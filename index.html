@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Saju — Korean Astrology for the World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;900&family=Noto+Serif+SC:wght@300;400;700;900&family=Noto+Serif+JP:wght@300;400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: rgba(201,168,76,0.35);
+  --gold-faint: rgba(201,168,76,0.12);
+  --dark: #0E0C08;
+  --dark-2: #161410;
+  --dark-3: #1E1C16;
+  --dark-4: #262420;
+  --text: #F0E8D8;
+  --text-dim: rgba(240,232,216,0.6);
+  --text-faint: rgba(240,232,216,0.35);
+  --accent: #8B6B35;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content:'';
+  position: fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── STAR CANVAS ── */
+#starfield {
+  position: fixed;
+  inset:0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-bar {
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 1000;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 20px;
+  background: linear-gradient(to bottom, rgba(14,12,8,0.95) 0%, rgba(14,12,8,0) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.lang-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-faint);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+.lang-btn:hover { color: var(--gold-light); border-color: var(--gold-dim); }
+.lang-btn.active { color: var(--gold); border-color: var(--gold); background: var(--gold-faint); }
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  position: relative;
+}
+
+.hero-emblem {
+  font-size: clamp(80px, 18vw, 180px);
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 80px rgba(201,168,76,0.4), 0 0 160px rgba(201,168,76,0.15);
+  animation: pulse 4s ease-in-out infinite;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  margin-bottom: 24px;
+  display: block;
+}
+
+@keyframes pulse {
+  0%,100% { text-shadow: 0 0 80px rgba(201,168,76,0.4), 0 0 160px rgba(201,168,76,0.15); }
+  50%      { text-shadow: 0 0 120px rgba(201,168,76,0.6), 0 0 240px rgba(201,168,76,0.25); }
+}
+
+.hero-app-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(14px, 3vw, 18px);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: clamp(32px, 7vw, 72px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 2.5vw, 19px);
+  color: var(--text-dim);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.cta-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 14px 32px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Cormorant Garamond', serif;
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 14px 32px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Cormorant Garamond', serif;
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  background: var(--gold-faint);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  animation: bob 2.5s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content:'';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+}
+
+@keyframes bob {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ── DIVIDER ── */
+.divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 40px;
+  margin: 20px 0;
+}
+.divider::before,.divider::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+.divider-icon {
+  color: var(--gold);
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+/* ── WHAT IS SAJU ── */
+.what-saju {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(28px, 5vw, 54px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 60px;
+}
+
+.saju-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px 80px;
+  align-items: start;
+}
+
+.saju-pillar {
+  background: var(--dark-3);
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.saju-pillar::before {
+  content:'';
+  position: absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.saju-pillar-glyph {
+  font-size: 52px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.saju-pillar-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.saju-pillar-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--gold-light);
+}
+
+.saju-pillar-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.saju-intro-text {
+  font-size: clamp(16px, 2.5vw, 22px);
+  line-height: 1.8;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 580px;
+}
+
+.saju-intro-text strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ── VS WESTERN ── */
+.vs-section {
+  padding: 80px 40px;
+  background: var(--dark-2);
+  border-top: 1px solid rgba(201,168,76,0.08);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.vs-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vs-table {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+  margin-top: 60px;
+  align-items: start;
+}
+
+.vs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vs-col-header {
+  padding: 24px 32px;
+  background: var(--dark-3);
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  text-align: center;
+}
+
+.vs-col-header .flag { font-size: 28px; margin-bottom: 8px; display: block; }
+.vs-col-header .name { font-size: 20px; font-weight: 600; color: var(--gold-light); }
+.vs-col-header .subname { font-size: 12px; color: var(--text-faint); letter-spacing: 0.2em; }
+
+.vs-item {
+  padding: 20px 28px;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 2px;
+  background: rgba(255,255,255,0.02);
+}
+
+.vs-item-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+}
+
+.vs-item-val {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.vs-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 72px;
+}
+
+.vs-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+}
+
+.vs-vs {
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+
+/* ── FEATURES ── */
+.features {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.feature-card {
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 2px;
+  padding: 36px 28px;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+
+.feature-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--gold-faint);
+}
+.feature-card:hover::after { transform: scaleX(1); }
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(201,168,76,0.3));
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+.feature-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+/* ── TESTIMONIAL ── */
+.testimonial-section {
+  padding: 80px 40px;
+  text-align: center;
+  background: var(--dark-2);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+
+.testimonial-quote {
+  font-size: clamp(22px, 4vw, 42px);
+  font-style: italic;
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto 32px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.testimonial-source {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* ── APP STORE ── */
+.download {
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.download-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.store-badges {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--dark-3);
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 14px 28px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s;
+  min-width: 180px;
+}
+.store-badge:hover {
+  background: var(--dark-4);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.store-badge-icon { font-size: 28px; }
+.store-badge-text { text-align: left; }
+.store-badge-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 0.1em; display: block; margin-bottom: 2px; }
+.store-badge-name { font-size: 16px; font-weight: 600; color: var(--gold-light); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 40px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+footer a { color: var(--gold-dim); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+/* ── LANGUAGE-SPECIFIC OVERRIDES ── */
+
+/* ── ZH: Bold, large, minimal ── */
+body.lang-zh {
+  --hero-glyph-size: clamp(100px, 22vw, 220px);
+}
+body.lang-zh .hero-emblem { font-family: 'Noto Serif SC', serif; font-size: clamp(100px,22vw,220px); }
+body.lang-zh .hero-title { font-family: 'Noto Serif SC', serif; font-size: clamp(36px, 8vw, 82px); font-weight: 700; letter-spacing: 0.05em; }
+body.lang-zh .hero-subtitle { font-size: clamp(16px, 2.8vw, 20px); line-height: 1.9; max-width: 480px; }
+body.lang-zh .feature-desc { font-size: 15px; line-height: 1.9; }
+body.lang-zh .section-title { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: clamp(30px, 6vw, 60px); }
+body.lang-zh .saju-intro-text { font-size: clamp(18px, 3vw, 26px); font-family: 'Noto Serif SC', serif; }
+body.lang-zh .saju-pillar-desc { font-size: 16px; }
+body.lang-zh .feature-title { font-size: 20px; font-family: 'Noto Serif SC', serif; }
+body.lang-zh .features-grid { gap: 32px; }
+body.lang-zh .feature-card { padding: 44px 36px; }
+body.lang-zh .vs-item-val { font-size: 17px; }
+body.lang-zh .testimonial-quote { font-size: clamp(26px, 5vw, 52px); font-family: 'Noto Serif SC', serif; font-weight: 700; font-style: normal; }
+
+/* ── JA: Small, dense, detailed ── */
+body.lang-ja .hero-emblem { font-family: 'Noto Serif JP', serif; }
+body.lang-ja .hero-title { font-family: 'Noto Serif JP', serif; font-size: clamp(22px, 4.5vw, 48px); font-weight: 400; line-height: 1.5; letter-spacing: 0.08em; }
+body.lang-ja .hero-subtitle { font-family: 'Noto Serif JP', serif; font-size: clamp(12px, 1.8vw, 15px); line-height: 2.2; max-width: 700px; color: var(--text-dim); }
+body.lang-ja .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(20px, 3.5vw, 40px); line-height: 1.6; }
+body.lang-ja .saju-intro-text { font-size: clamp(13px, 1.8vw, 16px); line-height: 2.2; font-family: 'Noto Serif JP', serif; }
+body.lang-ja .feature-desc { font-size: 12px; line-height: 2.0; }
+body.lang-ja .feature-title { font-size: 15px; font-family: 'Noto Serif JP', serif; letter-spacing: 0.1em; }
+body.lang-ja .features-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+body.lang-ja .feature-card { padding: 28px 22px; }
+body.lang-ja .saju-pillar-desc { font-size: 13px; line-height: 2.0; }
+body.lang-ja .vs-item-val { font-size: 13px; line-height: 1.8; }
+body.lang-ja .testimonial-quote { font-size: clamp(16px, 2.8vw, 28px); font-family: 'Noto Serif JP', serif; font-weight: 300; }
+
+/* ── KO ── */
+body.lang-ko .hero-emblem { font-family: 'Noto Serif KR', serif; }
+body.lang-ko .hero-title { font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 5.5vw, 58px); font-weight: 400; line-height: 1.35; letter-spacing: -0.02em; }
+body.lang-ko .hero-subtitle { font-family: 'Noto Serif KR', serif; font-size: clamp(14px, 2.2vw, 18px); }
+body.lang-ko .section-title { font-family: 'Noto Serif KR', serif; }
+body.lang-ko .saju-intro-text { font-family: 'Noto Serif KR', serif; }
+body.lang-ko .feature-title { font-family: 'Noto Serif KR', serif; }
+body.lang-ko .saju-pillar-name { font-family: 'Noto Serif KR', serif; }
+
+/* ── AR: RTL ── */
+body.lang-ar {
+  direction: rtl;
+}
+body.lang-ar .lang-bar { flex-direction: row-reverse; }
+body.lang-ar .hero-subtitle { font-size: clamp(14px, 2.5vw, 19px); letter-spacing: 0; line-height: 2.0; }
+body.lang-ar .section-label { letter-spacing: 0.1em; }
+body.lang-ar .feature-desc { font-size: 14px; line-height: 2.0; }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .saju-grid { grid-template-columns: 1fr; gap: 24px; }
+  .vs-table { grid-template-columns: 1fr; gap: 24px; }
+  .vs-mid { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  body.lang-ja .features-grid { grid-template-columns: 1fr; }
+  .what-saju, .features { padding: 60px 24px; }
+  .vs-section, .testimonial-section, .download { padding: 60px 24px; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<canvas id="starfield"></canvas>
+
+<!-- LANGUAGE SWITCHER -->
+<nav class="lang-bar" id="langBar">
+  <button class="lang-btn active" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="ko">한국어</button>
+  <button class="lang-btn" data-lang="zh">中文</button>
+  <button class="lang-btn" data-lang="ja">日本語</button>
+  <button class="lang-btn" data-lang="ar">العربية</button>
+  <button class="lang-btn" data-lang="fr">FR</button>
+  <button class="lang-btn" data-lang="de">DE</button>
+  <button class="lang-btn" data-lang="es">ES</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-emblem" id="heroEmblem">命</span>
+  <div class="hero-app-name" id="heroAppName">K · S A J U</div>
+  <h1 class="hero-title" id="heroTitle">
+    Your destiny, written<br><em>in the moment of birth</em>
+  </h1>
+  <p class="hero-subtitle" id="heroSubtitle">
+    Four Pillars of Destiny — the 3,000-year-old Korean art of reading fate from birth time — now available to the world in 15 languages.
+  </p>
+  <div class="cta-group">
+    <a href="#download" class="btn-primary" id="ctaPrimary">▸ Download Free</a>
+    <a href="#saju" class="btn-secondary" id="ctaLearn">What is Saju?</a>
+  </div>
+  <div class="scroll-hint" id="scrollHint">scroll</div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- WHAT IS SAJU -->
+<section class="what-saju fade-up" id="saju">
+  <span class="section-label" id="sajuLabel">Ancient Wisdom</span>
+  <h2 class="section-title" id="sajuTitle">What is 사주 (Saju)?</h2>
+
+  <div class="saju-grid">
+    <div class="saju-intro-text" id="sajuIntro">
+      <p style="margin-bottom:20px">
+        <strong>Saju (사주, 四柱)</strong> means "Four Pillars." At the exact moment you were born, the cosmos aligned — Year, Month, Day, and Hour each carry a Heavenly Stem and Earthly Branch, forming eight characters (팔자, Paljja) that map your entire life's journey.
+      </p>
+      <p style="margin-bottom:20px">
+        Unlike Western astrology focused on a single rising sun sign, Saju weaves <strong>five elemental forces</strong> — Wood, Fire, Earth, Metal, Water — through 60-year cycles, revealing not just personality but timing: when to act, when to wait, when fortune favors.
+      </p>
+      <p>
+        Practiced across Korea for millennia, Saju was the language of kings, generals, and matchmakers. Today, it's the daily guide of millions — and with <strong>K-Saju</strong>, it belongs to the world.
+      </p>
+    </div>
+
+    <div>
+      <div class="saju-pillar" style="margin-bottom:20px">
+        <span class="saju-pillar-glyph">年</span>
+        <span class="saju-pillar-label" id="p1label">1st Pillar</span>
+        <div class="saju-pillar-name" id="p1name">Year Pillar — Origin</div>
+        <p class="saju-pillar-desc" id="p1desc">Shaped by the year of birth. Reveals ancestral karma, social reputation, and early life destiny. Governed by the 12 zodiac animals.</p>
+      </div>
+      <div class="saju-pillar">
+        <span class="saju-pillar-glyph">月</span>
+        <span class="saju-pillar-label" id="p2label">2nd Pillar</span>
+        <div class="saju-pillar-name" id="p2name">Month Pillar — Growth</div>
+        <p class="saju-pillar-desc" id="p2desc">Born of the birth month. Governs parents, siblings, and career foundation — the pillars of mid-life ambition.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="saju-pillar" style="margin-bottom:20px">
+        <span class="saju-pillar-glyph">日</span>
+        <span class="saju-pillar-label" id="p3label">3rd Pillar</span>
+        <div class="saju-pillar-name" id="p3name">Day Pillar — Self</div>
+        <p class="saju-pillar-desc" id="p3desc">The most personal pillar. The Day Stem is your true self — your core nature, marriage energy, and inner world. This is who you truly are.</p>
+      </div>
+      <div class="saju-pillar">
+        <span class="saju-pillar-glyph">時</span>
+        <span class="saju-pillar-label" id="p4label">4th Pillar</span>
+        <div class="saju-pillar-name" id="p4name">Hour Pillar — Legacy</div>
+        <p class="saju-pillar-desc" id="p4desc">Cast by the birth hour. Illuminates children, later life, and the legacy you leave behind. The final chapter of your story.</p>
+      </div>
+    </div>
+
+    <div>
+      <div style="padding:36px; border:1px solid var(--gold-dim); background:var(--dark-3); border-radius:2px; position:relative; overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+        <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;" id="ohaengLabel">The Five Elements · 오행</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+          <span style="color:#4CAF8A;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">木</span>
+          <span style="color:#E57373;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">火</span>
+          <span style="color:#C9A84C;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">土</span>
+          <span style="color:#9E9E9E;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">金</span>
+          <span style="color:#64B5F6;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">水</span>
+        </div>
+        <p style="font-size:14px;line-height:1.8;color:var(--text-dim);font-weight:300;" id="ohaengDesc">
+          Wood · Fire · Earth · Metal · Water. These five forces flow through every being and every moment. Balance them, and life flows. Imbalance invites friction — and opportunity.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- VS WESTERN ASTROLOGY -->
+<section class="vs-section fade-up">
+  <div class="vs-inner">
+    <span class="section-label" id="vsLabel">East meets West</span>
+    <h2 class="section-title" id="vsTitle">Saju vs. Western Astrology</h2>
+
+    <div class="vs-table">
+      <div class="vs-col">
+        <div class="vs-col-header">
+          <span class="flag">☯</span>
+          <div class="name" id="saName">Korean Saju</div>
+          <div class="subname">사주 四柱</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs1lbl">Foundation</div>
+          <div class="vs-item-val" id="vs1ko">Year + Month + Day + <strong style="color:var(--gold-light)">Hour</strong> of birth — 8 characters total</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs2lbl">System</div>
+          <div class="vs-item-val" id="vs2ko">60-year Sexagenary Cycle (天干地支) based on the Chinese calendar</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs3lbl">Focus</div>
+          <div class="vs-item-val" id="vs3ko">Life cycles, fortune timing, relationships, and elemental balance</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs4lbl">Prediction Style</div>
+          <div class="vs-item-val" id="vs4ko">Dynamic — shifts over 10-year Major Luck Cycles (대운) and annual luck</div>
+        </div>
+      </div>
+
+      <div class="vs-mid">
+        <div class="vs-dot"></div>
+        <div class="vs-vs">VS</div>
+        <div class="vs-dot"></div>
+      </div>
+
+      <div class="vs-col">
+        <div class="vs-col-header">
+          <span class="flag">♈</span>
+          <div class="name" id="westName">Western Astrology</div>
+          <div class="subname">Zodiac · Horoscope</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs1lbl2">Foundation</div>
+          <div class="vs-item-val" id="vs1en">Sun sign (birth date) + Rising & Moon signs</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs2lbl2">System</div>
+          <div class="vs-item-val" id="vs2en">Tropical zodiac, planetary positions based on solar year</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs3lbl2">Focus</div>
+          <div class="vs-item-val" id="vs3en">Personality archetypes, psychological traits, compatibility</div>
+        </div>
+        <div class="vs-item">
+          <div class="vs-item-label" id="vs4lbl2">Prediction Style</div>
+          <div class="vs-item-val" id="vs4en">Transit-based — planets moving through natal chart positions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- FEATURES -->
+<section class="features fade-up">
+  <span class="section-label" id="featuresLabel">Inside K-Saju</span>
+  <h2 class="section-title" id="featuresTitle">Everything your destiny needs</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🔮</span>
+      <div class="feature-title" id="f1t">Daily Fortune</div>
+      <p class="feature-desc" id="f1d">Each morning, receive your daily Saju reading — elemental energy shifts, auspicious hours, and what the cosmos has planned. Powered by Claude AI for nuanced, personalized insights.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💫</span>
+      <div class="feature-title" id="f2t">K-Personality</div>
+      <p class="feature-desc" id="f2d">A deep-dive into your core Saju archetype: Day Master element, strength/weakness, and how you move through the world — the most honest mirror you'll ever look into.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🌙</span>
+      <div class="feature-title" id="f3t">Auspicious Calendar</div>
+      <p class="feature-desc" id="f3d">Plan weddings, launches, surgeries, and big decisions on the most favorable days. Traditional 길일 (auspicious day) calculation meets modern calendar UI.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">❤️</span>
+      <div class="feature-title" id="f4t">Relationship Saju</div>
+      <p class="feature-desc" id="f4d">Add family, partners, and friends. Analyze compatibility across all four pillars — see where you harmonize, where you clash, and how to navigate the tension.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🪞</span>
+      <div class="feature-title" id="f5t">Face Insight (관상)</div>
+      <p class="feature-desc" id="f5d">Korean physiognomy (관상학) reads fortune in the face. Upload a photo and receive an AI-powered analysis of life indicators written in the features you were born with.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💬</span>
+      <div class="feature-title" id="f6t">Ask More</div>
+      <p class="feature-desc" id="f6d">A conversational AI oracle fluent in Saju. Ask about career timing, marriage energy, or what a bad year really means — and receive answers grounded in your actual chart.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section fade-up">
+  <p class="testimonial-quote" id="testimonialText">
+    "Your birth moment is not an accident — it is your signature in the fabric of time."
+  </p>
+  <div class="testimonial-source" id="testimonialSrc">Korean Proverb · 사람은 날 때부터 팔자가 있다</div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- DOWNLOAD -->
+<section class="download fade-up" id="download">
+  <div class="download-inner">
+    <span class="section-label" id="dlLabel">Begin Your Reading</span>
+    <h2 class="section-title" id="dlTitle">Download K-Saju</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--text-dim);font-weight:300;margin-bottom:0;" id="dlSubtitle">
+      Free to start. Available in 15 languages. Your chart has been waiting for you.
+    </p>
+    <div class="store-badges">
+      <a href="#" class="store-badge">
+        <span class="store-badge-icon">🍎</span>
+        <div class="store-badge-text">
+          <span class="store-badge-sub" id="iosSub">Download on the</span>
+          <span class="store-badge-name">App Store</span>
+        </div>
+      </a>
+      <a href="#" class="store-badge">
+        <span class="store-badge-icon">🤖</span>
+        <div class="store-badge-text">
+          <span class="store-badge-sub" id="androidSub">Get it on</span>
+          <span class="store-badge-name">Google Play</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="margin-bottom:12px;">
+    <span style="color:var(--gold);font-size:18px;font-family:'Noto Serif KR',serif;font-weight:900;">命</span>
+    <span style="margin-left:8px;letter-spacing:0.2em;font-size:13px;">K-SAJU</span>
+  </p>
+  <p style="margin-bottom:8px;">
+    <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="#">Terms</a> &nbsp;·&nbsp;
+    <a href="#">Contact</a>
+  </p>
+  <p style="font-size:11px;opacity:0.4;">© 2025 Pie Nest Inc. · All rights reserved</p>
+</footer>
+
+<script>
+/* ── STARFIELD ── */
+(function(){
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  function init(){
+    stars = [];
+    for(let i=0;i<180;i++){
+      stars.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.2+0.2,
+        a: Math.random(),
+        speed: Math.random()*0.4+0.1,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const t = Date.now()/1000;
+    stars.forEach(s=>{
+      const alpha = (Math.sin(t*s.speed+s.phase)*0.4+0.6)*0.6;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(201,168,76,${alpha*0.5})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();
+  init();
+  draw();
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+
+/* ── SCROLL FADE ── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+/* ── TRANSLATIONS ── */
+const T = {
+  en: {
+    heroAppName: 'K · S A J U',
+    heroTitle: 'Your destiny, written<br><em>in the moment of birth</em>',
+    heroSubtitle: 'Four Pillars of Destiny — the 3,000-year-old Korean art of reading fate from birth time — now available to the world in 15 languages.',
+    ctaPrimary: '▸ Download Free',
+    ctaLearn: 'What is Saju?',
+    sajuLabel: 'Ancient Wisdom',
+    sajuTitle: 'What is 사주 (Saju)?',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (사주, 四柱)</strong> means "Four Pillars." At the exact moment you were born, the cosmos aligned — Year, Month, Day, and Hour each carry a Heavenly Stem and Earthly Branch, forming eight characters (팔자, Paljja) that map your entire life's journey.</p><p style="margin-bottom:20px">Unlike Western astrology focused on a single rising sun sign, Saju weaves <strong>five elemental forces</strong> — Wood, Fire, Earth, Metal, Water — through 60-year cycles, revealing not just personality but timing: when to act, when to wait, when fortune favors.</p><p>Practiced across Korea for millennia, Saju was the language of kings, generals, and matchmakers. Today, it's the daily guide of millions — and with <strong>K-Saju</strong>, it belongs to the world.</p>`,
+    p1label:'1st Pillar', p1name:'Year Pillar — Origin', p1desc:'Shaped by the year of birth. Reveals ancestral karma, social reputation, and early life destiny. Governed by the 12 zodiac animals.',
+    p2label:'2nd Pillar', p2name:'Month Pillar — Growth', p2desc:"Born of the birth month. Governs parents, siblings, and career foundation — the pillars of mid-life ambition.",
+    p3label:'3rd Pillar', p3name:'Day Pillar — Self', p3desc:'The most personal pillar. The Day Stem is your true self — your core nature, marriage energy, and inner world. This is who you truly are.',
+    p4label:'4th Pillar', p4name:'Hour Pillar — Legacy', p4desc:'Cast by the birth hour. Illuminates children, later life, and the legacy you leave behind. The final chapter of your story.',
+    ohaengLabel:'The Five Elements · 오행',
+    ohaengDesc:'Wood · Fire · Earth · Metal · Water. These five forces flow through every being and every moment. Balance them, and life flows. Imbalance invites friction — and opportunity.',
+    vsLabel:'East meets West', vsTitle:'Saju vs. Western Astrology',
+    saName:'Korean Saju', westName:'Western Astrology',
+    vs1lbl:'Foundation', vs1ko:'Year + Month + Day + <strong style="color:var(--gold-light)">Hour</strong> of birth — 8 characters total',
+    vs1en:'Sun sign (birth date) + Rising & Moon signs',
+    vs2lbl:'System', vs2ko:'60-year Sexagenary Cycle (天干地支) based on the Chinese calendar',
+    vs2en:'Tropical zodiac, planetary positions based on solar year',
+    vs3lbl:'Focus', vs3ko:'Life cycles, fortune timing, relationships, and elemental balance',
+    vs3en:'Personality archetypes, psychological traits, compatibility',
+    vs4lbl:'Prediction Style', vs4ko:'Dynamic — shifts over 10-year Major Luck Cycles (대운) and annual luck',
+    vs4en:'Transit-based — planets moving through natal chart positions',
+    featuresLabel:'Inside K-Saju', featuresTitle:'Everything your destiny needs',
+    f1t:'Daily Fortune', f1d:'Each morning, receive your daily Saju reading — elemental energy shifts, auspicious hours, and what the cosmos has planned. Powered by Claude AI for nuanced, personalized insights.',
+    f2t:'K-Personality', f2d:'A deep-dive into your core Saju archetype: Day Master element, strength/weakness, and how you move through the world — the most honest mirror you\'ll ever look into.',
+    f3t:'Auspicious Calendar', f3d:'Plan weddings, launches, surgeries, and big decisions on the most favorable days. Traditional 길일 (auspicious day) calculation meets modern calendar UI.',
+    f4t:'Relationship Saju', f4d:'Add family, partners, and friends. Analyze compatibility across all four pillars — see where you harmonize, where you clash, and how to navigate the tension.',
+    f5t:'Face Insight (관상)', f5d:'Korean physiognomy (관상학) reads fortune in the face. Upload a photo and receive an AI-powered analysis of life indicators written in the features you were born with.',
+    f6t:'Ask More', f6d:'A conversational AI oracle fluent in Saju. Ask about career timing, marriage energy, or what a bad year really means — and receive answers grounded in your actual chart.',
+    testimonialText:'"Your birth moment is not an accident — it is your signature in the fabric of time."',
+    testimonialSrc:'Korean Proverb · 사람은 날 때부터 팔자가 있다',
+    dlLabel:'Begin Your Reading', dlTitle:'Download K-Saju',
+    dlSubtitle:'Free to start. Available in 15 languages. Your chart has been waiting for you.',
+    iosSub:'Download on the', androidSub:'Get it on',
+    scrollHint:'scroll',
+  },
+  ko: {
+    heroAppName: 'K · 사 주',
+    heroTitle: '당신의 운명은<br><em>태어난 그 순간에 새겨졌습니다</em>',
+    heroSubtitle: '3,000년의 지혜 — 생년월일시 四柱八字로 풀어내는 나의 삶. 15개 언어로 전 세계와 함께합니다.',
+    ctaPrimary: '▸ 무료 다운로드',
+    ctaLearn: '사주란 무엇인가?',
+    sajuLabel: '동양의 지혜',
+    sajuTitle: '사주(四柱)란 무엇인가?',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>사주(四柱八字)</strong>는 태어난 연·월·일·시의 네 기둥에 담긴 여덟 글자입니다. 출생 순간 하늘의 기운이 고스란히 담겨, 한 사람의 기질·인연·운의 흐름을 담고 있습니다.</p><p style="margin-bottom:20px">서양 별자리가 하나의 태양궁을 중심으로 보는 것과 달리, 사주는 <strong>오행(木火土金水)</strong>의 상생·상극 원리를 통해 60년 주기의 대운과 매년 세운의 흐름까지 읽어냅니다.</p><p>왕과 장군, 혼인을 주관하던 사주쟁이의 언어가 이제 <strong>K-Saju</strong>를 통해 전 세계인의 손 안에 있습니다.</p>`,
+    p1label:'제1주', p1name:'년주(年柱) — 뿌리', p1desc:'출생 연도로 결정됩니다. 선대의 기운, 사회적 명성, 초년 운세를 담습니다. 12지신의 영향을 받습니다.',
+    p2label:'제2주', p2name:'월주(月柱) — 성장', p2desc:'출생 월로 결정됩니다. 부모·형제·직업 기반, 청·장년 운세를 관장합니다.',
+    p3label:'제3주', p3name:'일주(日柱) — 나', p3desc:'가장 중요한 기둥. 일간(日干)이 진짜 나 자신입니다. 본성, 배우자 인연, 내면세계를 나타냅니다.',
+    p4label:'제4주', p4name:'시주(時柱) — 결실', p4desc:'출생 시각으로 결정됩니다. 자녀, 노년 운세, 삶의 유산을 밝혀줍니다.',
+    ohaengLabel:'오행(五行)',
+    ohaengDesc:'목(木)·화(火)·토(土)·금(金)·수(水). 이 다섯 기운이 세상 모든 것에 흐릅니다. 조화로우면 순탄하고, 편중되면 파란이 — 그리고 기회가 찾아옵니다.',
+    vsLabel:'동서양의 만남', vsTitle:'사주 vs 서양 점성술',
+    saName:'한국 사주', westName:'서양 점성술',
+    vs1lbl:'기반', vs1ko:'생년+월+일+<strong style="color:var(--gold-light)">시</strong> — 총 8자(팔자)',
+    vs1en:'태양궁(생년월일) + 어센던트·달 궁',
+    vs2lbl:'체계', vs2ko:'60갑자(天干地支) 순환 체계',
+    vs2en:'황도대 12궁, 태양년 기반 행성 위치',
+    vs3lbl:'주안점', vs3ko:'인생 주기, 운의 타이밍, 인연, 오행 균형',
+    vs3en:'성격 유형, 심리 특성, 궁합',
+    vs4lbl:'예측 방식', vs4ko:'10년 대운 + 매년 세운으로 동적으로 변화',
+    vs4en:'행성 트랜짓(진행 행성)이 출생 차트를 통과',
+    featuresLabel:'K-Saju 기능', featuresTitle:'당신의 운명에 필요한 모든 것',
+    f1t:'오늘의 운세', f1d:'매일 아침 나의 일주(日柱) 에너지, 길한 시간대, 오늘 우주의 메시지를 받아보세요. Claude AI가 개인화된 깊이 있는 해석을 제공합니다.',
+    f2t:'K-퍼스널리티', f2d:'일간(日干) 원소, 강약, 세상과 내가 맺는 관계 방식까지 — 사주로 들여다보는 가장 솔직한 자화상입니다.',
+    f3t:'길일 캘린더', f3d:'결혼, 이사, 수술, 사업 시작일… 전통 길일 계산과 현대 캘린더 UI가 만났습니다. 최적의 날을 잡아보세요.',
+    f4t:'관계 사주', f4d:'가족, 연인, 친구를 추가하고 사주 궁합을 분석하세요. 어디서 통하고 어디서 부딪히는지, 그 해법까지 안내합니다.',
+    f5t:'관상 분석', f5d:'관상학(觀相學)은 얼굴에 새겨진 운명을 읽는 학문입니다. 사진 한 장으로 AI가 삶의 지표를 분석해 드립니다.',
+    f6t:'더 물어보기', f6d:'사주에 정통한 AI 오라클과 대화하세요. 이직 타이밍, 결혼 인연, 올해 왜 힘든지… 내 차트를 기반으로 답합니다.',
+    testimonialText:'"사람은 날 때부터 팔자가 있다."',
+    testimonialSrc:'한국 속담',
+    dlLabel:'나의 사주 시작하기', dlTitle:'K-Saju 다운로드',
+    dlSubtitle:'무료로 시작하세요. 15개 언어 지원. 당신의 사주가 기다리고 있습니다.',
+    iosSub:'App Store에서', androidSub:'Google Play에서',
+    scrollHint:'아래로',
+  },
+  zh: {
+    heroAppName: 'K · 四 柱',
+    heroTitle: '你的命运<br><em>在出生那刻已定</em>',
+    heroSubtitle: '三千年韩国四柱命理 · 15种语言全球版',
+    ctaPrimary: '▸ 免费下载',
+    ctaLearn: '什么是四柱？',
+    sajuLabel: '东方智慧',
+    sajuTitle: '什么是四柱（사주）？',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>四柱八字</strong>，以出生年、月、日、时四柱，推演天干地支八字，勾勒一生命运轨迹。</p><p style="margin-bottom:20px">有别于西方星座仅凭太阳宫位，四柱融汇<strong>五行（木火土金水）</strong>相生相克之理，洞察六十年大运流年，不仅知性格，更知时机。</p><p>此乃帝王将相、婚姻媒妁千年所用之学。今日，<strong>K-Saju</strong>将其带给全球。</p>`,
+    p1label:'第一柱', p1name:'年柱 — 根基', p1desc:'出生年份所定。揭示祖先气运、社会声望与早年命运，受十二生肖主导。',
+    p2label:'第二柱', p2name:'月柱 — 成长', p2desc:'出生月份所定。主父母兄弟、事业根基与中年运势。',
+    p3label:'第三柱', p3name:'日柱 — 本我', p3desc:'最核心之柱。日干即真实自我——本性、婚姻缘分与内心世界。',
+    p4label:'第四柱', p4name:'时柱 — 传承', p4desc:'出生时辰所定。映照子女运、晚年福祉与人生遗泽。',
+    ohaengLabel:'五行',
+    ohaengDesc:'木·火·土·金·水。五行流于万物之中。平衡则顺，偏枯则变——变中有机。',
+    vsLabel:'东西方相遇', vsTitle:'四柱 vs 西方占星',
+    saName:'韩国四柱', westName:'西方占星',
+    vs1lbl:'基础', vs1ko:'年+月+日+<strong style="color:var(--gold-light)">时</strong> 四柱八字',
+    vs1en:'太阳星座（生日）+ 上升星座·月亮星座',
+    vs2lbl:'体系', vs2ko:'六十甲子（天干地支）循环体系',
+    vs2en:'黄道十二宫，以太阳年为基础',
+    vs3lbl:'侧重', vs3ko:'人生周期·时运·感情·五行均衡',
+    vs3en:'性格原型·心理特质·缘分',
+    vs4lbl:'预测方式', vs4ko:'十年大运 + 流年 动态变化',
+    vs4en:'行星过境，推运法',
+    featuresLabel:'K-Saju 功能', featuresTitle:'命运所需，一应俱全',
+    f1t:'每日运势', f1d:'每日清晨收到专属运势解读——五行能量变化、吉时、今日宇宙信息。由Claude AI提供个性化深度解析。',
+    f2t:'K-性格', f2d:'深度解析日干五行、强弱、处世方式——最真实的自我镜像。',
+    f3t:'吉日历', f3d:'婚嫁·乔迁·手术·开业，传统吉日计算与现代日历界面完美结合。',
+    f4t:'关系四柱', f4d:'添加家人、伴侣、朋友，分析四柱合婚。了解缘分深浅、矛盾根源与化解之道。',
+    f5t:'面相分析', f5d:'面相学（관상학）读取面容中的命运信息。上传照片，AI为您解读天生面相所藏的人生密码。',
+    f6t:'深度问答', f6d:'精通四柱的AI命理师随时待命。事业时机·婚姻缘分·流年困顿……基于您的八字给出解答。',
+    testimonialText:'"命由天定，运在人为。"',
+    testimonialSrc:'韩国谚语',
+    dlLabel:'开启命理之旅', dlTitle:'下载 K-Saju',
+    dlSubtitle:'免费开始。支持15种语言。您的四柱在等待您。',
+    iosSub:'下载自', androidSub:'获取自',
+    scrollHint:'向下',
+  },
+  ja: {
+    heroAppName: 'K · 四 柱',
+    heroTitle: 'あなたの運命は、<br><em>生まれたその瞬間に刻まれていた</em>',
+    heroSubtitle: '韓国に3,000年伝わる四柱推命（사주）は、生年月日時という四本の柱から、その人の本質・人間関係・運勢の流れを精緻に読み解く命理学です。15言語対応でグローバルに展開中。',
+    ctaPrimary: '▸ 無料でダウンロード',
+    ctaLearn: '사주とは何か？',
+    sajuLabel: '東洋の叡智',
+    sajuTitle: '사주（四柱）とは？',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>사주（四柱八字）</strong>とは、生まれた年・月・日・時の四つの柱に宿る八つの文字のことです。その組み合わせには、五行（木・火・土・金・水）の相生・相剋が凝縮されており、その人の気質・縁・運勢の大きな流れが映し出されます。</p><p style="margin-bottom:20px">西洋占星術が主に太陽星座によって性格を読むのに対し、四柱推命は<strong>60年周期の大運と毎年の歳運</strong>を通じて、人生の転機やタイミングまで動的に読み取ります。「いつ動くべきか、いつ待つべきか」を知ることこそが、사주の真髄です。</p><p>かつては王侯将相や縁組を司る専門家だけが用いた秘伝の学問が、今や<strong>K-Saju</strong>を通して世界中の人々の手に届くようになりました。</p>`,
+    p1label:'第一柱', p1name:'年柱（ねんちゅう）— 根', p1desc:'生まれた年によって決まります。先祖から受け継いだ気運、社会的な評判、初年の運勢を示します。十二支の影響を受けます。',
+    p2label:'第二柱', p2name:'月柱（つきちゅう）— 成長', p2desc:'生まれた月によって決まります。両親・兄弟との縁、職業の基盤、青年・壮年期の運勢を司ります。',
+    p3label:'第三柱', p3name:'日柱（にちちゅう）— 本我', p3desc:'四柱の中で最も重要な柱。日干（にっかん）がその人の真の自己を示します。本質的な気質、配偶者との縁、内面世界を表します。',
+    p4label:'第四柱', p4name:'時柱（じちゅう）— 結実', p4desc:'生まれた時間によって決まります。子供との縁、晩年の運勢、そしてその人が後世に遺すものを照らし出します。',
+    ohaengLabel:'五行（오행）',
+    ohaengDesc:'木・火・土・金・水。この五つの気は、あらゆる存在と瞬間に流れています。バランスが取れれば人生は順調に流れ、偏れば摩擦が生じます——そしてそこにこそ、変化の機会が宿ります。',
+    vsLabel:'東洋と西洋の出会い', vsTitle:'사주 vs 西洋占星術：何が違うのか',
+    saName:'韓国の四柱推命', westName:'西洋占星術',
+    vs1lbl:'基盤', vs1ko:'生年＋月＋日＋<strong style="color:var(--gold-light)">時刻</strong>の四柱八字（全8文字）',
+    vs1en:'太陽星座（誕生日）＋アセンダント・月星座',
+    vs2lbl:'体系', vs2ko:'60年周期の六十干支（天干地支）に基づく命理体系',
+    vs2en:'黄道十二宮と惑星配置による占星術（太陽年基準）',
+    vs3lbl:'主な焦点', vs3ko:'人生の周期・運勢のタイミング・人間関係・五行のバランス',
+    vs3en:'性格のアーキタイプ・心理的特性・相性',
+    vs4lbl:'予測のアプローチ', vs4ko:'10年ごとの大運と毎年の歳運によって動的に変化する',
+    vs4en:'出生チャートに対する惑星トランジット（通過）を用いる',
+    featuresLabel:'K-Saujの機能', featuresTitle:'あなたの運命に必要なすべてが、ここに',
+    f1t:'今日の運勢', f1d:'毎朝、あなた専用の日次사주リーディングをお届けします。五行エネルギーの変化、吉時間帯、今日の宇宙からのメッセージ。Claude AIによる個別解釈で、深みのある洞察を。',
+    f2t:'K-パーソナリティ', f2d:'日干の五行属性、強弱のバランス、あなたが世界とどのように関わっているか——사주が映し出す、最も正直な自己像です。',
+    f3t:'吉日カレンダー', f3d:'結婚・引越し・手術・起業など、重要な決断を最善の日取りで。伝統的な길일（吉日）計算を、モダンなカレンダーUIで。',
+    f4t:'関係사주', f4d:'家族・恋人・友人を登録し、四柱で相性を詳しく分析。どこで調和し、どこで衝突し、どう乗り越えるかを丁寧に解説します。',
+    f5t:'관상（顔相）分析', f5d:'관상학（顔相学）は、顔に刻まれた運命を読む韓国の伝統学問です。写真をアップロードするだけで、AIがあなたの生まれ持った顔の中に宿る人生の指標を分析します。',
+    f6t:'もっと質問する', f6d:'사주に精通したAIオラクルと対話してください。転職のタイミング、結婚の縁、今年なぜ辛いのか……あなた自身のチャートを根拠に、丁寧に答えます。',
+    testimonialText:'"人は生まれた瞬間から、すでに自分の八字を持っている。"',
+    testimonialSrc:'韓国のことわざ',
+    dlLabel:'運命の読み解きを始める', dlTitle:'K-Saju をダウンロード',
+    dlSubtitle:'無料でスタート。15言語対応。あなたの四柱が、ずっと待っています。',
+    iosSub:'App Storeから', androidSub:'Google Playから',
+    scrollHint:'スクロール',
+  },
+  ar: {
+    heroAppName: 'K · ساجو',
+    heroTitle: 'مصيرك نُقِشَ<br><em>في لحظة ميلادك</em>',
+    heroSubtitle: 'أركان المصير الأربعة — علم الأبراج الكوري العريق منذ 3000 عام — متاحٌ الآن للعالم بـ15 لغة.',
+    ctaPrimary: '▸ حمّل مجاناً',
+    ctaLearn: 'ما هو ساجو؟',
+    sajuLabel: 'الحكمة القديمة',
+    sajuTitle: 'ما هو سَجو (사주)؟',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>سَجو (四柱)</strong> يعني "الأركان الأربعة". في اللحظة التي وُلدت فيها، تآلفت السماء — السنة والشهر واليوم والساعة، كلٌّ منها يحمل جذعاً سماوياً وفرعاً أرضياً، مكوّنةً ثمانية أحرف تُخطّط رحلة حياتك بأسرها.</p><p style="margin-bottom:20px">خلافاً لعلم الفلك الغربي الذي يركّز على برج الشمس، يجمع سَجو <strong>القوى العنصرية الخمس</strong> — الخشب والنار والأرض والمعدن والماء — عبر دورات ستينية، ليكشف لك ليس فقط شخصيتك بل توقيت الحظ أيضاً.</p><p>مارسه الملوك والقادة وأصحاب الزيجات آلاف السنين في كوريا. اليوم، صار مليارات يستلهمونه يومياً، وبـ<strong>K-Saju</strong> أصبح ملكاً للعالم.</p>`,
+    p1label:'الركن الأول', p1name:'ركن السنة — الجذور', p1desc:'يُحدَّد بسنة الميلاد. يكشف كارما الأجداد والسمعة الاجتماعية ومصير مرحلة الطفولة. يحكمه الحيوانات الاثنا عشر.',
+    p2label:'الركن الثاني', p2name:'ركن الشهر — النمو', p2desc:'يُحدَّد بشهر الميلاد. يحكم العلاقة بالوالدين والإخوة وأسس المسيرة المهنية.',
+    p3label:'الركن الثالث', p3name:'ركن اليوم — الذات', p3desc:'الركن الأكثر شخصية. جذع اليوم هو حقيقة ذاتك — طبيعتك الجوهرية وطاقة الزواج وعالمك الداخلي.',
+    p4label:'الركن الرابع', p4name:'ركن الساعة — الإرث', p4desc:'يُصاغ بساعة الميلاد. يُضيء حظّ الأبناء ومرحلة الشيخوخة والإرث الذي تتركه خلفك.',
+    ohaengLabel:'العناصر الخمسة · 오행',
+    ohaengDesc:'الخشب · النار · الأرض · المعدن · الماء. تجري هذه القوى الخمس في كل كائن وكل لحظة. توازنها يُسلِّس الحياة، وخلَلها يفتح الباب للاحتكاك — والفرصة.',
+    vsLabel:'الشرق يلتقي الغرب', vsTitle:'سَجو vs علم الفلك الغربي',
+    saName:'سَجو الكوري', westName:'علم الفلك الغربي',
+    vs1lbl:'الأساس', vs1ko:'السنة + الشهر + اليوم + <strong style="color:var(--gold-light)">الساعة</strong> — 8 أحرف',
+    vs1en:'برج الشمس (تاريخ الميلاد) + الطالع والقمر',
+    vs2lbl:'النظام', vs2ko:'دورة الستين عاماً (天干地支) قائمة على التقويم الصيني',
+    vs2en:'البروج الاستوائية، مواضع الكواكب وفق السنة الشمسية',
+    vs3lbl:'محور التركيز', vs3ko:'دورات الحياة، توقيت الحظ، العلاقات، توازن العناصر',
+    vs3en:'النماذج الشخصية، السمات النفسية، التوافق',
+    vs4lbl:'أسلوب التنبؤ', vs4ko:'ديناميكي — يتحوّل عبر دورات الحظ الكبرى العشرية والحظ السنوي',
+    vs4en:'عبورات الكواكب عبر مواضع الميلاد',
+    featuresLabel:'داخل K-Saju', featuresTitle:'كل ما يحتاجه مصيرك',
+    f1t:'حظ اليوم', f1d:'في كل صباح، استقبل قراءتك اليومية — تحولات طاقة العناصر، الساعات المباركة، وما خطّته الكواكب. بإمكانيات Claude AI للتفسير العميق الشخصي.',
+    f2t:'K-الشخصية', f2d:'غوصٌ عميق في جوهر نمطك: عنصر سيد اليوم، نقاط القوة والضعف، وكيف تتعامل مع العالم — أصدق مرآة ستنظر إليها.',
+    f3t:'تقويم الأيام المباركة', f3d:'خطّط لزفافك، إطلاق مشروعك، عمليتك الجراحية، وقراراتك الكبرى في أنسب الأوقات.',
+    f4t:'سَجو العلاقات', f4d:'أضف عائلتك وشريكك وأصدقاءك. حلّل التوافق عبر الأركان الأربعة — اكتشف أين تتناغمون وأين تتعارضون.',
+    f5t:'تحليل ملامح الوجه', f5d:'علم الفراسة الكورية (관상학) يقرأ الحظ في الملامح. ارفع صورتك واحصل على تحليل AI لمؤشرات حياتك المكتوبة في وجهك.',
+    f6t:'اسأل المزيد', f6d:'محاور ذكاء اصطناعي متمرّس في سَجو. اسأله عن توقيت المسيرة، طاقة الزواج، أو ما يعنيه عامٌ عسير — وستأتيك الإجابات من خريطتك الحقيقية.',
+    testimonialText:'"لحظة ميلادك ليست صدفة — إنها توقيعك في نسيج الزمن."',
+    testimonialSrc:'مثل كوري',
+    dlLabel:'ابدأ قراءتك', dlTitle:'حمّل K-Saju',
+    dlSubtitle:'مجاني للبدء. 15 لغة. خريطتك في انتظارك.',
+    iosSub:'حمّل من', androidSub:'احصل عليه من',
+    scrollHint:'للأسفل',
+  },
+  fr: {
+    heroAppName: 'K · S A J U',
+    heroTitle: 'Votre destin, gravé<br><em>à l\'instant de votre naissance</em>',
+    heroSubtitle: 'Les Quatre Piliers du Destin — l\'art coréen vieux de 3 000 ans de lire le sort à travers l\'heure de naissance — désormais disponible dans 15 langues.',
+    ctaPrimary: '▸ Télécharger Gratuitement',
+    ctaLearn: 'Qu\'est-ce que le Saju ?',
+    sajuLabel: 'Sagesse Ancestrale',
+    sajuTitle: 'Qu\'est-ce que le 사주 (Saju) ?',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> signifie « Quatre Piliers ». À l'instant précis de votre naissance, le cosmos s'est aligné — l'Année, le Mois, le Jour et l'Heure portent chacun une Tige Céleste et une Branche Terrestre, formant huit caractères qui tracent la carte de toute votre vie.</p><p style="margin-bottom:20px">Contrairement à l'astrologie occidentale centrée sur un seul signe solaire, le Saju entrelace <strong>cinq forces élémentaires</strong> — Bois, Feu, Terre, Métal, Eau — à travers des cycles de 60 ans, révélant non seulement la personnalité mais le timing : quand agir, quand attendre, quand la fortune sourit.</p><p>Pratiqué en Corée depuis des millénaires par les rois et les stratèges, le Saju appartient aujourd'hui au monde entier grâce à <strong>K-Saju</strong>.</p>`,
+    p1label:'1er Pilier', p1name:'Pilier de l\'Année — Origine', p1desc:'Déterminé par l\'année de naissance. Révèle le karma ancestral, la réputation sociale et le destin des premières années.',
+    p2label:'2e Pilier', p2name:'Pilier du Mois — Croissance', p2desc:'Déterminé par le mois de naissance. Régit les parents, les frères et sœurs et les fondations professionnelles.',
+    p3label:'3e Pilier', p3name:'Pilier du Jour — Le Moi', p3desc:'Le pilier le plus personnel. La Tige du Jour est votre vrai moi — nature profonde, énergie conjugale, monde intérieur.',
+    p4label:'4e Pilier', p4name:'Pilier de l\'Heure — Héritage', p4desc:'Façonné par l\'heure de naissance. Éclaire les enfants, la vieillesse et l\'héritage que vous laissez.',
+    ohaengLabel:'Les Cinq Éléments · 오행',
+    ohaengDesc:'Bois · Feu · Terre · Métal · Eau. Ces cinq forces traversent chaque être et chaque instant. L\'équilibre fluidifie la vie ; le déséquilibre crée la friction — et l\'opportunité.',
+    vsLabel:'Orient & Occident', vsTitle:'Saju vs Astrologie Occidentale',
+    saName:'Saju Coréen', westName:'Astrologie Occidentale',
+    vs1lbl:'Fondement', vs1ko:'Année + Mois + Jour + <strong style="color:var(--gold-light)">Heure</strong> de naissance — 8 caractères',
+    vs1en:'Signe solaire (date de naissance) + Ascendant & Lune',
+    vs2lbl:'Système', vs2ko:'Cycle sexagésimal de 60 ans (天干地支) basé sur le calendrier chinois',
+    vs2en:'Zodiaque tropical, positions planétaires basées sur l\'année solaire',
+    vs3lbl:'Focus', vs3ko:'Cycles de vie, timing de fortune, relations, équilibre élémentaire',
+    vs3en:'Archétypes de personnalité, traits psychologiques, compatibilité',
+    vs4lbl:'Style Prédictif', vs4ko:'Dynamique — évolue selon les Grandes Périodes de Chance de 10 ans',
+    vs4en:'Basé sur les transits planétaires à travers le thème natal',
+    featuresLabel:'Dans K-Saju', featuresTitle:'Tout ce que votre destin requiert',
+    f1t:'Fortune du Jour', f1d:'Chaque matin, recevez votre lecture Saju quotidienne — shifts d\'énergie élémentaire, heures fastes, et ce que le cosmos a prévu. Propulsé par Claude AI pour des insights nuancés.',
+    f2t:'K-Personnalité', f2d:'Plongée dans votre archétype Saju : élément Maître du Jour, forces/faiblesses et façon d\'évoluer dans le monde — le miroir le plus honnête que vous ayez jamais regardé.',
+    f3t:'Calendrier des Jours Fastes', f3d:'Planifiez mariages, lancements, chirurgies sur les jours les plus favorables. Le calcul traditionnel길일 rencontre une UI calendrier moderne.',
+    f4t:'Saju des Relations', f4d:'Ajoutez famille, partenaires, amis. Analysez la compatibilité sur les quatre piliers — voyez où vous vous harmonisez, où vous vous heurtez.',
+    f5t:'Insight Visage (관상)', f5d:'La physiognomonie coréenne lit le destin dans le visage. Téléchargez une photo et recevez une analyse IA des indicateurs de vie inscrits dans vos traits.',
+    f6t:'Poser Plus de Questions', f6d:'Un oracle IA conversationnel maîtrisant le Saju. Interrogez-le sur le timing de carrière, l\'énergie conjugale, ou ce que signifie vraiment une mauvaise année.',
+    testimonialText:'"Votre moment de naissance n\'est pas un accident — c\'est votre signature dans le tissu du temps."',
+    testimonialSrc:'Proverbe Coréen',
+    dlLabel:'Commencer votre Lecture', dlTitle:'Télécharger K-Saju',
+    dlSubtitle:'Gratuit pour commencer. Disponible en 15 langues. Votre thème vous attend.',
+    iosSub:'Télécharger sur', androidSub:'Disponible sur',
+    scrollHint:'défiler',
+  },
+  de: {
+    heroAppName: 'K · S A J U',
+    heroTitle: 'Dein Schicksal, eingeschrieben<br><em>im Moment deiner Geburt</em>',
+    heroSubtitle: 'Die Vier Säulen des Schicksals — die 3.000 Jahre alte koreanische Kunst des Schicksalslesens — jetzt weltweit in 15 Sprachen verfügbar.',
+    ctaPrimary: '▸ Kostenlos laden',
+    ctaLearn: 'Was ist Saju?',
+    sajuLabel: 'Uralte Weisheit',
+    sajuTitle: 'Was ist 사주 (Saju)?',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> bedeutet „Vier Säulen". Im genauen Moment deiner Geburt richtete sich der Kosmos aus — Jahr, Monat, Tag und Stunde tragen je einen Himmelsstamm und Erdzweig, die acht Zeichen bilden, die den Weg deines gesamten Lebens kartieren.</p><p style="margin-bottom:20px">Anders als die westliche Astrologie, die sich auf ein einzelnes Sonnenzeichen konzentriert, verwebt Saju <strong>fünf Elementarkräfte</strong> — Holz, Feuer, Erde, Metall, Wasser — durch 60-Jahres-Zyklen, um nicht nur Persönlichkeit, sondern Timing zu enthüllen.</p><p>Von Königen und Strategen über Jahrtausende in Korea praktiziert — mit <strong>K-Saju</strong> gehört es nun der Welt.</p>`,
+    p1label:'1. Säule', p1name:'Jahrssäule — Ursprung', p1desc:'Bestimmt durch das Geburtsjahr. Enthüllt Ahnenkamma, sozialen Ruf und frühes Lebensschicksal.',
+    p2label:'2. Säule', p2name:'Monatssäule — Wachstum', p2desc:'Bestimmt durch den Geburtsmonat. Regiert Eltern, Geschwister und Karrierefundament.',
+    p3label:'3. Säule', p3name:'Tagessäule — Das Selbst', p3desc:'Die persönlichste Säule. Der Tagesstamm ist dein wahres Ich — Kernnatur, Heiratsenergie, innere Welt.',
+    p4label:'4. Säule', p4name:'Stundensäule — Vermächtnis', p4desc:'Geformt durch die Geburtsstunde. Erhellt Kinder, spätes Leben und das Erbe, das du hinterlässt.',
+    ohaengLabel:'Die Fünf Elemente · 오행',
+    ohaengDesc:'Holz · Feuer · Erde · Metall · Wasser. Diese fünf Kräfte fließen durch jedes Wesen und jeden Moment. Im Gleichgewicht fließt das Leben. Ungleichgewicht schafft Reibung — und Gelegenheit.',
+    vsLabel:'Ost trifft West', vsTitle:'Saju vs. Westliche Astrologie',
+    saName:'Koreanisches Saju', westName:'Westliche Astrologie',
+    vs1lbl:'Grundlage', vs1ko:'Jahr + Monat + Tag + <strong style="color:var(--gold-light)">Stunde</strong> der Geburt — 8 Zeichen',
+    vs1en:'Sonnenzeichen (Geburtsdatum) + Aszendent & Mondzeichen',
+    vs2lbl:'System', vs2ko:'60-jähriger Sexagesimalzyklus (天干地支) basierend auf dem chinesischen Kalender',
+    vs2en:'Tropischer Tierkreis, Planetenpositionen basierend auf dem Sonnenjahr',
+    vs3lbl:'Fokus', vs3ko:'Lebenszyklen, Glückstiming, Beziehungen und elementares Gleichgewicht',
+    vs3en:'Persönlichkeitsarchetypen, psychologische Merkmale, Kompatibilität',
+    vs4lbl:'Vorhersagestil', vs4ko:'Dynamisch — verändert sich über 10-jährige große Glückszyklen und Jahresglück',
+    vs4en:'Transitbasiert — Planeten bewegen sich durch Geburtshoroskop-Positionen',
+    featuresLabel:'In K-Saju', featuresTitle:'Alles, was dein Schicksal braucht',
+    f1t:'Tagesglück', f1d:'Jeden Morgen dein tägliches Saju-Reading — Elementarenergieverschiebungen, günstige Stunden und was der Kosmos plant. Angetrieben von Claude AI.',
+    f2t:'K-Persönlichkeit', f2d:'Tiefenanalyse deines Saju-Archetyps: Tagesmeister-Element, Stärken/Schwächen und wie du dich in der Welt bewegst.',
+    f3t:'Glückstage-Kalender', f3d:'Plane Hochzeiten, Launches, OPs und große Entscheidungen an den günstigsten Tagen.',
+    f4t:'Beziehungs-Saju', f4d:'Füge Familie, Partner und Freunde hinzu. Analysiere Kompatibilität über alle vier Säulen.',
+    f5t:'Gesichtseinblick (관상)', f5d:'Koreanische Physiognomik liest das Schicksal im Gesicht. Lade ein Foto hoch für eine KI-Analyse.',
+    f6t:'Mehr fragen', f6d:'Ein konversationelles KI-Orakel, fließend in Saju. Frage nach Karrieretiming, Heiratsenergie oder was ein schwieriges Jahr wirklich bedeutet.',
+    testimonialText:'"Dein Geburtsmoment ist kein Zufall — er ist deine Unterschrift im Gewebe der Zeit."',
+    testimonialSrc:'Koreanisches Sprichwort',
+    dlLabel:'Dein Reading beginnen', dlTitle:'K-Saju Herunterladen',
+    dlSubtitle:'Kostenlos starten. 15 Sprachen. Dein Chart wartet auf dich.',
+    iosSub:'Laden im', androidSub:'Erhältlich bei',
+    scrollHint:'scrollen',
+  },
+  es: {
+    heroAppName: 'K · S A J U',
+    heroTitle: 'Tu destino, escrito<br><em>en el momento de tu nacimiento</em>',
+    heroSubtitle: 'Los Cuatro Pilares del Destino — el arte coreano de 3.000 años de leer el destino en el momento del nacimiento — ahora disponible en 15 idiomas.',
+    ctaPrimary: '▸ Descargar Gratis',
+    ctaLearn: '¿Qué es el Saju?',
+    sajuLabel: 'Sabiduría Ancestral',
+    sajuTitle: '¿Qué es el 사주 (Saju)?',
+    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> significa "Cuatro Pilares". En el momento exacto de tu nacimiento, el cosmos se alineó — Año, Mes, Día y Hora llevan cada uno un Tallo Celestial y una Rama Terrestre, formando ocho caracteres que mapean toda tu vida.</p><p style="margin-bottom:20px">A diferencia de la astrología occidental centrada en un signo solar, el Saju entrelaza <strong>cinco fuerzas elementales</strong> — Madera, Fuego, Tierra, Metal, Agua — a través de ciclos de 60 años, revelando no solo la personalidad sino el momento oportuno.</p><p>Practicado en Corea por reyes y estrategas durante milenios, hoy <strong>K-Saju</strong> lo trae al mundo.</p>`,
+    p1label:'1er Pilar', p1name:'Pilar del Año — Origen', p1desc:'Determinado por el año de nacimiento. Revela karma ancestral, reputación social y destino de la infancia.',
+    p2label:'2do Pilar', p2name:'Pilar del Mes — Crecimiento', p2desc:'Determinado por el mes de nacimiento. Rige padres, hermanos y cimientos profesionales.',
+    p3label:'3er Pilar', p3name:'Pilar del Día — El Yo', p3desc:'El pilar más personal. El Tallo del Día es tu verdadero ser — naturaleza esencial, energía matrimonial, mundo interior.',
+    p4label:'4to Pilar', p4name:'Pilar de la Hora — Legado', p4desc:'Formado por la hora de nacimiento. Ilumina hijos, vejez y el legado que dejas.',
+    ohaengLabel:'Los Cinco Elementos · 오행',
+    ohaengDesc:'Madera · Fuego · Tierra · Metal · Agua. Estas cinco fuerzas fluyen a través de cada ser y cada momento. El equilibrio fluidifica la vida; el desequilibrio invita la fricción — y la oportunidad.',
+    vsLabel:'Oriente encuentra Occidente', vsTitle:'Saju vs. Astrología Occidental',
+    saName:'Saju Coreano', westName:'Astrología Occidental',
+    vs1lbl:'Base', vs1ko:'Año + Mes + Día + <strong style="color:var(--gold-light)">Hora</strong> de nacimiento — 8 caracteres',
+    vs1en:'Signo solar (fecha de nacimiento) + Ascendente y Luna',
+    vs2lbl:'Sistema', vs2ko:'Ciclo Sexagesimal de 60 años (天干地支) basado en el calendario chino',
+    vs2en:'Zodíaco tropical, posiciones planetarias basadas en el año solar',
+    vs3lbl:'Enfoque', vs3ko:'Ciclos de vida, timing de fortuna, relaciones y equilibrio elemental',
+    vs3en:'Arquetipos de personalidad, rasgos psicológicos, compatibilidad',
+    vs4lbl:'Estilo Predictivo', vs4ko:'Dinámico — cambia según Grandes Ciclos de Suerte de 10 años',
+    vs4en:'Basado en tránsitos — planetas moviéndose por posiciones del carta natal',
+    featuresLabel:'Dentro de K-Saju', featuresTitle:'Todo lo que tu destino necesita',
+    f1t:'Fortuna del Día', f1d:'Cada mañana, recibe tu lectura Saju diaria — cambios de energía elemental, horas auspiciosas y lo que el cosmos tiene planeado.',
+    f2t:'K-Personalidad', f2d:'Un análisis profundo de tu arquetipo Saju: elemento Maestro del Día, fortalezas/debilidades y cómo te mueves por el mundo.',
+    f3t:'Calendario de Días Auspiciosos', f3d:'Planifica bodas, lanzamientos, cirugías y grandes decisiones en los días más favorables.',
+    f4t:'Saju de Relaciones', f4d:'Añade familia, parejas y amigos. Analiza compatibilidad en los cuatro pilares.',
+    f5t:'Insight Facial (관상)', f5d:'La fisiognomía coreana lee el destino en el rostro. Sube una foto y recibe un análisis IA.',
+    f6t:'Preguntar Más', f6d:'Un oráculo IA conversacional experto en Saju. Pregunta sobre timing profesional, energía matrimonial o qué significa un año difícil.',
+    testimonialText:'"Tu momento de nacimiento no es un accidente — es tu firma en el tejido del tiempo."',
+    testimonialSrc:'Proverbio Coreano',
+    dlLabel:'Comienza tu Lectura', dlTitle:'Descargar K-Saju',
+    dlSubtitle:'Gratis para empezar. Disponible en 15 idiomas. Tu carta te espera.',
+    iosSub:'Descargar en', androidSub:'Disponible en',
+    scrollHint:'deslizar',
+  },
+};
+
+function applyLang(lang) {
+  const t = T[lang] || T.en;
+  const body = document.body;
+
+  // remove all lang classes
+  body.className = body.className.replace(/lang-\w+/g,'').trim();
+  body.classList.add('lang-' + lang);
+
+  // update html lang
+  document.documentElement.lang = lang;
+
+  // apply texts
+  const set = (id, html) => {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = html;
+  };
+
+  set('heroAppName', t.heroAppName);
+  set('heroTitle', t.heroTitle);
+  set('heroSubtitle', t.heroSubtitle);
+  set('ctaPrimary', t.ctaPrimary);
+  set('ctaLearn', t.ctaLearn);
+  set('sajuLabel', t.sajuLabel);
+  set('sajuTitle', t.sajuTitle);
+  set('sajuIntro', t.sajuIntro);
+  set('p1label', t.p1label); set('p1name', t.p1name); set('p1desc', t.p1desc);
+  set('p2label', t.p2label); set('p2name', t.p2name); set('p2desc', t.p2desc);
+  set('p3label', t.p3label); set('p3name', t.p3name); set('p3desc', t.p3desc);
+  set('p4label', t.p4label); set('p4name', t.p4name); set('p4desc', t.p4desc);
+  set('ohaengLabel', t.ohaengLabel); set('ohaengDesc', t.ohaengDesc);
+  set('vsLabel', t.vsLabel); set('vsTitle', t.vsTitle);
+  set('saName', t.saName); set('westName', t.westName);
+  ['vs1lbl','vs2lbl','vs3lbl','vs4lbl'].forEach(id=>set(id, t[id]));
+  ['vs1lbl2','vs2lbl2','vs3lbl2','vs4lbl2'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerHTML=t[id.replace('2','')];
+  });
+  set('vs1ko',t.vs1ko); set('vs1en',t.vs1en);
+  set('vs2ko',t.vs2ko); set('vs2en',t.vs2en);
+  set('vs3ko',t.vs3ko); set('vs3en',t.vs3en);
+  set('vs4ko',t.vs4ko); set('vs4en',t.vs4en);
+  set('featuresLabel',t.featuresLabel); set('featuresTitle',t.featuresTitle);
+  set('f1t',t.f1t); set('f1d',t.f1d);
+  set('f2t',t.f2t); set('f2d',t.f2d);
+  set('f3t',t.f3t); set('f3d',t.f3d);
+  set('f4t',t.f4t); set('f4d',t.f4d);
+  set('f5t',t.f5t); set('f5d',t.f5d);
+  set('f6t',t.f6t); set('f6d',t.f6d);
+  set('testimonialText',t.testimonialText);
+  set('testimonialSrc',t.testimonialSrc);
+  set('dlLabel',t.dlLabel); set('dlTitle',t.dlTitle);
+  set('dlSubtitle',t.dlSubtitle);
+  set('iosSub',t.iosSub); set('androidSub',t.androidSub);
+  set('scrollHint',t.scrollHint);
+
+  // active button
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  // scroll hint text
+  const sh = document.getElementById('scrollHint');
+  if(sh) sh.firstChild && (sh.firstChild.textContent = t.scrollHint);
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>applyLang(btn.dataset.lang));
+});
+
+// auto-detect browser language
+const browserLang = (navigator.language||'en').slice(0,2).toLowerCase();
+const supported = ['en','ko','zh','ja','ar','fr','de','es'];
+if(supported.includes(browserLang)) {
+  applyLang(browserLang);
+} else {
+  applyLang('en');
+}
+</script>
+</body>
+</html>
