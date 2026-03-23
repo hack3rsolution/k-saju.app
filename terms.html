@@ -5,28 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — K-Saju Global</title>
 <style>
-  :root { --gold: #C9A84C; --bg: #0a0a0f; --text: #e8e4dc; --muted: #9a9590; --card-bg: #141419; }
+  :root { --gold: #C9A84C; --gold-dim: rgba(201,168,76,0.15); --gold-border: rgba(201,168,76,0.2); --bg: #0a0a0f; --text: #e8e4dc; --muted: #9a9590; --card-bg: #141419; --link: #C9A84C; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
-  .container { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
-  .logo { text-align: center; margin-bottom: 2rem; }
-  .logo a { color: var(--gold); text-decoration: none; font-size: 1.1rem; letter-spacing: 0.15em; font-weight: 600; }
+
+  /* Nav */
+  .nav { display: flex; align-items: center; justify-content: space-between; max-width: 720px; margin: 0 auto; padding: 1.5rem 1.5rem 0; }
+  .nav-logo { color: var(--gold); text-decoration: none; font-size: 1rem; letter-spacing: 0.15em; font-weight: 600; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* Content */
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
   h1 { font-size: 1.8rem; font-weight: 600; color: var(--gold); margin-bottom: 0.3rem; }
-  .updated { font-size: 0.85rem; color: var(--muted); margin-bottom: 2.5rem; }
-  h2 { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 2.2rem; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .updated { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .intro { font-size: 0.95rem; color: var(--text); opacity: 0.85; margin-bottom: 2rem; }
+  h2 { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 2.2rem; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--gold-dim); }
   h3 { font-size: 1rem; font-weight: 600; color: var(--muted); margin-top: 1.5rem; margin-bottom: 0.5rem; }
   p { margin-bottom: 1rem; font-size: 0.95rem; color: var(--text); opacity: 0.9; }
   ul { margin: 0.5rem 0 1rem 1.5rem; }
   li { margin-bottom: 0.4rem; font-size: 0.93rem; opacity: 0.85; }
-  .disclaimer-box { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; padding: 1.2rem 1.4rem; margin: 1rem 0 1.5rem; }
-  .disclaimer-box p { font-weight: 500; color: var(--gold); opacity: 1; margin-bottom: 0.5rem; }
-  .disclaimer-box ul li { color: var(--text); }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Highlight box */
+  .highlight-box { background: rgba(201,168,76,0.08); border: 1px solid var(--gold-border); border-radius: 8px; padding: 1.2rem 1.4rem; margin: 1rem 0 1.5rem; }
+  .highlight-box p { font-weight: 500; color: var(--gold); opacity: 1; margin-bottom: 0.5rem; }
+  .highlight-box ul li { color: var(--text); }
+
+  /* Legal caps */
   .caps { font-size: 0.85rem; opacity: 0.75; line-height: 1.7; }
-  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2.5rem 0; }
+
+  /* Contact box */
   .contact-box { background: var(--card-bg); border-radius: 8px; padding: 1.2rem 1.4rem; margin-top: 1.5rem; }
   .contact-box p { margin-bottom: 0.3rem; }
-  .contact-box a { color: var(--gold); text-decoration: none; }
-  .contact-box a:hover { text-decoration: underline; }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2.5rem 0; }
+
+  /* Footer */
   footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
   footer p { font-size: 0.8rem; color: var(--muted); }
   footer a { color: var(--muted); text-decoration: none; }
@@ -34,24 +52,30 @@
 </style>
 </head>
 <body>
+
+<nav class="nav">
+  <a href="https://k-saju.app/" class="nav-logo">命 K·SAJU</a>
+  <div class="nav-links">
+    <a href="https://k-saju.app/">Home</a>
+    <a href="https://k-saju.app/privacy.html">Privacy</a>
+    <a href="https://k-saju.app/terms.html">Terms</a>
+  </div>
+</nav>
+
 <div class="container">
 
-<div class="logo"><a href="https://k-saju.app/">命 K·SAJU</a></div>
-
 <h1>Terms of Service</h1>
-<p class="updated">Last Updated: March 23, 2026</p>
+<p class="updated">Last updated: March 23, 2026</p>
+<p class="intro">Welcome to K-Saju Global ("K-Saju," "the App," "we," "us," or "our"), a mobile application operated by Pie Nest Inc. ("Company"). These Terms of Service ("Terms") govern your access to and use of the K-Saju mobile application and all related services, features, and content offered through the App.</p>
+<p class="intro" style="margin-top:-1rem;">By downloading, installing, accessing, or using K-Saju, you agree to be bound by these Terms. If you do not agree, do not use the App.</p>
 
-<p>Welcome to K-Saju Global ("K-Saju," "the App," "we," "us," or "our"), a mobile application operated by Pie Nest Inc. ("Company"). These Terms of Service ("Terms") govern your access to and use of the K-Saju mobile application and all related services, features, and content offered through the App.</p>
-
-<p>By downloading, installing, accessing, or using K-Saju, you agree to be bound by these Terms. If you do not agree, do not use the App.</p>
-
-<h2>1. Description of Service</h2>
+<h2>1. Description of service</h2>
 
 <p>K-Saju Global is a mobile application that provides Korean astrology (사주/Saju) readings, personality analyses, compatibility reports, face insight analyses, and related content. The App uses artificial intelligence (AI) technology, including large language models, to generate personalized readings and interpretations based on user-provided information such as date of birth, time of birth, gender, and optionally facial photographs.</p>
 
-<h3>1.1 Entertainment Disclaimer</h3>
+<h3>1.1 Entertainment disclaimer</h3>
 
-<div class="disclaimer-box">
+<div class="highlight-box">
 <p>All content provided by K-Saju is for entertainment and general informational purposes only.</p>
 <ul>
 <li>Does not constitute medical, psychological, legal, financial, or professional advice of any kind</li>
@@ -63,7 +87,7 @@
 
 <p>You acknowledge that Korean astrology (Saju) is a traditional cultural practice, and the App presents its content within this cultural and entertainment context. Always consult qualified professionals for medical, legal, financial, or other important matters.</p>
 
-<h3>1.2 AI-Generated Content</h3>
+<h3>1.2 AI-generated content</h3>
 
 <p>K-Saju uses AI technology (large language models) to generate readings, analyses, and interpretive content. You acknowledge and agree that:</p>
 <ul>
@@ -78,13 +102,13 @@
 
 <p>You must be at least 13 years of age (or the minimum age required in your jurisdiction) to use K-Saju. If you are under 18 (or the age of legal majority in your jurisdiction), you may only use the App with the consent and supervision of a parent or legal guardian who agrees to these Terms on your behalf.</p>
 
-<h2>3. User Accounts and Data</h2>
+<h2>3. User accounts and data</h2>
 
-<h3>3.1 Information You Provide</h3>
+<h3>3.1 Information you provide</h3>
 
 <p>To use certain features of K-Saju, you may be asked to provide personal information including but not limited to: name, date and time of birth, gender, location of birth, photographs (for Face Insight feature), and relationship information (for compatibility analyses). You agree to provide accurate and complete information.</p>
 
-<h3>3.2 Face Insight Feature</h3>
+<h3>3.2 Face Insight feature</h3>
 
 <p>If you use the Face Insight feature, you may upload or capture a facial photograph. You acknowledge and agree that:</p>
 <ul>
@@ -94,16 +118,16 @@
 <li>You will not upload photographs of other individuals without their explicit consent</li>
 </ul>
 
-<h3>3.3 Data Processing by Third-Party AI Services</h3>
+<h3>3.3 Data processing by third-party AI services</h3>
 
-<p>To provide AI-generated readings and analyses, K-Saju transmits certain user-provided data (such as date of birth, time of birth, gender, and contextual prompts) to third-party AI service providers (Anthropic's Claude API) for processing. This data is used solely to generate your personalized readings and is subject to the third-party provider's data handling policies. For more details, please refer to our <a href="https://k-saju.app/privacy.html" style="color:var(--gold)">Privacy Policy</a>.</p>
+<p>To provide AI-generated readings and analyses, K-Saju transmits certain user-provided data (such as date of birth, time of birth, gender, and contextual prompts) to third-party AI service providers (Anthropic's Claude API) for processing. This data is used solely to generate your personalized readings and is subject to the third-party provider's data handling policies. For more details, please refer to our <a href="https://k-saju.app/privacy.html">Privacy Policy</a>.</p>
 
-<h2>4. Subscriptions, Payments, and In-App Purchases</h2>
+<h2>4. Subscriptions, payments, and in-app purchases</h2>
 
-<h3>4.1 Free and Premium Tiers</h3>
+<h3>4.1 Free and premium tiers</h3>
 <p>K-Saju offers both free and premium subscription tiers. The free tier provides limited daily usage (e.g., 3 interactions per day) with access to core features. The premium tier offers enhanced usage limits (e.g., 10 interactions per day), access to additional features and content packs.</p>
 
-<h3>4.2 Billing and Renewal</h3>
+<h3>4.2 Billing and renewal</h3>
 <ul>
 <li>Payment will be charged to your Apple ID account or Google Play account at confirmation of purchase</li>
 <li>Subscriptions automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current billing period</li>
@@ -111,23 +135,23 @@
 <li>You can manage and cancel your subscriptions by going to your device's account settings after purchase</li>
 </ul>
 
-<h3>4.3 Free Trials</h3>
+<h3>4.3 Free trials</h3>
 <p>If offered, free trial periods automatically convert to paid subscriptions unless canceled before the trial ends. Any unused portion of a free trial period will be forfeited when you purchase a subscription.</p>
 
 <h3>4.4 Refunds</h3>
 <p>Refund requests are handled by Apple (App Store) or Google (Google Play) in accordance with their respective refund policies. Pie Nest Inc. does not directly process refunds for in-app purchases made through these platforms.</p>
 
-<h3>4.5 Restore Purchases</h3>
+<h3>4.5 Restore purchases</h3>
 <p>You may restore previously purchased subscriptions and in-app purchases at any time through the Restore Purchases option available in the App's settings.</p>
 
-<h3>4.6 Price Changes</h3>
+<h3>4.6 Price changes</h3>
 <p>We reserve the right to adjust subscription prices. Any price changes will take effect at the start of the next subscription period following reasonable notice. You may cancel your subscription before the new price takes effect.</p>
 
-<h2>5. Acceptable Use</h2>
+<h2>5. Acceptable use</h2>
 
 <p>You agree not to: use the App for any unlawful or harmful purpose; attempt to reverse-engineer, decompile, or disassemble the App; interfere with or disrupt the App's infrastructure or services; use the App to harass, abuse, or harm another person; upload malicious content, viruses, or harmful code; use automated systems (bots, scrapers) to access the App; misrepresent your identity or impersonate others; share or redistribute AI-generated content in a manner that could mislead others into believing it constitutes professional advice; or upload photographs of individuals without their consent to the Face Insight feature.</p>
 
-<h2>6. Intellectual Property</h2>
+<h2>6. Intellectual property</h2>
 
 <p>All content, features, and functionality of K-Saju — including but not limited to text, graphics, logos, icons, images, audio, software, and the underlying AI models and algorithms — are the exclusive property of Pie Nest Inc. or its licensors and are protected by copyright, trademark, and other intellectual property laws.</p>
 
@@ -135,17 +159,17 @@
 
 <h2>7. Privacy</h2>
 
-<p>Your use of K-Saju is also governed by our <a href="https://k-saju.app/privacy.html" style="color:var(--gold)">Privacy Policy</a>, which describes how we collect, use, store, and share your personal information. By using the App, you consent to the practices described in the Privacy Policy.</p>
+<p>Your use of K-Saju is also governed by our <a href="https://k-saju.app/privacy.html">Privacy Policy</a>, which describes how we collect, use, store, and share your personal information. By using the App, you consent to the practices described in the Privacy Policy.</p>
 
-<h2>8. Disclaimers and Limitation of Liability</h2>
+<h2>8. Disclaimers and limitation of liability</h2>
 
-<h3>8.1 Disclaimer of Warranties</h3>
+<h3>8.1 Disclaimer of warranties</h3>
 <p class="caps">THE APP AND ALL CONTENT ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, OR NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE APP WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE.</p>
 
-<h3>8.2 Limitation of Liability</h3>
+<h3>8.2 Limitation of liability</h3>
 <p class="caps">TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, PIE NEST INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, RESULTING FROM YOUR ACCESS TO OR USE OF THE APP, ANY CONTENT OBTAINED FROM THE APP, OR ANY DECISIONS MADE BASED ON CONTENT PROVIDED BY THE APP.</p>
 
-<h3>8.3 Regional Limitations</h3>
+<h3>8.3 Regional limitations</h3>
 <p>Some jurisdictions do not allow the exclusion of certain warranties or the limitation of liability. In such jurisdictions, our liability shall be limited to the greatest extent permitted by law. EU consumers retain all rights granted under mandatory consumer protection laws.</p>
 
 <h2>9. Indemnification</h2>
@@ -156,15 +180,15 @@
 
 <p>We may suspend or terminate your access to the App at any time, with or without cause, and with or without notice. Upon termination, your right to use the App will immediately cease.</p>
 
-<h2>11. Changes to These Terms</h2>
+<h2>11. Changes to these terms</h2>
 
 <p>We reserve the right to modify these Terms at any time. If we make material changes, we will provide notice through the App or by other appropriate means. Your continued use of the App after such changes constitutes acceptance of the updated Terms.</p>
 
-<h2>12. Governing Law</h2>
+<h2>12. Governing law</h2>
 
 <p>These Terms shall be governed by and construed in accordance with the laws of the Republic of Korea. Any disputes shall be subject to the exclusive jurisdiction of the courts of Seoul, Republic of Korea. EU users may bring proceedings in their country of residence.</p>
 
-<h2>13. Apple-Specific Terms (iOS Users)</h2>
+<h2>13. Apple-specific terms (iOS users)</h2>
 
 <p>These Terms are between you and Pie Nest Inc., not Apple Inc. Pie Nest Inc. is solely responsible for the App and its content. Apple has no obligation to furnish maintenance or support services. Apple is not responsible for addressing any claims relating to the App. Apple is a third-party beneficiary of these Terms and may enforce these Terms against you.</p>
 
@@ -174,7 +198,7 @@
 
 <hr class="divider">
 
-<h2>15. Contact Us</h2>
+<h2>15. Contact us</h2>
 
 <div class="contact-box">
 <p><strong>Pie Nest Inc.</strong></p>
@@ -185,8 +209,8 @@
 <p style="margin-top:1.5rem; font-size:0.9rem; color:var(--muted);">These Terms of Service are effective as of March 23, 2026.</p>
 
 <footer>
-<p><a href="https://k-saju.app/">Home</a> · <a href="https://k-saju.app/privacy.html">Privacy Policy</a> · <a href="https://k-saju.app/terms.html">Terms of Service</a></p>
-<p style="margin-top:0.5rem;">© 2026 Pie Nest Inc. · All rights reserved</p>
+<p><a href="https://k-saju.app/">Home</a> · <a href="https://k-saju.app/privacy.html">Privacy Policy</a> · <a href="https://k-saju.app/terms.html">Terms of Service</a> · <a href="mailto:support@k-saju.app">Contact</a></p>
+<p style="margin-top:0.5rem;">&copy; 2026 Pie Nest Inc. &middot; All rights reserved</p>
 </footer>
 
 </div>
