@@ -119,6 +119,32 @@
     a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
     a:hover { color: #c4b5fd; }
 
+    /* ── Data table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13.5px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .data-table th {
+      background: var(--card);
+      color: var(--link);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .data-table td {
+      background: var(--surface);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ── Highlight callout ── */
     .callout {
       background: var(--card);
       border: 1px solid var(--border);
@@ -130,51 +156,21 @@
     }
     .callout.gold { border-left-color: var(--gold); }
 
-    .faq-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
+    /* ── Rights list ── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
     }
-    .faq-q {
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-    .faq-a {
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-    .faq-a code {
-      background: var(--card);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 13px;
-      color: var(--gold);
-    }
-
-    .contact-card {
+    .right-item {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      margin: 24px 0;
-    }
-    .contact-card .email {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--gold);
-      display: block;
-      margin: 12px 0 8px;
-    }
-    .contact-card .note {
+      border-radius: 8px;
+      padding: 12px 14px;
       font-size: 13px;
-      color: var(--muted);
     }
+    .right-item strong { display: block; color: var(--gold); margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
 
     footer {
       text-align: center;
@@ -188,8 +184,8 @@
 
     @media (max-width: 480px) {
       .page { padding: 32px 16px 60px; }
-      .faq-item { padding: 14px 16px; }
-      .contact-card { padding: 18px 16px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+      .rights-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -213,18 +209,15 @@
     <p class="page-meta">K-Saju: Korean Fortune &nbsp;&middot;&nbsp; Need help? We're here for you.</p>
   </div>
 
-  <!-- Contact -->
-  <div class="section">
-    <h2>Contact Us</h2>
-    <p>
-      If you have questions, issues, or feedback about K-Saju, reach out to our support team.
-      We typically respond within 1&ndash;2 business days.
-    </p>
-    <div class="contact-card">
-      <span class="note">Email us at</span>
-      <a class="email" href="mailto:support@k-saju.app">support@k-saju.app</a>
-      <span class="note">Please include your device model, OS version, and app version to help us assist you faster.</span>
-    </div>
+  <p>
+    If you have questions, issues, or feedback about K-Saju, our support team is
+    ready to help. We typically respond within 1&ndash;2 business days.
+  </p>
+
+  <div class="callout gold">
+    <strong>Email us:</strong> &nbsp;
+    <a href="mailto:support@k-saju.app">support@k-saju.app</a><br />
+    Please include your device model, OS version, and app version to help us assist you faster.
   </div>
 
   <hr class="divider" />
@@ -233,90 +226,81 @@
   <div class="section">
     <h2>Frequently Asked Questions</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I cancel my subscription?</div>
-      <div class="faq-a">
-        K-Saju subscriptions are managed through your app store account, not inside the app.
-        <ul>
-          <li><strong>iPhone / iPad:</strong> Go to <code>Settings</code> &gt; tap your name (Apple ID) &gt; <code>Subscriptions</code> &gt; select <strong>K-Saju</strong> &gt; <code>Cancel Subscription</code>.</li>
-          <li><strong>Android:</strong> Open <code>Google Play Store</code> &gt; tap your profile icon &gt; <code>Payments &amp; subscriptions</code> &gt; <code>Subscriptions</code> &gt; select <strong>K-Saju</strong> &gt; <code>Cancel</code>.</li>
-        </ul>
-        Your premium features will remain active until the end of the current billing period.
-      </div>
-    </div>
+    <h3>How do I cancel my subscription?</h3>
+    <p>
+      K-Saju subscriptions are managed through your app store account, not inside the app.
+    </p>
+    <ul>
+      <li><strong>iPhone / iPad:</strong> Go to Settings &gt; tap your name (Apple ID) &gt; Subscriptions &gt; select K-Saju &gt; Cancel Subscription.</li>
+      <li><strong>Android:</strong> Open Google Play Store &gt; tap your profile icon &gt; Payments &amp; subscriptions &gt; Subscriptions &gt; select K-Saju &gt; Cancel.</li>
+    </ul>
+    <p>
+      Your premium features will remain active until the end of the current billing period.
+    </p>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I delete my account and data?</div>
-      <div class="faq-a">
-        To request full account deletion and removal of all associated personal data, send an email to
-        <a href="mailto:support@k-saju.app">support@k-saju.app</a> with the subject line
-        <strong>"Account Deletion Request"</strong>. Please include the email address associated with your account.
-        We will process your request and permanently delete all your data within 30 days.
-      </div>
-    </div>
+    <h3>How do I delete my account and data?</h3>
+    <p>
+      To request full account deletion and removal of all associated personal data, send
+      an email to <a href="mailto:support@k-saju.app">support@k-saju.app</a> with the
+      subject line <strong>"Account Deletion Request"</strong>. Please include the email
+      address associated with your account. We will process your request and permanently
+      delete all your data within 30 days.
+    </p>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I change my birth information?</div>
-      <div class="faq-a">
-        You can update your birth date, birth time, and gender at any time:
-        <ul>
-          <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
-          <li>Tap <strong>Edit Profile</strong>.</li>
-          <li>Update your information and save.</li>
-        </ul>
-        Your fortune readings will automatically recalculate based on the updated information.
-      </div>
-    </div>
+    <h3>How do I change my birth information?</h3>
+    <p>You can update your birth date, birth time, and gender at any time:</p>
+    <ul>
+      <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
+      <li>Tap <strong>Edit Profile</strong>.</li>
+      <li>Update your information and save.</li>
+    </ul>
+    <p>
+      Your fortune readings will automatically recalculate based on the updated information.
+    </p>
 
-    <div class="faq-item">
-      <div class="faq-q">What happens to my Face Insight photos?</div>
-      <div class="faq-a">
-        Your privacy is our top priority. Photos submitted for Face Insight analysis are:
-        <ul>
-          <li><strong>Automatically and permanently deleted within 24 hours</strong> of submission.</li>
-          <li>Never stored on our servers beyond the immediate analysis.</li>
-          <li>Never shared with third parties or used for any other purpose.</li>
-        </ul>
-        For more details, see our <a href="/privacy.html">Privacy Policy</a>.
-      </div>
+    <h3>What happens to my Face Insight photos?</h3>
+    <div class="callout gold">
+      Photos submitted for Face Insight analysis are <strong>automatically and permanently
+      deleted within 24 hours</strong> of submission. We never store, share, or use face
+      images beyond the immediate analysis you requested.
     </div>
+    <p>
+      For more details, see our <a href="/privacy.html">Privacy Policy</a>.
+    </p>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I restore my purchases on a new device?</div>
-      <div class="faq-a">
-        If you reinstall K-Saju or switch devices, your purchases can be restored:
-        <ul>
-          <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
-          <li>Tap <strong>Restore Purchases</strong>.</li>
-        </ul>
-        Make sure you are signed in with the same Apple ID or Google account you used for the original purchase.
-      </div>
-    </div>
+    <h3>How do I restore my purchases on a new device?</h3>
+    <p>If you reinstall K-Saju or switch devices:</p>
+    <ul>
+      <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
+      <li>Tap <strong>Restore Purchases</strong>.</li>
+    </ul>
+    <p>
+      Make sure you are signed in with the same Apple ID or Google account you used for the original purchase.
+    </p>
 
-    <div class="faq-item">
-      <div class="faq-q">The app isn't loading or crashes on startup</div>
-      <div class="faq-a">
-        Try these steps:
-        <ul>
-          <li>Force-close the app and reopen it.</li>
-          <li>Make sure you have the latest version installed from the App Store or Google Play.</li>
-          <li>Restart your device.</li>
-        </ul>
-        If the issue persists, contact us at <a href="mailto:support@k-saju.app">support@k-saju.app</a>
-        with your device model, OS version, and a brief description of the problem.
-      </div>
-    </div>
+    <h3>The app isn't loading or crashes on startup</h3>
+    <p>Try these steps:</p>
+    <ul>
+      <li>Force-close the app and reopen it.</li>
+      <li>Make sure you have the latest version installed from the App Store or Google Play.</li>
+      <li>Restart your device.</li>
+    </ul>
+    <p>
+      If the issue persists, contact us at
+      <a href="mailto:support@k-saju.app">support@k-saju.app</a> with your device model,
+      OS version, and a brief description of the problem.
+    </p>
   </div>
 
   <hr class="divider" />
 
-  <!-- Additional info -->
+  <!-- Additional Resources -->
   <div class="section">
     <h2>Additional Resources</h2>
-    <div class="callout gold">
-      Read our <a href="/privacy.html">Privacy Policy</a> to learn how we handle your data, or our
-      <a href="/terms.html">Terms of Service</a> for the full terms governing your use of K-Saju.
-    </div>
+    <p>
+      <a href="/privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+      <a href="/terms.html">Terms of Service</a>
+    </p>
   </div>
 </div>
 
