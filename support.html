@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="K-Saju: Korean Fortune — Support & Help Center" />
+  <title>Support — K-Saju: Korean Fortune</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d0520;
+      --surface:  #1a0a2e;
+      --card:     #2d1854;
+      --border:   #3d2471;
+      --primary:  #7c3aed;
+      --gold:     #C9A84C;
+      --text:     #e2d9f3;
+      --muted:    #9d8fbe;
+      --link:     #a78bfa;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(13, 5, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+    }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .page-header { margin-bottom: 40px; }
+    .page-label {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.2);
+      color: var(--link);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .page-meta { font-size: 13px; color: var(--muted); }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    .section { margin-bottom: 40px; }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--link);
+      margin: 18px 0 8px;
+    }
+    p { margin-bottom: 12px; }
+    ul, ol { padding-left: 22px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: #c4b5fd; }
+
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    .callout.gold { border-left-color: var(--gold); }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .faq-q {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .faq-a {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .faq-a code {
+      background: var(--card);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    .contact-card .email {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+      margin: 12px 0 8px;
+    }
+    .contact-card .note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--link); }
+
+    @media (max-width: 480px) {
+      .page { padding: 32px 16px 60px; }
+      .faq-item { padding: 14px 16px; }
+      .contact-card { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://k-saju.app">☽ K-Saju</a>
+    <div class="nav-links">
+      <a href="https://k-saju.app">Home</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-label">Support</div>
+    <h1>Help Center</h1>
+    <p class="page-meta">K-Saju: Korean Fortune &nbsp;&middot;&nbsp; Need help? We're here for you.</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="section">
+    <h2>Contact Us</h2>
+    <p>
+      If you have questions, issues, or feedback about K-Saju, reach out to our support team.
+      We typically respond within 1&ndash;2 business days.
+    </p>
+    <div class="contact-card">
+      <span class="note">Email us at</span>
+      <a class="email" href="mailto:support@k-saju.app">support@k-saju.app</a>
+      <span class="note">Please include your device model, OS version, and app version to help us assist you faster.</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- FAQ -->
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I cancel my subscription?</div>
+      <div class="faq-a">
+        K-Saju subscriptions are managed through your app store account, not inside the app.
+        <ul>
+          <li><strong>iPhone / iPad:</strong> Go to <code>Settings</code> &gt; tap your name (Apple ID) &gt; <code>Subscriptions</code> &gt; select <strong>K-Saju</strong> &gt; <code>Cancel Subscription</code>.</li>
+          <li><strong>Android:</strong> Open <code>Google Play Store</code> &gt; tap your profile icon &gt; <code>Payments &amp; subscriptions</code> &gt; <code>Subscriptions</code> &gt; select <strong>K-Saju</strong> &gt; <code>Cancel</code>.</li>
+        </ul>
+        Your premium features will remain active until the end of the current billing period.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I delete my account and data?</div>
+      <div class="faq-a">
+        To request full account deletion and removal of all associated personal data, send an email to
+        <a href="mailto:support@k-saju.app">support@k-saju.app</a> with the subject line
+        <strong>"Account Deletion Request"</strong>. Please include the email address associated with your account.
+        We will process your request and permanently delete all your data within 30 days.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I change my birth information?</div>
+      <div class="faq-a">
+        You can update your birth date, birth time, and gender at any time:
+        <ul>
+          <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
+          <li>Tap <strong>Edit Profile</strong>.</li>
+          <li>Update your information and save.</li>
+        </ul>
+        Your fortune readings will automatically recalculate based on the updated information.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens to my Face Insight photos?</div>
+      <div class="faq-a">
+        Your privacy is our top priority. Photos submitted for Face Insight analysis are:
+        <ul>
+          <li><strong>Automatically and permanently deleted within 24 hours</strong> of submission.</li>
+          <li>Never stored on our servers beyond the immediate analysis.</li>
+          <li>Never shared with third parties or used for any other purpose.</li>
+        </ul>
+        For more details, see our <a href="/privacy.html">Privacy Policy</a>.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I restore my purchases on a new device?</div>
+      <div class="faq-a">
+        If you reinstall K-Saju or switch devices, your purchases can be restored:
+        <ul>
+          <li>Open K-Saju and go to the <strong>Settings</strong> tab.</li>
+          <li>Tap <strong>Restore Purchases</strong>.</li>
+        </ul>
+        Make sure you are signed in with the same Apple ID or Google account you used for the original purchase.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The app isn't loading or crashes on startup</div>
+      <div class="faq-a">
+        Try these steps:
+        <ul>
+          <li>Force-close the app and reopen it.</li>
+          <li>Make sure you have the latest version installed from the App Store or Google Play.</li>
+          <li>Restart your device.</li>
+        </ul>
+        If the issue persists, contact us at <a href="mailto:support@k-saju.app">support@k-saju.app</a>
+        with your device model, OS version, and a brief description of the problem.
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Additional info -->
+  <div class="section">
+    <h2>Additional Resources</h2>
+    <div class="callout gold">
+      Read our <a href="/privacy.html">Privacy Policy</a> to learn how we handle your data, or our
+      <a href="/terms.html">Terms of Service</a> for the full terms governing your use of K-Saju.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Pie Nest Inc. &middot; <a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms of Service</a> &middot; <a href="https://k-saju.app">K-Saju App</a></p>
+</footer>
+
+</body>
+</html>
