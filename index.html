@@ -2,1345 +2,645 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ohaeng — Five Elements Wellness for the World</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ohaeng — Five Elements Wellness</title>
+<meta name="description" content="Ohaeng is a daily wellness companion grounded in three thousand years of Eastern philosophy. Find your elemental balance in 15 languages.">
+<meta property="og:title" content="Ohaeng — Five Elements Wellness">
+<meta property="og:description" content="A daily wellness practice grounded in the ancient Five Elements philosophy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;900&family=Noto+Serif+SC:wght@300;400;700;900&family=Noto+Serif+JP:wght@300;400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold: #C9A84C;
-  --gold-light: #E8C97A;
-  --gold-dim: rgba(201,168,76,0.35);
-  --gold-faint: rgba(201,168,76,0.12);
-  --dark: #0E0C08;
-  --dark-2: #161410;
-  --dark-3: #1E1C16;
-  --dark-4: #262420;
-  --text: #F0E8D8;
-  --text-dim: rgba(240,232,216,0.6);
-  --text-faint: rgba(240,232,216,0.35);
-  --accent: #8B6B35;
+  --bg: #2A2335; --bg-soft: #332B40; --bg-card: #2F2839;
+  --ink: #EFE7F2; --ink-soft: #B8AAC4; --ink-mute: #9B8AB8; --ink-faint: #7A6E88;
+  --lavender: #C9B8DC; --lavender-deep: #9B8AB8; --lavender-glow: rgba(155, 138, 184, 0.15);
+  --gold: #D4B97C; --gold-soft: #B89A5E;
+  --line: rgba(201, 184, 220, 0.10); --line-strong: rgba(201, 184, 220, 0.20);
+  --c-wood: #A8C49A; --c-fire: #D4A8A2; --c-earth: #D4B97C; --c-metal: #C9C4BC; --c-water: #A8B8C9;
+  --container: 1280px; --gutter: 64px; --gutter-mobile: 24px;
 }
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
 body {
-  background: var(--dark);
-  color: var(--text);
-  font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
-  overflow-x: hidden;
-  position: relative;
+  background: var(--bg); color: var(--ink);
+  font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: hidden; position: relative;
 }
-
-/* ── GRAIN OVERLAY ── */
 body::before {
-  content:'';
-  position: fixed;
-  inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* ── STAR CANVAS ── */
-#starfield {
-  position: fixed;
-  inset:0;
-  pointer-events: none;
+  content: ''; position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(155, 138, 184, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 60%, rgba(212, 185, 124, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 138, 184, 0.06) 0%, transparent 60%);
   z-index: 0;
 }
+main { position: relative; z-index: 1; }
 
-/* ── LANGUAGE SWITCHER ── */
-.lang-bar {
-  position: fixed;
-  top:0; left:0; right:0;
-  z-index: 1000;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 20px;
-  background: linear-gradient(to bottom, rgba(14,12,8,0.95) 0%, rgba(14,12,8,0) 100%);
-  backdrop-filter: blur(8px);
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--lavender-deep); display: flex; align-items: center; gap: 16px;
 }
+.eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); opacity: 0.6; }
+.eyebrow.center { justify-content: center; }
 
-.lang-btn {
-  background: none;
-  border: 1px solid transparent;
-  color: var(--text-faint);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-family: inherit;
+/* NAV */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px var(--gutter); position: sticky; top: 0;
+  background: rgba(42, 35, 53, 0.7); backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); z-index: 100; border-bottom: 1px solid var(--line);
 }
-.lang-btn:hover { color: var(--gold-light); border-color: var(--gold-dim); }
-.lang-btn.active { color: var(--gold); border-color: var(--gold); background: var(--gold-faint); }
-
-/* ── SECTIONS ── */
-section {
-  position: relative;
-  z-index: 1;
+.wordmark {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px;
+  font-style: italic; letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
 }
+.wordmark::before {
+  content: ''; width: 5px; height: 5px; background: var(--gold);
+  border-radius: 50%; display: block; box-shadow: 0 0 12px var(--gold);
+}
+.nav-links {
+  display: flex; gap: 4px; font-size: 12px; letter-spacing: 0.08em;
+  color: var(--ink-mute); align-items: center;
+}
+.nav-links span {
+  padding: 6px 10px; cursor: pointer; transition: color 0.3s;
+  color: var(--ink-mute); border-radius: 4px;
+}
+.nav-links span:hover { color: var(--ink); }
+.nav-links span.active { color: var(--ink); border-bottom: 1px solid var(--gold); }
+.lang-divider { width: 1px; height: 14px; background: var(--line-strong); margin: 0 4px; }
 
-/* ── HERO ── */
+/* HERO */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 100px 24px 60px;
-  position: relative;
+  padding: 120px var(--gutter) 140px; max-width: var(--container); margin: 0 auto;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;
 }
-
-.hero-emblem {
-  font-size: clamp(80px, 18vw, 180px);
-  line-height: 1;
-  color: var(--gold);
-  text-shadow: 0 0 80px rgba(201,168,76,0.4), 0 0 160px rgba(201,168,76,0.15);
-  animation: pulse 4s ease-in-out infinite;
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 900;
-  margin-bottom: 24px;
-  display: block;
+.hero-eyebrow { margin-bottom: 36px; }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(48px, 6.5vw, 88px); line-height: 0.96; letter-spacing: -0.025em;
+  color: var(--ink); margin-bottom: 36px;
 }
-
-@keyframes pulse {
-  0%,100% { text-shadow: 0 0 80px rgba(201,168,76,0.4), 0 0 160px rgba(201,168,76,0.15); }
-  50%      { text-shadow: 0 0 120px rgba(201,168,76,0.6), 0 0 240px rgba(201,168,76,0.25); }
+.hero h1 em { font-style: italic; font-weight: 300; color: var(--lavender); }
+.hero h1 .gold-accent { font-style: italic; color: var(--gold); font-weight: 400; }
+.hero p {
+  font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--ink-soft);
+  max-width: 480px; margin-bottom: 48px;
 }
-
-.hero-app-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(14px, 3vw, 18px);
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-
-.hero-title {
-  font-size: clamp(32px, 7vw, 72px);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-  max-width: 700px;
-}
-
-.hero-title em {
-  font-style: italic;
-  color: var(--gold-light);
-}
-
-.hero-subtitle {
-  font-size: clamp(14px, 2.5vw, 19px);
-  color: var(--text-dim);
-  max-width: 560px;
-  line-height: 1.7;
-  margin-bottom: 48px;
-  font-weight: 300;
-}
-
-.cta-group {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
+.cta-group { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--gold);
-  color: var(--dark);
-  padding: 14px 32px;
-  border-radius: 2px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s;
-  font-family: 'Cormorant Garamond', serif;
+  background: var(--ink); color: var(--bg); padding: 16px 34px;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; border: none;
+  border-radius: 100px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  text-decoration: none; display: inline-block;
 }
-.btn-primary:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+.btn-primary:hover { background: var(--gold); box-shadow: 0 0 40px rgba(212,185,124,0.3); }
+.btn-text {
+  font-size: 13px; letter-spacing: 0.06em; color: var(--ink-soft); text-decoration: none;
+  border-bottom: 1px solid var(--line-strong); padding-bottom: 4px; transition: all 0.4s;
 }
+.btn-text:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--gold);
-  border: 1px solid var(--gold-dim);
-  padding: 14px 32px;
-  border-radius: 2px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s;
-  font-family: 'Cormorant Garamond', serif;
+/* HERO SVG */
+.hero-visual {
+  position: relative; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
 }
-.btn-secondary:hover {
-  border-color: var(--gold);
-  background: var(--gold-faint);
-}
+.hero-visual svg { width: 100%; height: 100%; filter: drop-shadow(0 0 40px rgba(155,138,184,0.2)); }
+.orbit-ring { fill: none; stroke: var(--line-strong); stroke-width: 0.8; }
+.orbit-ring.dashed { stroke-dasharray: 1 5; opacity: 0.6; }
+.element-line { stroke: var(--lavender-deep); stroke-width: 0.5; fill: none; opacity: 0.3; stroke-dasharray: 2 3; }
+.hero-dot.wood { fill: var(--c-wood); filter: drop-shadow(0 0 8px var(--c-wood)); }
+.hero-dot.fire { fill: var(--c-fire); filter: drop-shadow(0 0 8px var(--c-fire)); }
+.hero-dot.earth { fill: var(--c-earth); filter: drop-shadow(0 0 8px var(--c-earth)); }
+.hero-dot.metal { fill: var(--c-metal); filter: drop-shadow(0 0 8px var(--c-metal)); }
+.hero-dot.water { fill: var(--c-water); filter: drop-shadow(0 0 8px var(--c-water)); }
+@keyframes hero-pulse { 0%,100%{opacity:0.95}50%{opacity:0.5} }
+.pulsing-1{animation:hero-pulse 7s ease-in-out infinite}
+.pulsing-2{animation:hero-pulse 7s ease-in-out infinite 1.4s}
+.pulsing-3{animation:hero-pulse 7s ease-in-out infinite 2.8s}
+.pulsing-4{animation:hero-pulse 7s ease-in-out infinite 4.2s}
+.pulsing-5{animation:hero-pulse 7s ease-in-out infinite 5.6s}
+@keyframes slow-rotate { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+.constellation { transform-origin: 200px 200px; animation: slow-rotate 180s linear infinite; }
+.counter-rotate { transform-origin: 0 0; animation: slow-rotate 180s linear infinite reverse; }
 
-.scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-faint);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  animation: bob 2.5s ease-in-out infinite;
+/* SECTIONS */
+.section {
+  padding: 140px var(--gutter); max-width: var(--container); margin: 0 auto;
+  border-top: 1px solid var(--line);
 }
-.scroll-hint::after {
-  content:'';
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--gold-dim), transparent);
-}
-
-@keyframes bob {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50%      { transform: translateX(-50%) translateY(8px); }
-}
-
-/* ── DIVIDER ── */
-.divider {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 0 40px;
-  margin: 20px 0;
-}
-.divider::before,.divider::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
-}
-.divider-icon {
-  color: var(--gold);
-  font-size: 20px;
-  opacity: 0.6;
-}
-
-/* ── WHAT IS SAJU ── */
-.what-saju {
-  padding: 100px 40px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-size: 11px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-  display: block;
-}
-
 .section-title {
-  font-size: clamp(28px, 5vw, 54px);
-  font-weight: 300;
-  line-height: 1.2;
-  margin-bottom: 60px;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(40px, 4.5vw, 60px); line-height: 1.05; letter-spacing: -0.02em;
+  margin: 24px 0 60px; max-width: 780px; color: var(--ink);
 }
+.section-title em { font-style: italic; color: var(--lavender); }
 
-.saju-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px 80px;
-  align-items: start;
+/* ELEMENTS */
+.elements-intro {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+  margin-bottom: 100px; padding-bottom: 100px; border-bottom: 1px solid var(--line); align-items: start;
 }
-
-.saju-pillar {
-  background: var(--dark-3);
-  border: 1px solid var(--gold-dim);
-  border-radius: 2px;
-  padding: 40px 36px;
-  position: relative;
-  overflow: hidden;
+.elements-glyph-block {
+  font-family: 'Noto Serif KR', serif; font-weight: 300; font-size: 56px;
+  color: var(--lavender); line-height: 1.1;
 }
-.saju-pillar::before {
-  content:'';
-  position: absolute;
-  top:0; left:0; right:0;
-  height:2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+.elements-glyph-block::after {
+  content: '五行'; display: block; font-size: 12px; letter-spacing: 0.3em;
+  color: var(--ink-mute); margin-top: 16px;
 }
+.elements-intro-text p { font-size: 18px; font-weight: 300; line-height: 1.75; color: var(--ink-soft); max-width: 580px; }
+.elements-intro-text p+p { margin-top: 24px; }
 
-.saju-pillar-glyph {
-  font-size: 52px;
-  color: var(--gold);
-  margin-bottom: 16px;
-  display: block;
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 900;
-  line-height: 1;
+.elements-grid {
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line);
 }
-
-.saju-pillar-label {
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  margin-bottom: 8px;
-  display: block;
+.element-card {
+  padding: 56px 28px 64px; background: var(--bg); position: relative;
+  overflow: hidden; transition: background 1.5s ease;
 }
-
-.saju-pillar-name {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--gold-light);
+.element-card.wood{color:var(--c-wood)}.element-card.fire{color:var(--c-fire)}
+.element-card.earth{color:var(--c-earth)}.element-card.metal{color:var(--c-metal)}.element-card.water{color:var(--c-water)}
+.element-card .glyph {
+  font-family: 'Noto Serif KR', serif; font-weight: 300; font-size: 44px;
+  color: currentColor; margin-bottom: 12px; display: block; line-height: 1; position: relative; z-index: 2;
+  animation: glyph-pulse 9s ease-in-out infinite; transition: filter 1.5s ease;
 }
-
-.saju-pillar-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-dim);
-  font-weight: 300;
+.element-card.wood .glyph{animation-delay:0s}.element-card.fire .glyph{animation-delay:1.8s}
+.element-card.earth .glyph{animation-delay:3.6s}.element-card.metal .glyph{animation-delay:5.4s}.element-card.water .glyph{animation-delay:7.2s}
+@keyframes glyph-pulse{0%,100%{opacity:0.85;filter:drop-shadow(0 0 4px transparent)}50%{opacity:1;filter:drop-shadow(0 0 8px currentColor)}}
+.element-card:hover .glyph{filter:drop-shadow(0 0 14px currentColor)}
+.element-card .name-en {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 24px; color: var(--ink); margin-bottom: 28px; position: relative; z-index: 2;
 }
-
-.saju-intro-text {
-  font-size: clamp(16px, 2.5vw, 22px);
-  line-height: 1.8;
-  color: var(--text-dim);
-  font-weight: 300;
-  max-width: 580px;
+.element-card .keyword {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 16px; position: relative; z-index: 2;
 }
-
-.saju-intro-text strong {
-  color: var(--gold-light);
-  font-weight: 600;
+.element-card .desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); position: relative; z-index: 2; }
+.element-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 30%, currentColor, transparent 60%);
+  opacity: 0; z-index: 1; animation: card-breathe 14s ease-in-out infinite; transition: opacity 1.5s ease;
 }
-
-/* ── VS WESTERN ── */
-.vs-section {
-  padding: 80px 40px;
-  background: var(--dark-2);
-  border-top: 1px solid rgba(201,168,76,0.08);
-  border-bottom: 1px solid rgba(201,168,76,0.08);
+.element-card.wood::before{animation-delay:0s}.element-card.fire::before{animation-delay:2.8s}
+.element-card.earth::before{animation-delay:5.6s}.element-card.metal::before{animation-delay:8.4s}.element-card.water::before{animation-delay:11.2s}
+@keyframes card-breathe{0%,100%{opacity:0}50%{opacity:0.05}}
+.element-card:hover::before{animation:none;opacity:0.15}
+.element-card .orbit-dot {
+  position: absolute; top: 30px; right: 24px; width: 4px; height: 4px;
+  background: currentColor; border-radius: 50%; filter: drop-shadow(0 0 6px currentColor);
+  opacity: 0.4; animation: drift 16s ease-in-out infinite; z-index: 1;
 }
+.element-card.wood .orbit-dot{animation-delay:0s}.element-card.fire .orbit-dot{animation-delay:3.2s}
+.element-card.earth .orbit-dot{animation-delay:6.4s}.element-card.metal .orbit-dot{animation-delay:9.6s}.element-card.water .orbit-dot{animation-delay:12.8s}
+@keyframes drift{0%,100%{transform:translate(0,0);opacity:0.3}25%{transform:translate(-6px,12px);opacity:0.5}50%{transform:translate(-14px,6px);opacity:0.35}75%{transform:translate(-9px,-6px);opacity:0.5}}
 
-.vs-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.vs-table {
-  display: grid;
-  grid-template-columns: 1fr 80px 1fr;
-  gap: 0;
-  margin-top: 60px;
-  align-items: start;
-}
-
-.vs-col {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.vs-col-header {
-  padding: 24px 32px;
-  background: var(--dark-3);
-  border: 1px solid var(--gold-dim);
-  border-radius: 2px;
-  text-align: center;
-}
-
-.vs-col-header .flag { font-size: 28px; margin-bottom: 8px; display: block; }
-.vs-col-header .name { font-size: 20px; font-weight: 600; color: var(--gold-light); }
-.vs-col-header .subname { font-size: 12px; color: var(--text-faint); letter-spacing: 0.2em; }
-
-.vs-item {
-  padding: 20px 28px;
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 2px;
-  background: rgba(255,255,255,0.02);
-}
-
-.vs-item-label {
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  margin-bottom: 6px;
-}
-
-.vs-item-val {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-dim);
-}
-
-.vs-mid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding-top: 72px;
-}
-
-.vs-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold-dim);
-}
-
-.vs-vs {
-  writing-mode: vertical-rl;
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  color: var(--text-faint);
-  text-transform: uppercase;
-}
-
-/* ── FEATURES ── */
-.features {
-  padding: 100px 40px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
+/* FEATURES */
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); margin-top: 60px;
 }
-
-.feature-card {
-  background: var(--dark-3);
-  border: 1px solid rgba(201,168,76,0.12);
-  border-radius: 2px;
-  padding: 36px 28px;
-  transition: all 0.4s;
-  position: relative;
-  overflow: hidden;
+.feature-card { padding: 48px 32px 56px; background: var(--bg); position: relative; transition: background 1s ease; }
+.feature-card:hover { background: var(--bg-soft); }
+.feature-card .icon-wrap { width: 36px; height: 36px; margin-bottom: 28px; color: var(--gold); opacity: 0.85; }
+.feature-card .icon-wrap svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.feature-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: 26px; color: var(--ink); margin-bottom: 14px; letter-spacing: -0.01em;
 }
+.feature-card .feature-kr { font-family: 'Noto Serif KR', serif; font-size: 12px; letter-spacing: 0.2em; color: var(--ink-mute); margin-bottom: 18px; display: block; }
+.feature-card p { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-soft); }
 
-.feature-card::after {
-  content:'';
-  position:absolute;
-  bottom:0; left:0; right:0;
-  height:1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  transform: scaleX(0);
-  transition: transform 0.4s;
+/* QUOTE */
+.quote-section {
+  padding: 180px var(--gutter); max-width: 920px; margin: 0 auto;
+  text-align: center; position: relative; border-top: 1px solid var(--line);
 }
-
-.feature-card:hover {
-  border-color: var(--gold-dim);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--gold-faint);
+.quote-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 600px; height: 600px; background: radial-gradient(circle, var(--lavender-glow) 0%, transparent 70%);
+  z-index: -1; pointer-events: none;
 }
-.feature-card:hover::after { transform: scaleX(1); }
+.quote-mark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: 100px; color: var(--gold); line-height: 1; margin-bottom: 24px; opacity: 0.5; }
+.quote-section blockquote { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic; font-size: clamp(30px,3.5vw,46px); line-height: 1.3; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 36px; }
+.quote-section cite { font-style: normal; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-mute); }
 
-.feature-icon {
-  font-size: 40px;
-  margin-bottom: 16px;
-  display: block;
-  filter: drop-shadow(0 0 12px rgba(201,168,76,0.3));
+/* CTA */
+.cta-section { padding: 160px var(--gutter); max-width: 920px; margin: 0 auto; text-align: center; border-top: 1px solid var(--line); }
+.cta-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(40px,5vw,64px); line-height: 1.05; letter-spacing: -0.02em; margin: 28px 0 24px; color: var(--ink); }
+.cta-section h2 em { font-style: italic; color: var(--lavender); }
+.cta-section .lead { font-size: 17px; line-height: 1.7; color: var(--ink-soft); max-width: 560px; margin: 0 auto 56px; }
+.app-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.app-btn {
+  display: flex; align-items: center; gap: 12px; padding: 14px 28px;
+  background: transparent; color: var(--ink); border: 1px solid var(--line-strong);
+  border-radius: 100px; text-decoration: none; font-size: 13px; letter-spacing: 0.04em;
+  font-weight: 400; transition: all 0.4s;
 }
+.app-btn:hover { border-color: var(--gold); background: rgba(212,185,124,0.04); }
+.app-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-.feature-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--gold-light);
-  margin-bottom: 12px;
-}
+/* FOOTER */
+footer { padding: 80px var(--gutter) 60px; border-top: 1px solid var(--line); text-align: center; }
+footer .wordmark { justify-content: center; margin-bottom: 24px; font-size: 22px; }
+footer .footer-links { font-size: 12px; letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 24px; }
+footer .footer-links a { color: var(--ink-mute); text-decoration: none; margin: 0 12px; transition: color 0.3s; }
+footer .footer-links a:hover { color: var(--ink); }
+footer .copyright { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase; }
 
-.feature-desc {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-dim);
-  font-weight: 300;
-}
-
-/* ── TESTIMONIAL ── */
-.testimonial-section {
-  padding: 80px 40px;
-  text-align: center;
-  background: var(--dark-2);
-  border-top: 1px solid rgba(201,168,76,0.08);
-}
-
-.testimonial-quote {
-  font-size: clamp(22px, 4vw, 42px);
-  font-style: italic;
-  font-weight: 300;
-  max-width: 800px;
-  margin: 0 auto 32px;
-  line-height: 1.5;
-  color: var(--text);
-}
-
-.testimonial-source {
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-
-/* ── APP STORE ── */
-.download {
-  padding: 100px 40px;
-  text-align: center;
-}
-
-.download-inner {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.store-badges {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 48px;
-}
-
-.store-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--dark-3);
-  border: 1px solid var(--gold-dim);
-  border-radius: 4px;
-  padding: 14px 28px;
-  text-decoration: none;
-  color: var(--text);
-  transition: all 0.3s;
-  min-width: 180px;
-}
-.store-badge:hover {
-  background: var(--dark-4);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-.store-badge-icon { font-size: 28px; }
-.store-badge-text { text-align: left; }
-.store-badge-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 0.1em; display: block; margin-bottom: 2px; }
-.store-badge-name { font-size: 16px; font-weight: 600; color: var(--gold-light); }
-
-/* ── FOOTER ── */
-footer {
-  padding: 40px;
-  border-top: 1px solid rgba(201,168,76,0.1);
-  text-align: center;
-  color: var(--text-faint);
-  font-size: 13px;
-  letter-spacing: 0.05em;
-}
-
-footer a { color: var(--gold-dim); text-decoration: none; }
-footer a:hover { color: var(--gold); }
-
-/* ── LANGUAGE-SPECIFIC OVERRIDES ── */
-
-/* ── ZH: Bold, large, minimal ── */
-body.lang-zh {
-  --hero-glyph-size: clamp(100px, 22vw, 220px);
-}
-body.lang-zh .hero-emblem { font-family: 'Noto Serif SC', serif; font-size: clamp(100px,22vw,220px); }
-body.lang-zh .hero-title { font-family: 'Noto Serif SC', serif; font-size: clamp(36px, 8vw, 82px); font-weight: 700; letter-spacing: 0.05em; }
-body.lang-zh .hero-subtitle { font-size: clamp(16px, 2.8vw, 20px); line-height: 1.9; max-width: 480px; }
-body.lang-zh .feature-desc { font-size: 15px; line-height: 1.9; }
-body.lang-zh .section-title { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: clamp(30px, 6vw, 60px); }
-body.lang-zh .saju-intro-text { font-size: clamp(18px, 3vw, 26px); font-family: 'Noto Serif SC', serif; }
-body.lang-zh .saju-pillar-desc { font-size: 16px; }
-body.lang-zh .feature-title { font-size: 20px; font-family: 'Noto Serif SC', serif; }
-body.lang-zh .features-grid { gap: 32px; }
-body.lang-zh .feature-card { padding: 44px 36px; }
-body.lang-zh .vs-item-val { font-size: 17px; }
-body.lang-zh .testimonial-quote { font-size: clamp(26px, 5vw, 52px); font-family: 'Noto Serif SC', serif; font-weight: 700; font-style: normal; }
-
-/* ── JA: Small, dense, detailed ── */
-body.lang-ja .hero-emblem { font-family: 'Noto Serif JP', serif; }
-body.lang-ja .hero-title { font-family: 'Noto Serif JP', serif; font-size: clamp(22px, 4.5vw, 48px); font-weight: 400; line-height: 1.5; letter-spacing: 0.08em; }
-body.lang-ja .hero-subtitle { font-family: 'Noto Serif JP', serif; font-size: clamp(12px, 1.8vw, 15px); line-height: 2.2; max-width: 700px; color: var(--text-dim); }
-body.lang-ja .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(20px, 3.5vw, 40px); line-height: 1.6; }
-body.lang-ja .saju-intro-text { font-size: clamp(13px, 1.8vw, 16px); line-height: 2.2; font-family: 'Noto Serif JP', serif; }
-body.lang-ja .feature-desc { font-size: 12px; line-height: 2.0; }
-body.lang-ja .feature-title { font-size: 15px; font-family: 'Noto Serif JP', serif; letter-spacing: 0.1em; }
-body.lang-ja .features-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-body.lang-ja .feature-card { padding: 28px 22px; }
-body.lang-ja .saju-pillar-desc { font-size: 13px; line-height: 2.0; }
-body.lang-ja .vs-item-val { font-size: 13px; line-height: 1.8; }
-body.lang-ja .testimonial-quote { font-size: clamp(16px, 2.8vw, 28px); font-family: 'Noto Serif JP', serif; font-weight: 300; }
-
-/* ── KO ── */
-body.lang-ko .hero-emblem { font-family: 'Noto Serif KR', serif; }
-body.lang-ko .hero-title { font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 5.5vw, 58px); font-weight: 400; line-height: 1.35; letter-spacing: -0.02em; }
-body.lang-ko .hero-subtitle { font-family: 'Noto Serif KR', serif; font-size: clamp(14px, 2.2vw, 18px); }
-body.lang-ko .section-title { font-family: 'Noto Serif KR', serif; }
-body.lang-ko .saju-intro-text { font-family: 'Noto Serif KR', serif; }
-body.lang-ko .feature-title { font-family: 'Noto Serif KR', serif; }
-body.lang-ko .saju-pillar-name { font-family: 'Noto Serif KR', serif; }
-
-/* ── AR: RTL ── */
-body.lang-ar {
-  direction: rtl;
-}
-body.lang-ar .lang-bar { flex-direction: row-reverse; }
-body.lang-ar .hero-subtitle { font-size: clamp(14px, 2.5vw, 19px); letter-spacing: 0; line-height: 2.0; }
-body.lang-ar .section-label { letter-spacing: 0.1em; }
-body.lang-ar .feature-desc { font-size: 14px; line-height: 2.0; }
-
-/* ── ANIMATIONS ── */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .saju-grid { grid-template-columns: 1fr; gap: 24px; }
-  .vs-table { grid-template-columns: 1fr; gap: 24px; }
-  .vs-mid { display: none; }
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 18px var(--gutter-mobile); }
+  .hero { padding: 60px var(--gutter-mobile) 80px; grid-template-columns: 1fr; gap: 48px; }
+  .section, .quote-section, .cta-section { padding: 80px var(--gutter-mobile); }
+  .elements-intro { grid-template-columns: 1fr; gap: 40px; padding-bottom: 60px; margin-bottom: 60px; }
+  .elements-grid { grid-template-columns: repeat(2,1fr); }
   .features-grid { grid-template-columns: 1fr; }
-  body.lang-ja .features-grid { grid-template-columns: 1fr; }
-  .what-saju, .features { padding: 60px 24px; }
-  .vs-section, .testimonial-section, .download { padding: 60px 24px; }
+  footer { padding: 60px var(--gutter-mobile) 40px; }
+  .nav-links span { padding: 4px 8px; font-size: 11px; }
+  .lang-divider { display: none; }
+}
+@media (max-width: 600px) {
+  .nav-links span:nth-child(n+10) { display: none; }
 }
 </style>
 </head>
-<body class="lang-en">
+<body>
+<main>
 
-<canvas id="starfield"></canvas>
-
-<!-- LANGUAGE SWITCHER -->
-<nav class="lang-bar" id="langBar">
-  <button class="lang-btn active" data-lang="en">EN</button>
-  <button class="lang-btn" data-lang="ko">한국어</button>
-  <button class="lang-btn" data-lang="zh">中文</button>
-  <button class="lang-btn" data-lang="ja">日本語</button>
-  <button class="lang-btn" data-lang="ar">العربية</button>
-  <button class="lang-btn" data-lang="fr">FR</button>
-  <button class="lang-btn" data-lang="de">DE</button>
-  <button class="lang-btn" data-lang="es">ES</button>
+<nav>
+  <a href="/" class="wordmark">ohaeng</a>
+  <div class="nav-links">
+    <span onclick="applyLang('en')" class="active" id="btn-en">EN</span>
+    <span onclick="applyLang('ko')" id="btn-ko">한국어</span>
+    <span onclick="applyLang('zh')" id="btn-zh">中文</span>
+    <span onclick="applyLang('ja')" id="btn-ja">日本語</span>
+    <span onclick="applyLang('fr')" id="btn-fr">FR</span>
+    <span onclick="applyLang('de')" id="btn-de">DE</span>
+    <div class="lang-divider"></div>
+    <span onclick="applyLang('es')" id="btn-es">ES</span>
+    <span onclick="applyLang('pt')" id="btn-pt">PT</span>
+    <span onclick="applyLang('hi')" id="btn-hi">हि</span>
+    <span onclick="applyLang('vi')" id="btn-vi">VI</span>
+    <span onclick="applyLang('id')" id="btn-id">ID</span>
+    <span onclick="applyLang('th')" id="btn-th">TH</span>
+    <span onclick="applyLang('ar')" id="btn-ar">AR</span>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <span class="hero-emblem" id="heroEmblem">命</span>
-  <div class="hero-app-name" id="heroAppName">K · S A J U</div>
-  <h1 class="hero-title" id="heroTitle">
-    Your balance begins<br><em>in the moment of birth</em>
-  </h1>
-  <p class="hero-subtitle" id="heroSubtitle">
-    Five Elements of Balance — the 3,000-year-old Korean art of reading elemental balance from birth time — now available to the world in 15 languages.
-  </p>
-  <div class="cta-group">
-    <a href="#download" class="btn-primary" id="ctaPrimary">▸ Download Free</a>
-    <a href="#ohaeng" class="btn-secondary" id="ctaLearn">Discover Five Elements</a>
+  <div class="hero-text">
+    <div class="eyebrow hero-eyebrow" id="heroEyebrow">A daily wellness practice</div>
+    <h1 id="heroTitle">Find your <em>balance</em>,<br>in <span class="gold-accent">five</span> elements.</h1>
+    <p id="heroSubtitle">Ohaeng is a quiet wellness companion grounded in three thousand years of Eastern philosophy. Read your day in elements — what's flowing, what's blocked, where to soften.</p>
+    <div class="cta-group">
+      <a href="#download" class="btn-primary" id="ctaDownload">Download free</a>
+      <a href="#how" class="btn-text" id="ctaHow">How it works ↓</a>
+    </div>
   </div>
-  <div class="scroll-hint" id="scrollHint">scroll</div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" class="orbit-ring" />
+      <circle cx="200" cy="200" r="130" class="orbit-ring dashed" />
+      <circle cx="200" cy="200" r="60" class="orbit-ring" />
+      <g class="constellation">
+        <polygon points="200,30 363,148 301,335 99,335 37,148" class="element-line" />
+        <g class="pulsing-1"><circle cx="200" cy="30" r="11" class="hero-dot wood" /></g>
+        <g transform="translate(200 14)"><text class="counter-rotate" text-anchor="middle" font-family="Noto Serif KR" font-size="13" fill="#9B8AB8">木</text></g>
+        <g class="pulsing-2"><circle cx="363" cy="148" r="11" class="hero-dot fire" /></g>
+        <g transform="translate(382 142)"><text class="counter-rotate" text-anchor="middle" font-family="Noto Serif KR" font-size="13" fill="#9B8AB8">火</text></g>
+        <g class="pulsing-3"><circle cx="301" cy="335" r="11" class="hero-dot earth" /></g>
+        <g transform="translate(316 356)"><text class="counter-rotate" text-anchor="middle" font-family="Noto Serif KR" font-size="13" fill="#9B8AB8">土</text></g>
+        <g class="pulsing-4"><circle cx="99" cy="335" r="11" class="hero-dot metal" /></g>
+        <g transform="translate(84 356)"><text class="counter-rotate" text-anchor="middle" font-family="Noto Serif KR" font-size="13" fill="#9B8AB8">金</text></g>
+        <g class="pulsing-5"><circle cx="37" cy="148" r="11" class="hero-dot water" /></g>
+        <g transform="translate(18 142)"><text class="counter-rotate" text-anchor="middle" font-family="Noto Serif KR" font-size="13" fill="#9B8AB8">水</text></g>
+      </g>
+      <text x="200" y="206" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="15" fill="#C9B8DC" letter-spacing="0.15em" id="svgCenter">balance</text>
+    </svg>
+  </div>
 </section>
 
-<div class="divider"><span class="divider-icon">✦</span></div>
-
-<!-- WHAT IS SAJU -->
-<section class="what-saju fade-up" id="ohaeng">
-  <span class="section-label" id="ohaengLabel">Ancient Wisdom</span>
-  <h2 class="section-title" id="ohaengTitle">What is 오행 (Ohaeng)?</h2>
-
-  <div class="saju-grid">
-    <div class="saju-intro-text" id="ohaengIntro">
-      <p style="margin-bottom:20px">
-        <strong>Saju (사주, 四柱)</strong> means "Five Elements." At the exact moment you were born, the cosmos aligned — Year, Month, Day, and Hour each carry a Heavenly Stem and Earthly Branch, forming eight characters (팔자, Paljja) that map your entire life's journey.
-      </p>
-      <p style="margin-bottom:20px">
-        Unlike Western horoscopes focused on a single rising sun sign, Saju weaves <strong>five elemental forces</strong> — Wood, Fire, Earth, Metal, Water — through 60-year cycles, revealing not just personality but timing: when to act, when to wait, when opportunity arises.
-      </p>
-      <p>
-        Practiced across East Asia for millennia, Five Elements wisdom guided health, harmony, and life decisions. Today, it's the daily guide of millions — and with <strong>Ohaeng</strong>, it belongs to the world.
-      </p>
+<section class="section" id="how">
+  <div class="eyebrow" id="elementsEyebrow">五行 · The Five Elements</div>
+  <h2 class="section-title" id="elementsTitle">Wood, Fire, Earth, Metal, Water —<br>the <em>quiet architecture</em> of how we feel.</h2>
+  <div class="elements-intro">
+    <div class="elements-glyph-block">오행</div>
+    <div class="elements-intro-text">
+      <p id="elementsIntro1">Each of us carries a unique elemental signature, shaped by the moment we were born. Some elements run strong; others quiet. When they flow in harmony, we feel grounded.</p>
+      <p id="elementsIntro2">When out of balance, we feel friction — the stress, the fatigue, the restlessness. Friction is information. Ohaeng helps you read it, gently.</p>
     </div>
-
-    <div>
-      <div class="saju-pillar" style="margin-bottom:20px">
-        <span class="saju-pillar-glyph">年</span>
-        <span class="saju-pillar-label" id="p1label">1st Pillar</span>
-        <div class="saju-pillar-name" id="p1name">Year Pillar — Origin</div>
-        <p class="saju-pillar-desc" id="p1desc">Shaped by the year of birth. Reveals ancestral karma, social reputation, and early life elemental influence. Governed by the 12 zodiac animals.</p>
-      </div>
-      <div class="saju-pillar">
-        <span class="saju-pillar-glyph">月</span>
-        <span class="saju-pillar-label" id="p2label">2nd Pillar</span>
-        <div class="saju-pillar-name" id="p2name">Month Pillar — Growth</div>
-        <p class="saju-pillar-desc" id="p2desc">Born of the birth month. Governs parents, siblings, and career foundation — the pillars of mid-life ambition.</p>
-      </div>
+  </div>
+  <div class="elements-grid">
+    <div class="element-card wood">
+      <span class="orbit-dot"></span>
+      <span class="glyph">木</span>
+      <div class="name-en">Wood</div>
+      <div class="keyword">Growth · Vitality</div>
+      <div class="desc">The energy of springtime — flexible, upward, reaching. Strong Wood brings vision and momentum; tense Wood brings restlessness.</div>
     </div>
-
-    <div>
-      <div class="saju-pillar" style="margin-bottom:20px">
-        <span class="saju-pillar-glyph">日</span>
-        <span class="saju-pillar-label" id="p3label">3rd Pillar</span>
-        <div class="saju-pillar-name" id="p3name">Day Pillar — Self</div>
-        <p class="saju-pillar-desc" id="p3desc">The most personal pillar. The Day Stem is your true self — your core nature, marriage energy, and inner world. This is who you truly are.</p>
-      </div>
-      <div class="saju-pillar">
-        <span class="saju-pillar-glyph">時</span>
-        <span class="saju-pillar-label" id="p4label">4th Pillar</span>
-        <div class="saju-pillar-name" id="p4name">Hour-based elemental balance — Legacy</div>
-        <p class="saju-pillar-desc" id="p4desc">Cast by the birth hour. Illuminates children, later life, and the legacy you leave behind. The final chapter of your story.</p>
-      </div>
+    <div class="element-card fire">
+      <span class="orbit-dot"></span>
+      <span class="glyph">火</span>
+      <div class="name-en">Fire</div>
+      <div class="keyword">Warmth · Expression</div>
+      <div class="desc">The energy of summer — radiant, expressive, joyful. Strong Fire brings connection; depleted Fire brings burnout.</div>
     </div>
-
-    <div>
-      <div style="padding:36px; border:1px solid var(--gold-dim); background:var(--dark-3); border-radius:2px; position:relative; overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
-        <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;" id="ohaengLabel">The Five Elements · 오행</div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
-          <span style="color:#4CAF8A;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">木</span>
-          <span style="color:#E57373;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">火</span>
-          <span style="color:#C9A84C;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">土</span>
-          <span style="color:#9E9E9E;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">金</span>
-          <span style="color:#64B5F6;font-size:24px;font-family:'Noto Serif KR',serif;font-weight:900;">水</span>
-        </div>
-        <p style="font-size:14px;line-height:1.8;color:var(--text-dim);font-weight:300;" id="ohaengDesc">
-          Wood · Fire · Earth · Metal · Water. These five forces flow through every being and every moment. Balance them, and life flows. Imbalance invites friction — and opportunity.
-        </p>
-      </div>
+    <div class="element-card earth">
+      <span class="orbit-dot"></span>
+      <span class="glyph">土</span>
+      <div class="name-en">Earth</div>
+      <div class="keyword">Grounding · Care</div>
+      <div class="desc">The energy of late summer — steady, nurturing, present. Strong Earth brings stability; heavy Earth brings stagnation.</div>
+    </div>
+    <div class="element-card metal">
+      <span class="orbit-dot"></span>
+      <span class="glyph">金</span>
+      <div class="name-en">Metal</div>
+      <div class="keyword">Clarity · Refinement</div>
+      <div class="desc">The energy of autumn — clear, precise, discerning. Strong Metal brings focus; brittle Metal brings rigidity.</div>
+    </div>
+    <div class="element-card water">
+      <span class="orbit-dot"></span>
+      <span class="glyph">水</span>
+      <div class="name-en">Water</div>
+      <div class="keyword">Depth · Stillness</div>
+      <div class="desc">The energy of winter — reflective, deep, adaptable. Strong Water brings wisdom; cold Water brings withdrawal.</div>
     </div>
   </div>
 </section>
 
-<div class="divider"><span class="divider-icon">✦</span></div>
-
-<!-- VS WESTERN ASTROLOGY -->
-<section class="vs-section fade-up">
-  <div class="vs-inner">
-    <span class="section-label" id="vsLabel">East meets West</span>
-    <h2 class="section-title" id="vsTitle">Saju vs. Western Astrology</h2>
-
-    <div class="vs-table">
-      <div class="vs-col">
-        <div class="vs-col-header">
-          <span class="flag">☯</span>
-          <div class="name" id="saName">Korean Saju</div>
-          <div class="subname">사주 四柱</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs1lbl">Foundation</div>
-          <div class="vs-item-val" id="vs1ko">Year + Month + Day + <strong style="color:var(--gold-light)">Hour</strong> of birth — 8 characters total</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs2lbl">System</div>
-          <div class="vs-item-val" id="vs2ko">60-year Sexagenary Cycle (天干地支) based on the Chinese calendar</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs3lbl">Focus</div>
-          <div class="vs-item-val" id="vs3ko">Life cycles, wellness timing, relationships, and elemental balance</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs4lbl">Prediction Style</div>
-          <div class="vs-item-val" id="vs4ko">Dynamic — shifts over Personalized Wellness Cycles and annual energy</div>
-        </div>
-      </div>
-
-      <div class="vs-mid">
-        <div class="vs-dot"></div>
-        <div class="vs-vs">VS</div>
-        <div class="vs-dot"></div>
-      </div>
-
-      <div class="vs-col">
-        <div class="vs-col-header">
-          <span class="flag">♈</span>
-          <div class="name" id="westName">Western Astrology</div>
-          <div class="subname">Zodiac · Horoscope</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs1lbl2">Foundation</div>
-          <div class="vs-item-val" id="vs1en">Sun sign (birth date) + Rising & Moon signs</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs2lbl2">System</div>
-          <div class="vs-item-val" id="vs2en">Tropical zodiac, planetary positions based on solar year</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs3lbl2">Focus</div>
-          <div class="vs-item-val" id="vs3en">Personality archetypes, psychological traits, compatibility</div>
-        </div>
-        <div class="vs-item">
-          <div class="vs-item-label" id="vs4lbl2">Prediction Style</div>
-          <div class="vs-item-val" id="vs4en">Transit-based — planets moving through natal chart positions</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-icon">✦</span></div>
-
-<!-- FEATURES -->
-<section class="features fade-up">
-  <span class="section-label" id="featuresLabel">Inside Ohaeng</span>
-  <h2 class="section-title" id="featuresTitle">Everything your wellness needs</h2>
-
+<section class="section">
+  <div class="eyebrow" id="featuresEyebrow">Inside Ohaeng</div>
+  <h2 class="section-title" id="featuresTitle">Everything your <em>daily balance</em> needs.</h2>
   <div class="features-grid">
     <div class="feature-card">
-      <span class="feature-icon">🔮</span>
-      <div class="feature-title" id="f1t">Daily Wellness</div>
-      <p class="feature-desc" id="f1d">Each morning, receive your daily Saju reading — elemental energy shifts, auspicious hours, and what the cosmos has planned. Powered by Claude AI for nuanced, personalized insights.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></div>
+      <span class="feature-kr" id="f1kr">每日 · DAILY</span>
+      <h3 id="f1t">Daily reading</h3>
+      <p id="f1d">A short morning reading of today's elemental energy — what's flowing, what's blocked, where to lean in. Nuanced and personal, written for the day you're walking into.</p>
     </div>
     <div class="feature-card">
-      <span class="feature-icon">💫</span>
-      <div class="feature-title" id="f2t">K-Personality</div>
-      <p class="feature-desc" id="f2d">A deep-dive into your core Saju archetype: Day Master element, strength/weakness, and how you move through the world — the most honest mirror you'll ever look into.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <span class="feature-kr" id="f2kr">本性 · PROFILE</span>
+      <h3 id="f2t">Your element profile</h3>
+      <p id="f2d">A quiet look at your dominant element — your strengths, your blind spots, how you naturally move through the world. The most honest mirror you'll meet today.</p>
     </div>
     <div class="feature-card">
-      <span class="feature-icon">🌙</span>
-      <div class="feature-title" id="f3t">Auspicious Calendar</div>
-      <p class="feature-desc" id="f3d">Plan weddings, launches, surgeries, and big decisions on the most favorable days. Traditional 길일 (auspicious day) calculation meets modern calendar UI.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      <span class="feature-kr" id="f3kr">日曆 · CALENDAR</span>
+      <h3 id="f3t">Wellness calendar</h3>
+      <p id="f3d">Plan important moments — meetings, decisions, rest days — around the rhythms that work with your elements, not against them. A gentle map for the month ahead.</p>
     </div>
     <div class="feature-card">
-      <span class="feature-icon">❤️</span>
-      <div class="feature-title" id="f4t">Relationship Saju</div>
-      <p class="feature-desc" id="f4d">Add family, partners, and friends. Analyze compatibility across all four pillars — see where you harmonize, where you clash, and how to navigate the tension.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <span class="feature-kr" id="f4kr">和合 · COMPATIBILITY</span>
+      <h3 id="f4t">Compatibility</h3>
+      <p id="f4d">Add the people you care about. See where your elements harmonize, where they clash, and how to navigate the friction with awareness instead of frustration.</p>
     </div>
     <div class="feature-card">
-      <span class="feature-icon">🪞</span>
-      <div class="feature-title" id="f5t">Face Insight (관상)</div>
-      <p class="feature-desc" id="f5d">Korean physiognomy (관상학) reads fortune in the face. Upload a photo and receive an AI-powered analysis of life indicators written in the features you were born with.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+      <span class="feature-kr" id="f5kr">觀相 · FACE READING</span>
+      <h3 id="f5t">Face reading</h3>
+      <p id="f5d">An ancient practice from Korean tradition — wisdom read in the features you were born with. Photo analyzed and deleted within 24 hours. Always.</p>
     </div>
     <div class="feature-card">
-      <span class="feature-icon">💬</span>
-      <div class="feature-title" id="f6t">Ask More</div>
-      <p class="feature-desc" id="f6d">A conversational AI oracle fluent in Saju. Ask about career timing, marriage energy, or what a bad year really means — and receive answers grounded in your actual chart.</p>
+      <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+      <span class="feature-kr" id="f6kr">問答 · DIALOGUE</span>
+      <h3 id="f6t">Ask Ohaeng</h3>
+      <p id="f6d">A conversational AI grounded in your elemental profile. Ask about timing, energy, why this week feels heavy — and receive answers rooted in your own balance.</p>
     </div>
   </div>
 </section>
 
-<div class="divider"><span class="divider-icon">✦</span></div>
-
-<!-- TESTIMONIAL -->
-<section class="testimonial-section fade-up">
-  <p class="testimonial-quote" id="testimonialText">
-    "Your birth moment is not an accident — it is your signature in the fabric of time."
-  </p>
-  <div class="testimonial-source" id="testimonialSrc">Korean Proverb · 사람은 날 때부터 팔자가 있다</div>
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <blockquote id="quoteText">Balance is not a state you reach.<br>It is a rhythm you return to.</blockquote>
+  <cite id="quoteCite">— A daily reminder</cite>
 </section>
 
-<div class="divider"><span class="divider-icon">✦</span></div>
-
-<!-- DOWNLOAD -->
-<section class="download fade-up" id="download">
-  <div class="download-inner">
-    <span class="section-label" id="dlLabel">Begin Your Reading</span>
-    <h2 class="section-title" id="dlTitle">Download Ohaeng</h2>
-    <p style="font-size:17px;line-height:1.7;color:var(--text-dim);font-weight:300;margin-bottom:0;" id="dlSubtitle">
-      Free to start. Available in 15 languages. Your chart has been waiting for you.
-    </p>
-    <div class="store-badges">
-      <a href="#" class="store-badge">
-        <span class="store-badge-icon">🍎</span>
-        <div class="store-badge-text">
-          <span class="store-badge-sub" id="iosSub">Download on the</span>
-          <span class="store-badge-name">App Store</span>
-        </div>
-      </a>
-      <a href="#" class="store-badge">
-        <span class="store-badge-icon">🤖</span>
-        <div class="store-badge-text">
-          <span class="store-badge-sub" id="androidSub">Get it on</span>
-          <span class="store-badge-name">Google Play</span>
-        </div>
-      </a>
-    </div>
+<section class="cta-section" id="download">
+  <div class="eyebrow center" id="ctaEyebrow">Begin your practice</div>
+  <h2 id="ctaTitle">Your <em>balance</em>, in your pocket.</h2>
+  <p class="lead" id="ctaLead">Free to start. Available in 15 languages. No accounts created on your behalf — just open the app and begin.</p>
+  <div class="app-buttons">
+    <a href="https://apps.apple.com/app/id6745872430" class="app-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+      App Store
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.pienest.ohaeng" class="app-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.6.4-1 .9-1.1l13.4 8.6L3 20.5zm14.5-7.7l3.4 1.9c.5.3.5 1 0 1.3l-3.4 1.9L14.7 15l2.8-2.2zM4.6 2.4l11.5 6.7-2.7 2.7L4.6 2.4zm0 19.2l8.8-9.4 2.7 2.7L4.6 21.6z"/></svg>
+      Google Play
+    </a>
   </div>
 </section>
 
 <footer>
-  <p style="margin-bottom:12px;">
-    <span style="color:var(--gold);font-size:18px;font-family:'Noto Serif KR',serif;font-weight:900;">命</span>
-    <span style="margin-left:8px;letter-spacing:0.2em;font-size:13px;">OHAENG</span>
-  </p>
-  <p style="margin-bottom:8px;">
-    <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="https://k-saju.app/terms.html">Terms</a> &nbsp;·&nbsp;
-    <a href="mailto:support@k-saju.app">Contact</a>
-  </p>
-  <p style="font-size:11px;opacity:0.4;">© 2026 Pie Nest Inc. · All rights reserved</p>
+  <a href="/" class="wordmark">ohaeng</a>
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy</a>·
+    <a href="/terms.html">Terms</a>·
+    <a href="/support.html">Support</a>·
+    <a href="mailto:support@ohaeng.app">Contact</a>
+  </div>
+  <div class="copyright">© 2026 Pie Nest Inc.</div>
 </footer>
 
+</main>
+
 <script>
-/* ── STARFIELD ── */
-(function(){
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  function init(){
-    stars = [];
-    for(let i=0;i<180;i++){
-      stars.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*1.2+0.2,
-        a: Math.random(),
-        speed: Math.random()*0.4+0.1,
-        phase: Math.random()*Math.PI*2
-      });
-    }
-  }
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const t = Date.now()/1000;
-    stars.forEach(s=>{
-      const alpha = (Math.sin(t*s.speed+s.phase)*0.4+0.6)*0.6;
-      ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(201,168,76,${alpha*0.5})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  resize();
-  init();
-  draw();
-  window.addEventListener('resize',()=>{resize();init();});
-})();
-
-/* ── SCROLL FADE ── */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.1});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-/* ── TRANSLATIONS ── */
 const T = {
   en: {
-    heroAppName: 'K · S A J U',
-    heroTitle: 'Your balance begins<br><em>in the moment of birth</em>',
-    heroSubtitle: 'Five Elements of Balance — the 3,000-year-old Korean art of reading elemental balance from birth time — now available to the world in 15 languages.',
-    ctaPrimary: '▸ Download Free',
-    ctaLearn: 'What is Ohaeng?',
-    sajuLabel: 'Five Elements',
-    sajuTitle: 'What is 오행 (Ohaeng)?',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (사주, 四柱)</strong> means "Five Elements." At the exact moment you were born, the cosmos aligned — Year, Month, Day, and Hour each carry a Heavenly Stem and Earthly Branch, forming eight characters (팔자, Paljja) that map your entire life's journey.</p><p style="margin-bottom:20px">Unlike Western horoscopes focused on a single rising sun sign, Saju weaves <strong>five elemental forces</strong> — Wood, Fire, Earth, Metal, Water — through 60-year cycles, revealing not just personality but timing: when to act, when to wait, when opportunity arises.</p><p>Practiced across East Asia for millennia, Five Elements wisdom guided health, harmony, and life decisions. Today, it's the daily guide of millions — and with <strong>Ohaeng</strong>, it belongs to the world.</p>`,
-    p1label:'1st Pillar', p1name:'Year Pillar — Origin', p1desc:'Shaped by the year of birth. Reveals ancestral karma, social reputation, and early life elemental influence. Governed by the 12 zodiac animals.',
-    p2label:'2nd Pillar', p2name:'Month Pillar — Growth', p2desc:"Born of the birth month. Governs parents, siblings, and career foundation — the pillars of mid-life ambition.",
-    p3label:'3rd Pillar', p3name:'Day Pillar — Self', p3desc:'The most personal pillar. The Day Stem is your true self — your core nature, marriage energy, and inner world. This is who you truly are.',
-    p4label:'4th Pillar', p4name:'Hour-based elemental balance — Legacy', p4desc:'Cast by the birth hour. Illuminates children, later life, and the legacy you leave behind. The final chapter of your story.',
-    ohaengLabel:'The Five Elements · 오행',
-    ohaengDesc:'Wood · Fire · Earth · Metal · Water. These five forces flow through every being and every moment. Balance them, and life flows. Imbalance invites friction — and opportunity.',
-    vsLabel:'East meets West', vsTitle:'Saju vs. Western Astrology',
-    saName:'Korean Saju', westName:'Western Astrology',
-    vs1lbl:'Foundation', vs1ko:'Year + Month + Day + <strong style="color:var(--gold-light)">Hour</strong> of birth — 8 characters total',
-    vs1en:'Sun sign (birth date) + Rising & Moon signs',
-    vs2lbl:'System', vs2ko:'60-year Sexagenary Cycle (天干地支) based on the Chinese calendar',
-    vs2en:'Tropical zodiac, planetary positions based on solar year',
-    vs3lbl:'Focus', vs3ko:'Life cycles, wellness timing, relationships, and elemental balance',
-    vs3en:'Personality archetypes, psychological traits, compatibility',
-    vs4lbl:'Prediction Style', vs4ko:'Dynamic — shifts over Personalized Wellness Cycles and annual energy',
-    vs4en:'Transit-based — planets moving through natal chart positions',
-    featuresLabel:'Inside Ohaeng', featuresTitle:'Everything your wellness journey needs',
-    f1t:'Daily Wellness', f1d:'Each morning, receive your daily Saju reading — elemental energy shifts, auspicious hours, and what the cosmos has planned. Powered by Claude AI for nuanced, personalized insights.',
-    f2t:'K-Personality', f2d:'A deep-dive into your core Saju archetype: Day Master element, strength/weakness, and how you move through the world — the most honest mirror you\'ll ever look into.',
-    f3t:'Auspicious Calendar', f3d:'Plan weddings, launches, surgeries, and big decisions on the most favorable days. Traditional 길일 (auspicious day) calculation meets modern calendar UI.',
-    f4t:'Relationship Saju', f4d:'Add family, partners, and friends. Analyze compatibility across all four pillars — see where you harmonize, where you clash, and how to navigate the tension.',
-    f5t:'Face Insight (관상)', f5d:'Korean physiognomy (관상학) reads fortune in the face. Upload a photo and receive an AI-powered analysis of life indicators written in the features you were born with.',
-    f6t:'Ask More', f6d:'A conversational AI oracle fluent in Saju. Ask about career timing, marriage energy, or what a bad year really means — and receive answers grounded in your actual chart.',
-    testimonialText:'"Your birth moment is not an accident — it is your signature in the fabric of time."',
-    testimonialSrc:'Korean Proverb · 사람은 날 때부터 팔자가 있다',
-    dlLabel:'Begin Your Journey', dlTitle:'Download Ohaeng',
-    dlSubtitle:'Free to start. Available in 15 languages. Your chart has been waiting for you.',
-    iosSub:'Download on the', androidSub:'Get it on',
-    scrollHint:'scroll',
+    heroEyebrow: 'A daily wellness practice',
+    heroTitle: 'Find your <em>balance</em>,<br>in <span class="gold-accent">five</span> elements.',
+    heroSubtitle: 'Ohaeng is a quiet wellness companion grounded in three thousand years of Eastern philosophy. Read your day in elements — what\'s flowing, what\'s blocked, where to soften.',
+    ctaDownload: 'Download free', ctaHow: 'How it works ↓', svgCenter: 'balance',
+    elementsEyebrow: '五行 · The Five Elements',
+    elementsTitle: 'Wood, Fire, Earth, Metal, Water —<br>the <em>quiet architecture</em> of how we feel.',
+    elementsIntro1: 'Each of us carries a unique elemental signature, shaped by the moment we were born. Some elements run strong; others quiet. When they flow in harmony, we feel grounded.',
+    elementsIntro2: 'When out of balance, we feel friction — the stress, the fatigue, the restlessness. Friction is information. Ohaeng helps you read it, gently.',
+    featuresEyebrow: 'Inside Ohaeng', featuresTitle: 'Everything your <em>daily balance</em> needs.',
+    f1t: 'Daily reading', f1d: 'A short morning reading of today\'s elemental energy — what\'s flowing, what\'s blocked, where to lean in. Nuanced and personal, written for the day you\'re walking into.',
+    f2t: 'Your element profile', f2d: 'A quiet look at your dominant element — your strengths, your blind spots, how you naturally move through the world. The most honest mirror you\'ll meet today.',
+    f3t: 'Wellness calendar', f3d: 'Plan important moments — meetings, decisions, rest days — around the rhythms that work with your elements, not against them. A gentle map for the month ahead.',
+    f4t: 'Compatibility', f4d: 'Add the people you care about. See where your elements harmonize, where they clash, and how to navigate the friction with awareness instead of frustration.',
+    f5t: 'Face reading', f5d: 'An ancient practice from Korean tradition — wisdom read in the features you were born with. Photo analyzed and deleted within 24 hours. Always.',
+    f6t: 'Ask Ohaeng', f6d: 'A conversational AI grounded in your elemental profile. Ask about timing, energy, why this week feels heavy — and receive answers rooted in your own balance.',
+    quoteText: 'Balance is not a state you reach.<br>It is a rhythm you return to.',
+    quoteCite: '— A daily reminder',
+    ctaEyebrow: 'Begin your practice',
+    ctaTitle: 'Your <em>balance</em>, in your pocket.',
+    ctaLead: 'Free to start. Available in 15 languages. No accounts created on your behalf — just open the app and begin.',
   },
   ko: {
-    heroAppName: 'K · 사 주',
-    heroTitle: '당신의 운명은<br><em>태어난 그 순간,<br>이미 새겨졌습니다</em>',
-    heroSubtitle: '3,000년의 지혜 — 생년월일시 四柱八字로 풀어내는 나의 삶. 15개 언어로 전 세계와 함께합니다.',
-    ctaPrimary: '▸ 무료 다운로드',
-    ctaLearn: '사주란 무엇인가?',
-    sajuLabel: '오행의 지혜',
-    sajuTitle: '오행(五行)이란 무엇인가?',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>오행(五行)</strong>은 木·火·土·金·水, 다섯 원소가 만드는 에너지 균형입니다. 태어난 순간 하늘의 기운이 고스란히 담겨, 한 사람의 기질·건강·삶의 흐름을 형성합니다.</p><p style="margin-bottom:20px">서양 별자리가 하나의 태양궁을 중심으로 보는 것과 달리, 오행은 <strong>木·火·土·金·水</strong>의 상생·상극 원리를 통해 삶의 웰니스 주기와 매년 에너지 흐름까지 읽어냅니다.</p><p>왕과 장군, 치유사들의 지혜가 이제 <strong>Ohaeng</strong>를 통해 전 세계인의 손 안에 있습니다.</p>`,
-    p1label:'제1주', p1name:'년주(年柱) — 뿌리', p1desc:'출생 연도로 결정됩니다. 선대의 기운, 사회적 명성, 초년 운세를 담습니다. 12지신의 영향을 받습니다.',
-    p2label:'제2주', p2name:'월주(月柱) — 성장', p2desc:'출생 월로 결정됩니다. 부모·형제·직업 기반, 청·장년 운세를 관장합니다.',
-    p3label:'제3주', p3name:'일주(日柱) — 나', p3desc:'가장 중요한 기둥. 일간(日干)이 진짜 나 자신입니다. 본성, 배우자 인연, 내면세계를 나타냅니다.',
-    p4label:'제4주', p4name:'시주(時柱) — 결실', p4desc:'출생 시각으로 결정됩니다. 자녀, 노년 운세, 삶의 유산을 밝혀줍니다.',
-    ohaengLabel:'오행(五行)',
-    ohaengDesc:'목(木)·화(火)·토(土)·금(金)·수(水). 이 다섯 기운이 세상 모든 것에 흐릅니다. 조화로우면 순탄하고, 편중되면 파란이 — 그리고 기회가 찾아옵니다.',
-    vsLabel:'동서양의 만남', vsTitle:'오행 vs 서양 점성술',
-    saName:'오행 웰니스', westName:'서양 점성술',
-    vs1lbl:'기반', vs1ko:'생년+월+일+<strong style="color:var(--gold-light)">시</strong> — 총 8자(팔자)',
-    vs1en:'태양궁(생년월일) + 어센던트·달 궁',
-    vs2lbl:'체계', vs2ko:'60갑자(天干地支) 순환 체계',
-    vs2en:'황도대 12궁, 태양년 기반 행성 위치',
-    vs3lbl:'주안점', vs3ko:'인생 주기, 운의 타이밍, 인연, 오행 균형',
-    vs3en:'성격 유형, 심리 특성, 궁합',
-    vs4lbl:'예측 방식', vs4ko:'10년 웰니스 주기 + 매년 에너지 흐름으로 동적으로 변화',
-    vs4en:'행성 트랜짓(진행 행성)이 출생 차트를 통과',
-    featuresLabel:'Ohaeng 기능', featuresTitle:'당신의 웰니스에 필요한 모든 것',
-    f1t:'오늘의 에너지', f1d:'매일 아침 나의 일간(日干) 에너지, 추천 시간대, 오늘의 오행 메시지를 받아보세요. Claude AI가 개인화된 깊이 있는 해석을 제공합니다.',
-    f2t:'K-퍼스널리티', f2d:'일간(日干) 원소, 오행 균형, 세상과 내가 맺는 관계 방식까지 — 오행으로 들여다보는 가장 솔직한 자화상입니다.',
-    f3t:'길일 캘린더', f3d:'결혼, 이사, 수술, 사업 시작일… 전통 길일 계산과 현대 캘린더 UI가 만났습니다. 최적의 날을 잡아보세요.',
-    f4t:'관계 사주', f4d:'가족, 연인, 친구를 추가하고 사주 궁합을 분석하세요. 어디서 통하고 어디서 부딪히는지, 그 해법까지 안내합니다.',
-    f5t:'관상 분석', f5d:'관상학(觀相學)은 얼굴에 새겨진 운명을 읽는 학문입니다. 사진 한 장으로 AI가 삶의 지표를 분석해 드립니다.',
-    f6t:'더 물어보기', f6d:'사주에 정통한 AI 오라클과 대화하세요. 이직 타이밍, 결혼 인연, 올해 왜 힘든지… 내 차트를 기반으로 답합니다.',
-    testimonialText:'"사람은 날 때부터 팔자가 있다."',
-    testimonialSrc:'한국 속담',
-    dlLabel:'나의 오행 여정 시작하기', dlTitle:'Ohaeng 다운로드',
-    dlSubtitle:'무료로 시작하세요. 15개 언어 지원. 당신의 사주가 기다리고 있습니다.',
-    iosSub:'App Store에서', androidSub:'Google Play에서',
-    scrollHint:'아래로',
+    heroEyebrow: '매일의 웰니스',
+    heroTitle: '나의 <em>균형</em>을 찾아보세요,<br><span class="gold-accent">다섯</span> 가지 원소에서.',
+    heroSubtitle: 'Ohaeng은 삼천 년의 동양 지혜에 뿌리를 둔 조용한 웰니스 동반자입니다. 오늘 하루를 다섯 가지 기운으로 읽어보세요 — 무엇이 흐르고, 무엇이 막혔고, 어디를 부드럽게 풀어야 할지.',
+    ctaDownload: '무료 다운로드', ctaHow: '어떻게 작동하나요 ↓', svgCenter: '균형',
+    elementsEyebrow: '五行 · 다섯 가지 원소',
+    elementsTitle: '목·화·토·금·수 —<br>우리가 느끼는 모든 것의 <em>조용한 구조</em>.',
+    elementsIntro1: '우리 각자는 태어난 순간 고유한 원소 조합을 지닙니다. 어떤 원소는 강하게, 어떤 원소는 조용하게 흐릅니다. 조화롭게 흐를 때, 우리는 안정감을 느낍니다.',
+    elementsIntro2: '균형이 깨지면 마찰이 생깁니다 — 스트레스, 피로, 불안. 마찰은 정보입니다. Ohaeng이 그것을 부드럽게 읽어드립니다.',
+    featuresEyebrow: 'Ohaeng 기능', featuresTitle: '일상의 <em>균형</em>을 위한 모든 것.',
+    f1t: '오늘의 에너지', f1d: '아침마다 오늘 원소 에너지를 짧게 읽어드립니다 — 무엇이 흐르고, 무엇이 막혔는지, 어디에 집중할지. 개인화된 깊이 있는 해석.',
+    f2t: '나의 원소 프로파일', f2d: '나의 지배 원소를 조용히 살펴봅니다 — 강점, 사각지대, 세상과 내가 맺는 방식. 오늘 만날 가장 솔직한 거울.',
+    f3t: '웰니스 캘린더', f3d: '중요한 순간들 — 미팅, 결정, 휴식일 — 을 내 원소 리듬에 맞춰 계획하세요. 다가오는 한 달을 위한 부드러운 지도.',
+    f4t: '관계 분석', f4d: '소중한 사람들을 추가하세요. 원소가 조화를 이루는 곳, 충돌하는 곳, 그리고 인식으로 마찰을 헤쳐나가는 법을 알아보세요.',
+    f5t: '관상', f5d: '한국 전통에서 이어온 오랜 지혜 — 타고난 얼굴에서 읽는 삶의 이야기. 사진은 분석 후 24시간 이내 영구 삭제.',
+    f6t: '오행에게 묻기', f6d: '나의 원소 프로파일에 기반한 AI 대화. 타이밍, 에너지, 이번 주가 왜 무거운지 — 내 균형에 뿌리를 둔 답을 받아보세요.',
+    quoteText: '균형은 도달하는 상태가 아니라,<br>돌아가는 리듬입니다.',
+    quoteCite: '— 매일의 상기',
+    ctaEyebrow: '지금 시작하세요',
+    ctaTitle: '당신의 <em>균형</em>, 손 안에.',
+    ctaLead: '무료로 시작하세요. 15개 언어 지원. 따로 계정을 만들 필요 없이 — 앱을 열고 시작하세요.',
   },
   zh: {
-    heroAppName: 'K · 四 柱',
-    heroTitle: '你的命运<br><em>在出生那刻已定</em>',
-    heroSubtitle: '三千年韩国四柱命理 · 15种语言全球版',
-    ctaPrimary: '▸ 免费下载',
-    ctaLearn: '什么是四柱？',
-    sajuLabel: '五行智慧',
-    sajuTitle: '什么是四柱（사주）？',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>四柱八字</strong>，以出生年、月、日、时四柱，推演天干地支八字，勾勒一生命运轨迹。</p><p style="margin-bottom:20px">有别于西方星座仅凭太阳宫位，四柱融汇<strong>五行（木火土金水）</strong>相生相克之理，洞察六十年大运流年，不仅知性格，更知时机。</p><p>此乃帝王将相、婚姻媒妁千年所用之学。今日，<strong>Ohaeng</strong>将其带给全球。</p>`,
-    p1label:'第一柱', p1name:'年柱 — 根基', p1desc:'出生年份所定。揭示祖先气运、社会声望与早年命运，受十二生肖主导。',
-    p2label:'第二柱', p2name:'月柱 — 成长', p2desc:'出生月份所定。主父母兄弟、事业根基与中年运势。',
-    p3label:'第三柱', p3name:'日柱 — 本我', p3desc:'最核心之柱。日干即真实自我——本性、婚姻缘分与内心世界。',
-    p4label:'第四柱', p4name:'时柱 — 传承', p4desc:'出生时辰所定。映照子女运、晚年福祉与人生遗泽。',
-    ohaengLabel:'五行',
-    ohaengDesc:'木·火·土·金·水。五行流于万物之中。平衡则顺，偏枯则变——变中有机。',
-    vsLabel:'东西方相遇', vsTitle:'四柱 vs 西方占星',
-    saName:'韩国四柱', westName:'西方占星',
-    vs1lbl:'基础', vs1ko:'年+月+日+<strong style="color:var(--gold-light)">时</strong> 四柱八字',
-    vs1en:'太阳星座（生日）+ 上升星座·月亮星座',
-    vs2lbl:'体系', vs2ko:'六十甲子（天干地支）循环体系',
-    vs2en:'黄道十二宫，以太阳年为基础',
-    vs3lbl:'侧重', vs3ko:'人生周期·时运·感情·五行均衡',
-    vs3en:'性格原型·心理特质·缘分',
-    vs4lbl:'预测方式', vs4ko:'十年大运 + 流年 动态变化',
-    vs4en:'行星过境，推运法',
-    featuresLabel:'Ohaeng 功能', featuresTitle:'五行健康，一应俱全',
-    f1t:'每日运势', f1d:'每日清晨收到专属运势解读——五行能量变化、吉时、今日宇宙信息。由Claude AI提供个性化深度解析。',
-    f2t:'K-性格', f2d:'深度解析日干五行、强弱、处世方式——最真实的自我镜像。',
-    f3t:'吉日历', f3d:'婚嫁·乔迁·手术·开业，传统吉日计算与现代日历界面完美结合。',
-    f4t:'关系四柱', f4d:'添加家人、伴侣、朋友，分析四柱合婚。了解缘分深浅、矛盾根源与化解之道。',
-    f5t:'面相分析', f5d:'面相学（관상학）读取面容中的命运信息。上传照片，AI为您解读天生面相所藏的人生密码。',
-    f6t:'深度问答', f6d:'精通四柱的AI命理师随时待命。事业时机·婚姻缘分·流年困顿……基于您的八字给出解答。',
-    testimonialText:'"命由天定，运在人为。"',
-    testimonialSrc:'韩国谚语',
-    dlLabel:'开启五行之旅', dlTitle:'下载 Ohaeng',
-    dlSubtitle:'免费开始。支持15种语言。您的四柱在等待您。',
-    iosSub:'下载自', androidSub:'获取自',
-    scrollHint:'向下',
+    heroEyebrow: '每日健康修行',
+    heroTitle: '在<span class="gold-accent">五行</span>中，<br>寻找你的<em>平衡</em>。',
+    heroSubtitle: 'Ohaeng 是以三千年东方哲学为根基的静谧健康伴侣。以五行解读你的今天 — 什么在流动，什么在阻滞，哪里需要柔化。',
+    ctaDownload: '免费下载', ctaHow: '了解更多 ↓', svgCenter: '平衡',
+    elementsEyebrow: '五行 · 五种元素',
+    elementsTitle: '木·火·土·金·水 —<br>感受一切的<em>静谧结构</em>。',
+    elementsIntro1: '我们每个人在出生那一刻，都携带着独特的元素印记。有些元素运行强劲，有些则悄然流淌。当它们和谐流动时，我们感到踏实。',
+    elementsIntro2: '失衡时，我们感受到摩擦 — 压力、疲惫、不安。摩擦是信息。Ohaeng 帮助你温柔地解读它。',
+    featuresEyebrow: 'Ohaeng 功能', featuresTitle: '日常<em>平衡</em>所需的一切。',
+    f1t: '每日解读', f1d: '每天清晨，读取今日的元素能量 — 什么在流动，什么受阻，在哪里用力。个性化且深入。',
+    f2t: '元素档案', f2d: '静静审视你的主导元素 — 你的优势、盲点，以及你与世界互动的方式。',
+    f3t: '健康日历', f3d: '围绕你的元素节律，规划重要时刻 — 会议、决策、休息日。',
+    f4t: '关系分析', f4d: '添加你在乎的人，看看元素在哪里和谐，在哪里碰撞，如何以觉知化解摩擦。',
+    f5t: '面相解读', f5d: '来自韩国传统的古老智慧 — 在你天生的五官中读取人生轨迹。照片24小时内永久删除。',
+    f6t: '问 Ohaeng', f6d: '以你的元素档案为基础的对话 AI。询问时机、能量、这周为何沉重 — 获得植根于你自身平衡的回答。',
+    quoteText: '平衡不是你到达的状态，<br>而是你不断回归的节奏。',
+    quoteCite: '— 每日提醒',
+    ctaEyebrow: '开始你的修行', ctaTitle: '你的<em>平衡</em>，就在掌心。',
+    ctaLead: '免费开始。支持15种语言。无需额外注册 — 打开应用，即刻开始。',
   },
   ja: {
-    heroAppName: 'K · 四 柱',
-    heroTitle: 'あなたの運命は、<br><em>生まれたその瞬間に刻まれていた</em>',
-    heroSubtitle: '韓国に3,000年伝わる四柱推命（사주）は、生年月日時という四本の柱から、その人の本質・人間関係・運勢の流れを精緻に読み解く命理学です。15言語対応でグローバルに展開中。',
-    ctaPrimary: '▸ 無料でダウンロード',
-    ctaLearn: '사주とは何か？',
-    sajuLabel: '五行の叡智',
-    sajuTitle: '사주（四柱）とは？',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>사주（四柱八字）</strong>とは、生まれた年・月・日・時の四つの柱に宿る八つの文字のことです。その組み合わせには、五行（木・火・土・金・水）の相生・相剋が凝縮されており、その人の気質・縁・運勢の大きな流れが映し出されます。</p><p style="margin-bottom:20px">西洋占星術が主に太陽星座によって性格を読むのに対し、四柱推命は<strong>60年周期の大運と毎年の歳運</strong>を通じて、人生の転機やタイミングまで動的に読み取ります。「いつ動くべきか、いつ待つべきか」を知ることこそが、사주の真髄です。</p><p>かつては王侯将相や縁組を司る専門家だけが用いた秘伝の学問が、今や<strong>Ohaeng</strong>を通して世界中の人々の手に届くようになりました。</p>`,
-    p1label:'第一柱', p1name:'年柱（ねんちゅう）— 根', p1desc:'生まれた年によって決まります。先祖から受け継いだ気運、社会的な評判、初年の運勢を示します。十二支の影響を受けます。',
-    p2label:'第二柱', p2name:'月柱（つきちゅう）— 成長', p2desc:'生まれた月によって決まります。両親・兄弟との縁、職業の基盤、青年・壮年期の運勢を司ります。',
-    p3label:'第三柱', p3name:'日柱（にちちゅう）— 本我', p3desc:'四柱の中で最も重要な柱。日干（にっかん）がその人の真の自己を示します。本質的な気質、配偶者との縁、内面世界を表します。',
-    p4label:'第四柱', p4name:'時柱（じちゅう）— 結実', p4desc:'生まれた時間によって決まります。子供との縁、晩年の運勢、そしてその人が後世に遺すものを照らし出します。',
-    ohaengLabel:'五行（오행）',
-    ohaengDesc:'木・火・土・金・水。この五つの気は、あらゆる存在と瞬間に流れています。バランスが取れれば人生は順調に流れ、偏れば摩擦が生じます——そしてそこにこそ、変化の機会が宿ります。',
-    vsLabel:'東洋と西洋の出会い', vsTitle:'사주 vs 西洋占星術：何が違うのか',
-    saName:'韓国の四柱推命', westName:'西洋占星術',
-    vs1lbl:'基盤', vs1ko:'生年＋月＋日＋<strong style="color:var(--gold-light)">時刻</strong>の四柱八字（全8文字）',
-    vs1en:'太陽星座（誕生日）＋アセンダント・月星座',
-    vs2lbl:'体系', vs2ko:'60年周期の六十干支（天干地支）に基づく命理体系',
-    vs2en:'黄道十二宮と惑星配置による占星術（太陽年基準）',
-    vs3lbl:'主な焦点', vs3ko:'人生の周期・運勢のタイミング・人間関係・五行のバランス',
-    vs3en:'性格のアーキタイプ・心理的特性・相性',
-    vs4lbl:'予測のアプローチ', vs4ko:'10年ごとの大運と毎年の歳運によって動的に変化する',
-    vs4en:'出生チャートに対する惑星トランジット（通過）を用いる',
-    featuresLabel:'K-Saujの機能', featuresTitle:'あなたの運命に必要なすべてが、ここに',
-    f1t:'今日の運勢', f1d:'毎朝、あなた専用の日次사주リーディングをお届けします。五行エネルギーの変化、吉時間帯、今日の宇宙からのメッセージ。Claude AIによる個別解釈で、深みのある洞察を。',
-    f2t:'K-パーソナリティ', f2d:'日干の五行属性、強弱のバランス、あなたが世界とどのように関わっているか——사주が映し出す、最も正直な自己像です。',
-    f3t:'吉日カレンダー', f3d:'結婚・引越し・手術・起業など、重要な決断を最善の日取りで。伝統的な길일（吉日）計算を、モダンなカレンダーUIで。',
-    f4t:'関係사주', f4d:'家族・恋人・友人を登録し、四柱で相性を詳しく分析。どこで調和し、どこで衝突し、どう乗り越えるかを丁寧に解説します。',
-    f5t:'관상（顔相）分析', f5d:'관상학（顔相学）は、顔に刻まれた運命を読む韓国の伝統学問です。写真をアップロードするだけで、AIがあなたの生まれ持った顔の中に宿る人生の指標を分析します。',
-    f6t:'もっと質問する', f6d:'사주に精通したAIオラクルと対話してください。転職のタイミング、結婚の縁、今年なぜ辛いのか……あなた自身のチャートを根拠に、丁寧に答えます。',
-    testimonialText:'"人は生まれた瞬間から、すでに自分の八字を持っている。"',
-    testimonialSrc:'韓国のことわざ',
-    dlLabel:'五行の旅を始める', dlTitle:'Ohaeng をダウンロード',
-    dlSubtitle:'無料でスタート。15言語対応。あなたの四柱が、ずっと待っています。',
-    iosSub:'App Storeから', androidSub:'Google Playから',
-    scrollHint:'スクロール',
-  },
-  ar: {
-    heroAppName: 'K · ساجو',
-    heroTitle: 'مصيرك نُقِشَ<br><em>في لحظة ميلادك</em>',
-    heroSubtitle: 'أركان المصير الأربعة — علم الأبراج الكوري العريق منذ 3000 عام — متاحٌ الآن للعالم بـ15 لغة.',
-    ctaPrimary: '▸ حمّل مجاناً',
-    ctaLearn: 'ما هو ساجو؟',
-    sajuLabel: 'حكمة الأوهانج',
-    sajuTitle: 'ما هو أوهانج (오행)؟',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>سَجو (四柱)</strong> يعني "الأركان الأربعة". في اللحظة التي وُلدت فيها، تآلفت السماء — السنة والشهر واليوم والساعة، كلٌّ منها يحمل جذعاً سماوياً وفرعاً أرضياً، مكوّنةً ثمانية أحرف تُخطّط رحلة حياتك بأسرها.</p><p style="margin-bottom:20px">خلافاً لعلم الفلك الغربي الذي يركّز على برج الشمس، يجمع سَجو <strong>القوى العنصرية الخمس</strong> — الخشب والنار والأرض والمعدن والماء — عبر دورات ستينية، ليكشف لك ليس فقط شخصيتك بل توقيت الحظ أيضاً.</p><p>مارسه الملوك والقادة وأصحاب الزيجات آلاف السنين في كوريا. اليوم، صار مليارات يستلهمونه يومياً، وبـ<strong>Ohaeng</strong> أصبح ملكاً للعالم.</p>`,
-    p1label:'الركن الأول', p1name:'ركن السنة — الجذور', p1desc:'يُحدَّد بسنة الميلاد. يكشف كارما الأجداد والسمعة الاجتماعية ومصير مرحلة الطفولة. يحكمه الحيوانات الاثنا عشر.',
-    p2label:'الركن الثاني', p2name:'ركن الشهر — النمو', p2desc:'يُحدَّد بشهر الميلاد. يحكم العلاقة بالوالدين والإخوة وأسس المسيرة المهنية.',
-    p3label:'الركن الثالث', p3name:'ركن اليوم — الذات', p3desc:'الركن الأكثر شخصية. جذع اليوم هو حقيقة ذاتك — طبيعتك الجوهرية وطاقة الزواج وعالمك الداخلي.',
-    p4label:'الركن الرابع', p4name:'ركن الساعة — الإرث', p4desc:'يُصاغ بساعة الميلاد. يُضيء حظّ الأبناء ومرحلة الشيخوخة والإرث الذي تتركه خلفك.',
-    ohaengLabel:'العناصر الخمسة · 오행',
-    ohaengDesc:'الخشب · النار · الأرض · المعدن · الماء. تجري هذه القوى الخمس في كل كائن وكل لحظة. توازنها يُسلِّس الحياة، وخلَلها يفتح الباب للاحتكاك — والفرصة.',
-    vsLabel:'الشرق يلتقي الغرب', vsTitle:'سَجو vs علم الفلك الغربي',
-    saName:'سَجو الكوري', westName:'علم الفلك الغربي',
-    vs1lbl:'الأساس', vs1ko:'السنة + الشهر + اليوم + <strong style="color:var(--gold-light)">الساعة</strong> — 8 أحرف',
-    vs1en:'برج الشمس (تاريخ الميلاد) + الطالع والقمر',
-    vs2lbl:'النظام', vs2ko:'دورة الستين عاماً (天干地支) قائمة على التقويم الصيني',
-    vs2en:'البروج الاستوائية، مواضع الكواكب وفق السنة الشمسية',
-    vs3lbl:'محور التركيز', vs3ko:'دورات الحياة، توقيت الحظ، العلاقات، توازن العناصر',
-    vs3en:'النماذج الشخصية، السمات النفسية، التوافق',
-    vs4lbl:'أسلوب التنبؤ', vs4ko:'ديناميكي — يتحوّل عبر دورات الحظ الكبرى العشرية والحظ السنوي',
-    vs4en:'عبورات الكواكب عبر مواضع الميلاد',
-    featuresLabel:'داخل Ohaeng', featuresTitle:'كل ما يحتاجه توازنك',
-    f1t:'حظ اليوم', f1d:'في كل صباح، استقبل قراءتك اليومية — تحولات طاقة العناصر، الساعات المباركة، وما خطّته الكواكب. بإمكانيات Claude AI للتفسير العميق الشخصي.',
-    f2t:'K-الشخصية', f2d:'غوصٌ عميق في جوهر نمطك: عنصر سيد اليوم، نقاط القوة والضعف، وكيف تتعامل مع العالم — أصدق مرآة ستنظر إليها.',
-    f3t:'تقويم الأيام المباركة', f3d:'خطّط لزفافك، إطلاق مشروعك، عمليتك الجراحية، وقراراتك الكبرى في أنسب الأوقات.',
-    f4t:'سَجو العلاقات', f4d:'أضف عائلتك وشريكك وأصدقاءك. حلّل التوافق عبر الأركان الأربعة — اكتشف أين تتناغمون وأين تتعارضون.',
-    f5t:'تحليل ملامح الوجه', f5d:'علم الفراسة الكورية (관상학) يقرأ الحظ في الملامح. ارفع صورتك واحصل على تحليل AI لمؤشرات حياتك المكتوبة في وجهك.',
-    f6t:'اسأل المزيد', f6d:'محاور ذكاء اصطناعي متمرّس في سَجو. اسأله عن توقيت المسيرة، طاقة الزواج، أو ما يعنيه عامٌ عسير — وستأتيك الإجابات من خريطتك الحقيقية.',
-    testimonialText:'"لحظة ميلادك ليست صدفة — إنها توقيعك في نسيج الزمن."',
-    testimonialSrc:'مثل كوري',
-    dlLabel:'ابدأ رحلتك', dlTitle:'حمّل Ohaeng',
-    dlSubtitle:'مجاني للبدء. 15 لغة. خريطتك في انتظارك.',
-    iosSub:'حمّل من', androidSub:'احصل عليه من',
-    scrollHint:'للأسفل',
+    heroEyebrow: '毎日のウェルネス',
+    heroTitle: '<span class="gold-accent">五行</span>の中に<br><em>バランス</em>を見つけて。',
+    heroSubtitle: 'Ohaengは三千年の東洋哲学に根ざした、静かなウェルネスの伴侶です。五つの元素で今日を読む — 何が流れ、何が滞り、どこを解きほぐすべきか。',
+    ctaDownload: '無料ダウンロード', ctaHow: '詳しく見る ↓', svgCenter: 'バランス',
+    elementsEyebrow: '五行 · 五つの元素',
+    elementsTitle: '木·火·土·金·水 —<br>私たちの感覚の<em>静かな構造</em>。',
+    elementsIntro1: '私たちはそれぞれ、生まれた瞬間に固有の元素のシグネチャーを持っています。流れる時、私たちは安定を感じます。',
+    elementsIntro2: 'バランスが崩れると、摩擦が生まれます。ストレス、疲労、落ち着きのなさ。摩擦は情報です。Ohaengがそれを静かに読み解きます。',
+    featuresEyebrow: 'Ohaengの機能', featuresTitle: '毎日の<em>バランス</em>に必要なすべて。',
+    f1t: 'デイリーリーディング', f1d: '今日の元素エネルギーを朝に短く読み解きます。個性的で深い解釈で、歩み入る一日のために。',
+    f2t: '元素プロフィール', f2d: 'あなたの支配元素をそっと見つめます — 強み、盲点、世界との関わり方。',
+    f3t: 'ウェルネスカレンダー', f3d: '大切な瞬間を元素のリズムに合わせて計画しましょう。',
+    f4t: '相性分析', f4d: '大切な人を追加して。元素がどこで調和し、どこで衝突するかを見てみましょう。',
+    f5t: '観相', f5d: '韓国伝統の古い知恵 — 生まれ持った顔立ちから読む人生。写真は24時間以内に完全削除。',
+    f6t: 'Ohaengに聞く', f6d: 'あなたの元素プロフィールに基づくAIとの対話。タイミング、エネルギー、なぜ今週が重いのか — あなた自身のバランスに根ざした答えを。',
+    quoteText: 'バランスは到達する状態ではなく、<br>戻っていくリズムです。',
+    quoteCite: '— 毎日のリマインダー',
+    ctaEyebrow: '始めましょう', ctaTitle: 'あなたの<em>バランス</em>を、手の中に。',
+    ctaLead: '無料でスタート。15言語対応。アカウント不要 — アプリを開いてすぐ始められます。',
   },
   fr: {
-    heroAppName: 'K · S A J U',
-    heroTitle: 'Votre destin, gravé<br><em>à l\'instant de votre naissance</em>',
-    heroSubtitle: 'Les Quatre Piliers du Destin — l\'art coréen vieux de 3 000 ans de lire le sort à travers l\'heure de naissance — désormais disponible dans 15 langues.',
-    ctaPrimary: '▸ Télécharger Gratuitement',
-    ctaLearn: 'Qu\'est-ce que le Saju ?',
-    sajuLabel: 'Sagesse des Cinq Éléments',
-    sajuTitle: 'Qu\'est-ce que le 사주 (Saju) ?',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> signifie « Quatre Piliers ». À l'instant précis de votre naissance, le cosmos s'est aligné — l'Année, le Mois, le Jour et l'Heure portent chacun une Tige Céleste et une Branche Terrestre, formant huit caractères qui tracent la carte de toute votre vie.</p><p style="margin-bottom:20px">Contrairement à l'astrologie occidentale centrée sur un seul signe solaire, le Saju entrelace <strong>cinq forces élémentaires</strong> — Bois, Feu, Terre, Métal, Eau — à travers des cycles de 60 ans, révélant non seulement la personnalité mais le timing : quand agir, quand attendre, quand la fortune sourit.</p><p>Pratiqué en Corée depuis des millénaires par les rois et les stratèges, le Saju appartient aujourd'hui au monde entier grâce à <strong>Ohaeng</strong>.</p>`,
-    p1label:'1er Pilier', p1name:'Pilier de l\'Année — Origine', p1desc:'Déterminé par l\'année de naissance. Révèle le karma ancestral, la réputation sociale et le destin des premières années.',
-    p2label:'2e Pilier', p2name:'Pilier du Mois — Croissance', p2desc:'Déterminé par le mois de naissance. Régit les parents, les frères et sœurs et les fondations professionnelles.',
-    p3label:'3e Pilier', p3name:'Pilier du Jour — Le Moi', p3desc:'Le pilier le plus personnel. La Tige du Jour est votre vrai moi — nature profonde, énergie conjugale, monde intérieur.',
-    p4label:'4e Pilier', p4name:'Pilier de l\'Heure — Héritage', p4desc:'Façonné par l\'heure de naissance. Éclaire les enfants, la vieillesse et l\'héritage que vous laissez.',
-    ohaengLabel:'Les Cinq Éléments · 오행',
-    ohaengDesc:'Bois · Feu · Terre · Métal · Eau. Ces cinq forces traversent chaque être et chaque instant. L\'équilibre fluidifie la vie ; le déséquilibre crée la friction — et l\'opportunité.',
-    vsLabel:'Orient & Occident', vsTitle:'Saju vs Astrologie Occidentale',
-    saName:'Saju Coréen', westName:'Astrologie Occidentale',
-    vs1lbl:'Fondement', vs1ko:'Année + Mois + Jour + <strong style="color:var(--gold-light)">Heure</strong> de naissance — 8 caractères',
-    vs1en:'Signe solaire (date de naissance) + Ascendant & Lune',
-    vs2lbl:'Système', vs2ko:'Cycle sexagésimal de 60 ans (天干地支) basé sur le calendrier chinois',
-    vs2en:'Zodiaque tropical, positions planétaires basées sur l\'année solaire',
-    vs3lbl:'Focus', vs3ko:'Cycles de vie, timing de fortune, relations, équilibre élémentaire',
-    vs3en:'Archétypes de personnalité, traits psychologiques, compatibilité',
-    vs4lbl:'Style Prédictif', vs4ko:'Dynamique — évolue selon les Grandes Périodes de Chance de 10 ans',
-    vs4en:'Basé sur les transits planétaires à travers le thème natal',
-    featuresLabel:'Dans Ohaeng', featuresTitle:'Tout ce dont votre équilibre a besoin',
-    f1t:'Fortune du Jour', f1d:'Chaque matin, recevez votre lecture Saju quotidienne — shifts d\'énergie élémentaire, heures fastes, et ce que le cosmos a prévu. Propulsé par Claude AI pour des insights nuancés.',
-    f2t:'K-Personnalité', f2d:'Plongée dans votre archétype Saju : élément Maître du Jour, forces/faiblesses et façon d\'évoluer dans le monde — le miroir le plus honnête que vous ayez jamais regardé.',
-    f3t:'Calendrier des Jours Fastes', f3d:'Planifiez mariages, lancements, chirurgies sur les jours les plus favorables. Le calcul traditionnel길일 rencontre une UI calendrier moderne.',
-    f4t:'Saju des Relations', f4d:'Ajoutez famille, partenaires, amis. Analysez la compatibilité sur les quatre piliers — voyez où vous vous harmonisez, où vous vous heurtez.',
-    f5t:'Insight Visage (관상)', f5d:'La physiognomonie coréenne lit le destin dans le visage. Téléchargez une photo et recevez une analyse IA des indicateurs de vie inscrits dans vos traits.',
-    f6t:'Poser Plus de Questions', f6d:'Un oracle IA conversationnel maîtrisant le Saju. Interrogez-le sur le timing de carrière, l\'énergie conjugale, ou ce que signifie vraiment une mauvaise année.',
-    testimonialText:'"Votre moment de naissance n\'est pas un accident — c\'est votre signature dans le tissu du temps."',
-    testimonialSrc:'Proverbe Coréen',
-    dlLabel:'Commencer votre Voyage', dlTitle:'Télécharger Ohaeng',
-    dlSubtitle:'Gratuit pour commencer. Disponible en 15 langues. Votre thème vous attend.',
-    iosSub:'Télécharger sur', androidSub:'Disponible sur',
-    scrollHint:'défiler',
+    heroEyebrow: 'Une pratique quotidienne de bien-être',
+    heroTitle: 'Trouvez votre <em>équilibre</em>,<br>en <span class="gold-accent">cinq</span> éléments.',
+    heroSubtitle: 'Ohaeng est un compagnon de bien-être enraciné dans trois mille ans de philosophie orientale. Lisez votre journée en éléments — ce qui coule, ce qui est bloqué, où adoucir.',
+    ctaDownload: 'Télécharger gratuitement', ctaHow: 'Comment ça marche ↓', svgCenter: 'équilibre',
+    elementsEyebrow: '五行 · Les Cinq Éléments',
+    elementsTitle: 'Bois, Feu, Terre, Métal, Eau —<br>l\'<em>architecture silencieuse</em> de ce que nous ressentons.',
+    elementsIntro1: 'Chacun de nous porte une signature élémentaire unique, façonnée par le moment de notre naissance. Quand ils coulent en harmonie, nous nous sentons ancrés.',
+    elementsIntro2: 'Quand le déséquilibre s\'installe, nous ressentons une friction — le stress, la fatigue. Ohaeng vous aide à la lire, en douceur.',
+    featuresEyebrow: 'Dans Ohaeng', featuresTitle: 'Tout ce que votre <em>équilibre quotidien</em> nécessite.',
+    f1t: 'Lecture quotidienne', f1d: 'Une courte lecture matinale de l\'énergie élémentaire du jour. Nuancée et personnelle.',
+    f2t: 'Votre profil élémentaire', f2d: 'Un regard sur votre élément dominant — vos forces, vos angles morts, comment vous traversez le monde.',
+    f3t: 'Calendrier bien-être', f3d: 'Planifiez les moments importants autour des rythmes de vos éléments.',
+    f4t: 'Compatibilité', f4d: 'Ajoutez vos proches et voyez où vos éléments s\'harmonisent ou s\'affrontent.',
+    f5t: 'Lecture du visage', f5d: 'Une pratique ancienne de la tradition coréenne. Photo analysée et supprimée dans les 24 heures.',
+    f6t: 'Demandez à Ohaeng', f6d: 'Une IA conversationnelle ancrée dans votre profil élémentaire. Posez vos questions sur l\'énergie et le timing.',
+    quoteText: 'L\'équilibre n\'est pas un état que l\'on atteint.<br>C\'est un rythme auquel on revient.',
+    quoteCite: '— Un rappel quotidien',
+    ctaEyebrow: 'Commencez votre pratique', ctaTitle: 'Votre <em>équilibre</em>, dans votre poche.',
+    ctaLead: 'Gratuit pour commencer. Disponible en 15 langues.',
   },
   de: {
-    heroAppName: 'K · S A J U',
-    heroTitle: 'Dein Schicksal, eingeschrieben<br><em>im Moment deiner Geburt</em>',
-    heroSubtitle: 'Die Vier Säulen des Schicksals — die 3.000 Jahre alte koreanische Kunst des Schicksalslesens — jetzt weltweit in 15 Sprachen verfügbar.',
-    ctaPrimary: '▸ Kostenlos laden',
-    ctaLearn: 'Was ist Saju?',
-    sajuLabel: 'Weisheit der Fünf Elemente',
-    sajuTitle: 'Was ist 오행 (Ohaeng)?',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> bedeutet „Vier Säulen". Im genauen Moment deiner Geburt richtete sich der Kosmos aus — Jahr, Monat, Tag und Stunde tragen je einen Himmelsstamm und Erdzweig, die acht Zeichen bilden, die den Weg deines gesamten Lebens kartieren.</p><p style="margin-bottom:20px">Anders als die westliche Astrologie, die sich auf ein einzelnes Sonnenzeichen konzentriert, verwebt Saju <strong>fünf Elementarkräfte</strong> — Holz, Feuer, Erde, Metall, Wasser — durch 60-Jahres-Zyklen, um nicht nur Persönlichkeit, sondern Timing zu enthüllen.</p><p>Von Königen und Strategen über Jahrtausende in Korea praktiziert — mit <strong>Ohaeng</strong> gehört es nun der Welt.</p>`,
-    p1label:'1. Säule', p1name:'Jahrssäule — Ursprung', p1desc:'Bestimmt durch das Geburtsjahr. Enthüllt Ahnenkamma, sozialen Ruf und frühes Lebensschicksal.',
-    p2label:'2. Säule', p2name:'Monatssäule — Wachstum', p2desc:'Bestimmt durch den Geburtsmonat. Regiert Eltern, Geschwister und Karrierefundament.',
-    p3label:'3. Säule', p3name:'Tagessäule — Das Selbst', p3desc:'Die persönlichste Säule. Der Tagesstamm ist dein wahres Ich — Kernnatur, Heiratsenergie, innere Welt.',
-    p4label:'4. Säule', p4name:'Stundensäule — Vermächtnis', p4desc:'Geformt durch die Geburtsstunde. Erhellt Kinder, spätes Leben und das Erbe, das du hinterlässt.',
-    ohaengLabel:'Die Fünf Elemente · 오행',
-    ohaengDesc:'Holz · Feuer · Erde · Metall · Wasser. Diese fünf Kräfte fließen durch jedes Wesen und jeden Moment. Im Gleichgewicht fließt das Leben. Ungleichgewicht schafft Reibung — und Gelegenheit.',
-    vsLabel:'Ost trifft West', vsTitle:'Saju vs. Westliche Astrologie',
-    saName:'Koreanisches Saju', westName:'Westliche Astrologie',
-    vs1lbl:'Grundlage', vs1ko:'Jahr + Monat + Tag + <strong style="color:var(--gold-light)">Stunde</strong> der Geburt — 8 Zeichen',
-    vs1en:'Sonnenzeichen (Geburtsdatum) + Aszendent & Mondzeichen',
-    vs2lbl:'System', vs2ko:'60-jähriger Sexagesimalzyklus (天干地支) basierend auf dem chinesischen Kalender',
-    vs2en:'Tropischer Tierkreis, Planetenpositionen basierend auf dem Sonnenjahr',
-    vs3lbl:'Fokus', vs3ko:'Lebenszyklen, Glückstiming, Beziehungen und elementares Gleichgewicht',
-    vs3en:'Persönlichkeitsarchetypen, psychologische Merkmale, Kompatibilität',
-    vs4lbl:'Vorhersagestil', vs4ko:'Dynamisch — verändert sich über 10-jährige große Glückszyklen und Jahresglück',
-    vs4en:'Transitbasiert — Planeten bewegen sich durch Geburtshoroskop-Positionen',
-    featuresLabel:'In Ohaeng', featuresTitle:'Alles für dein Wohlbefinden',
-    f1t:'Tagesglück', f1d:'Jeden Morgen dein tägliches Saju-Reading — Elementarenergieverschiebungen, günstige Stunden und was der Kosmos plant. Angetrieben von Claude AI.',
-    f2t:'K-Persönlichkeit', f2d:'Tiefenanalyse deines Saju-Archetyps: Tagesmeister-Element, Stärken/Schwächen und wie du dich in der Welt bewegst.',
-    f3t:'Glückstage-Kalender', f3d:'Plane Hochzeiten, Launches, OPs und große Entscheidungen an den günstigsten Tagen.',
-    f4t:'Beziehungs-Saju', f4d:'Füge Familie, Partner und Freunde hinzu. Analysiere Kompatibilität über alle vier Säulen.',
-    f5t:'Gesichtseinblick (관상)', f5d:'Koreanische Physiognomik liest das Schicksal im Gesicht. Lade ein Foto hoch für eine KI-Analyse.',
-    f6t:'Mehr fragen', f6d:'Ein konversationelles KI-Orakel, fließend in Saju. Frage nach Karrieretiming, Heiratsenergie oder was ein schwieriges Jahr wirklich bedeutet.',
-    testimonialText:'"Dein Geburtsmoment ist kein Zufall — er ist deine Unterschrift im Gewebe der Zeit."',
-    testimonialSrc:'Koreanisches Sprichwort',
-    dlLabel:'Deine Reise beginnen', dlTitle:'Ohaeng Herunterladen',
-    dlSubtitle:'Kostenlos starten. 15 Sprachen. Dein Chart wartet auf dich.',
-    iosSub:'Laden im', androidSub:'Erhältlich bei',
-    scrollHint:'scrollen',
+    heroEyebrow: 'Eine tägliche Wellness-Praxis',
+    heroTitle: 'Finde dein <em>Gleichgewicht</em>,<br>in <span class="gold-accent">fünf</span> Elementen.',
+    heroSubtitle: 'Ohaeng ist ein stiller Wellness-Begleiter, verwurzelt in dreitausend Jahren östlicher Philosophie. Lies deinen Tag in Elementen — was fließt, was blockiert ist, wo du sanfter sein solltest.',
+    ctaDownload: 'Kostenlos herunterladen', ctaHow: 'Wie es funktioniert ↓', svgCenter: 'Gleichgewicht',
+    elementsEyebrow: '五行 · Die Fünf Elemente',
+    elementsTitle: 'Holz, Feuer, Erde, Metall, Wasser —<br>die <em>stille Architektur</em> dessen, was wir fühlen.',
+    elementsIntro1: 'Jeder von uns trägt eine einzigartige elementare Signatur, geformt durch den Moment unserer Geburt. Wenn sie harmonisch fließen, fühlen wir uns geerdet.',
+    elementsIntro2: 'Bei Ungleichgewicht spüren wir Reibung — Stress, Erschöpfung. Ohaeng hilft dir, sie sanft zu lesen.',
+    featuresEyebrow: 'In Ohaeng', featuresTitle: 'Alles, was dein <em>tägliches Gleichgewicht</em> braucht.',
+    f1t: 'Tägliche Lesung', f1d: 'Eine kurze Morgenlesung der elementaren Energie des Tages. Nuanciert und persönlich.',
+    f2t: 'Dein Elementprofil', f2d: 'Ein ruhiger Blick auf dein dominantes Element — deine Stärken, blinde Flecken, wie du dich in der Welt bewegst.',
+    f3t: 'Wellness-Kalender', f3d: 'Plane wichtige Momente um die Rhythmen deiner Elemente herum.',
+    f4t: 'Kompatibilität', f4d: 'Füge geliebte Menschen hinzu und sieh, wo eure Elemente harmonieren oder kollidieren.',
+    f5t: 'Gesichtslesen', f5d: 'Eine alte Praxis der koreanischen Tradition. Foto analysiert und innerhalb von 24 Stunden gelöscht.',
+    f6t: 'Frag Ohaeng', f6d: 'Eine konversationelle KI, verwurzelt in deinem Elementprofil. Frag nach Timing, Energie und Antworten in deinem Gleichgewicht.',
+    quoteText: 'Gleichgewicht ist kein Zustand, den du erreichst.<br>Es ist ein Rhythmus, zu dem du zurückkehrst.',
+    quoteCite: '— Eine tägliche Erinnerung',
+    ctaEyebrow: 'Beginne deine Praxis', ctaTitle: 'Dein <em>Gleichgewicht</em>, in deiner Tasche.',
+    ctaLead: 'Kostenlos starten. In 15 Sprachen verfügbar.',
   },
+  // ES, PT, HI, VI, ID, TH, AR — English fallback with key override
   es: {
-    heroAppName: 'K · S A J U',
-    heroTitle: 'Tu destino, escrito<br><em>en el momento de tu nacimiento</em>',
-    heroSubtitle: 'Los Cuatro Pilares del Destino — el arte coreano de 3.000 años de leer el destino en el momento del nacimiento — ahora disponible en 15 idiomas.',
-    ctaPrimary: '▸ Descargar Gratis',
-    ctaLearn: '¿Qué es el Saju?',
-    sajuLabel: 'Sabiduría de los Cinco Elementos',
-    sajuTitle: '¿Qué es el 오행 (Ohaeng)?',
-    sajuIntro: `<p style="margin-bottom:20px"><strong>Saju (四柱)</strong> significa "Cuatro Pilares". En el momento exacto de tu nacimiento, el cosmos se alineó — Año, Mes, Día y Hora llevan cada uno un Tallo Celestial y una Rama Terrestre, formando ocho caracteres que mapean toda tu vida.</p><p style="margin-bottom:20px">A diferencia de la astrología occidental centrada en un signo solar, el Saju entrelaza <strong>cinco fuerzas elementales</strong> — Madera, Fuego, Tierra, Metal, Agua — a través de ciclos de 60 años, revelando no solo la personalidad sino el momento oportuno.</p><p>Practicado en Corea por reyes y estrategas durante milenios, hoy <strong>Ohaeng</strong> lo trae al mundo.</p>`,
-    p1label:'1er Pilar', p1name:'Pilar del Año — Origen', p1desc:'Determinado por el año de nacimiento. Revela karma ancestral, reputación social y destino de la infancia.',
-    p2label:'2do Pilar', p2name:'Pilar del Mes — Crecimiento', p2desc:'Determinado por el mes de nacimiento. Rige padres, hermanos y cimientos profesionales.',
-    p3label:'3er Pilar', p3name:'Pilar del Día — El Yo', p3desc:'El pilar más personal. El Tallo del Día es tu verdadero ser — naturaleza esencial, energía matrimonial, mundo interior.',
-    p4label:'4to Pilar', p4name:'Pilar de la Hora — Legado', p4desc:'Formado por la hora de nacimiento. Ilumina hijos, vejez y el legado que dejas.',
-    ohaengLabel:'Los Cinco Elementos · 오행',
-    ohaengDesc:'Madera · Fuego · Tierra · Metal · Agua. Estas cinco fuerzas fluyen a través de cada ser y cada momento. El equilibrio fluidifica la vida; el desequilibrio invita la fricción — y la oportunidad.',
-    vsLabel:'Oriente encuentra Occidente', vsTitle:'Saju vs. Astrología Occidental',
-    saName:'Saju Coreano', westName:'Astrología Occidental',
-    vs1lbl:'Base', vs1ko:'Año + Mes + Día + <strong style="color:var(--gold-light)">Hora</strong> de nacimiento — 8 caracteres',
-    vs1en:'Signo solar (fecha de nacimiento) + Ascendente y Luna',
-    vs2lbl:'Sistema', vs2ko:'Ciclo Sexagesimal de 60 años (天干地支) basado en el calendario chino',
-    vs2en:'Zodíaco tropical, posiciones planetarias basadas en el año solar',
-    vs3lbl:'Enfoque', vs3ko:'Ciclos de vida, timing de fortuna, relaciones y equilibrio elemental',
-    vs3en:'Arquetipos de personalidad, rasgos psicológicos, compatibilidad',
-    vs4lbl:'Estilo Predictivo', vs4ko:'Dinámico — cambia según Grandes Ciclos de Suerte de 10 años',
-    vs4en:'Basado en tránsitos — planetas moviéndose por posiciones del carta natal',
-    featuresLabel:'Dentro de Ohaeng', featuresTitle:'Todo lo que tu bienestar necesita',
-    f1t:'Fortuna del Día', f1d:'Cada mañana, recibe tu lectura Saju diaria — cambios de energía elemental, horas auspiciosas y lo que el cosmos tiene planeado.',
-    f2t:'K-Personalidad', f2d:'Un análisis profundo de tu arquetipo Saju: elemento Maestro del Día, fortalezas/debilidades y cómo te mueves por el mundo.',
-    f3t:'Calendario de Días Auspiciosos', f3d:'Planifica bodas, lanzamientos, cirugías y grandes decisiones en los días más favorables.',
-    f4t:'Saju de Relaciones', f4d:'Añade familia, parejas y amigos. Analiza compatibilidad en los cuatro pilares.',
-    f5t:'Insight Facial (관상)', f5d:'La fisiognomía coreana lee el destino en el rostro. Sube una foto y recibe un análisis IA.',
-    f6t:'Preguntar Más', f6d:'Un oráculo IA conversacional experto en Saju. Pregunta sobre timing profesional, energía matrimonial o qué significa un año difícil.',
-    testimonialText:'"Tu momento de nacimiento no es un accidente — es tu firma en el tejido del tiempo."',
-    testimonialSrc:'Proverbio Coreano',
-    dlLabel:'Comienza tu Viaje', dlTitle:'Descargar Ohaeng',
-    dlSubtitle:'Gratis para empezar. Disponible en 15 idiomas. Tu carta te espera.',
-    iosSub:'Descargar en', androidSub:'Disponible en',
-    scrollHint:'deslizar',
+    heroEyebrow: 'Una práctica de bienestar diario',
+    heroTitle: 'Encuentra tu <em>equilibrio</em>,<br>en <span class="gold-accent">cinco</span> elementos.',
+    heroSubtitle: 'Ohaeng es un compañero de bienestar fundamentado en tres mil años de filosofía oriental. Lee tu día en elementos — qué fluye, qué está bloqueado, dónde suavizar.',
+    ctaDownload: 'Descargar gratis', ctaHow: 'Cómo funciona ↓', svgCenter: 'equilibrio',
+    elementsEyebrow: '五行 · Los Cinco Elementos',
+    elementsTitle: 'Madera, Fuego, Tierra, Metal, Agua —<br>la <em>arquitectura silenciosa</em> de lo que sentimos.',
+    elementsIntro1: 'Cada uno de nosotros lleva una firma elemental única, formada en el momento de nacer. Cuando fluyen en armonía, nos sentimos arraigados.',
+    elementsIntro2: 'Cuando hay desequilibrio, sentimos fricción — estrés, fatiga. Ohaeng te ayuda a leerla suavemente.',
+    featuresEyebrow: 'Dentro de Ohaeng', featuresTitle: 'Todo lo que tu <em>equilibrio diario</em> necesita.',
+    f1t: 'Lectura diaria', f1d: 'Una breve lectura matutina de la energía elemental del día. Matizada y personal.',
+    f2t: 'Tu perfil elemental', f2d: 'Una mirada tranquila a tu elemento dominante — fortalezas, puntos ciegos, cómo te mueves por el mundo.',
+    f3t: 'Calendario de bienestar', f3d: 'Planifica momentos importantes en torno a los ritmos de tus elementos.',
+    f4t: 'Compatibilidad', f4d: 'Añade a las personas que te importan y ve dónde se armonizan o chocan sus elementos.',
+    f5t: 'Lectura facial', f5d: 'Una práctica antigua de la tradición coreana. Foto analizada y eliminada en 24 horas.',
+    f6t: 'Pregunta a Ohaeng', f6d: 'IA conversacional basada en tu perfil elemental.',
+    quoteText: 'El equilibrio no es un estado que alcanzas.<br>Es un ritmo al que regresas.',
+    quoteCite: '— Un recordatorio diario',
+    ctaEyebrow: 'Comienza tu práctica', ctaTitle: 'Tu <em>equilibrio</em>, en tu bolsillo.',
+    ctaLead: 'Gratis para empezar. Disponible en 15 idiomas.',
   },
 };
 
+// Languages with English fallback (partial override)
+const FALLBACK_LANGS = {
+  pt:  { heroEyebrow: 'Uma prática diária de bem-estar', ctaDownload: 'Baixar grátis', ctaTitle: 'Seu <em>equilíbrio</em>, no bolso.', ctaLead: 'Grátis para começar. Disponível em 15 idiomas.' },
+  hi:  { heroEyebrow: 'एक दैनिक वेलनेस अभ्यास', ctaDownload: 'मुफ़्त डाउनलोड करें', ctaTitle: 'आपका <em>संतुलन</em>, आपकी जेब में।', ctaLead: 'शुरू करने के लिए मुफ़्त। 15 भाषाओं में उपलब्ध।' },
+  vi:  { heroEyebrow: 'Thực hành sức khỏe hàng ngày', ctaDownload: 'Tải xuống miễn phí', ctaTitle: 'Sự <em>cân bằng</em> của bạn, trong tầm tay.', ctaLead: 'Miễn phí để bắt đầu. Có sẵn bằng 15 ngôn ngữ.' },
+  id:  { heroEyebrow: 'Praktik kesehatan harian', ctaDownload: 'Unduh gratis', ctaTitle: '<em>Keseimbangan</em> Anda, di genggaman Anda.', ctaLead: 'Gratis untuk memulai. Tersedia dalam 15 bahasa.' },
+  th:  { heroEyebrow: 'การปฏิบัติสุขภาพประจำวัน', ctaDownload: 'ดาวน์โหลดฟรี', ctaTitle: '<em>ความสมดุล</em>ของคุณ ในฝ่ามือ', ctaLead: 'เริ่มต้นฟรี มีให้ใน 15 ภาษา' },
+  ar:  { heroEyebrow: 'ممارسة يومية للعافية', ctaDownload: 'تحميل مجاني', ctaTitle: '<em>توازنك</em>، في جيبك.', ctaLead: 'مجاني للبدء. متاح بـ 15 لغة.' },
+};
+
+function set(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
 function applyLang(lang) {
-  const t = T[lang] || T.en;
-  const body = document.body;
+  const base = T[lang] || { ...T.en, ...(FALLBACK_LANGS[lang] || {}) };
+  const t = T[lang] ? T[lang] : { ...T.en, ...(FALLBACK_LANGS[lang] || {}) };
 
-  // remove all lang classes
-  body.className = body.className.replace(/lang-\w+/g,'').trim();
-  body.classList.add('lang-' + lang);
+  for (const [key, val] of Object.entries(t)) set(key, val);
 
-  // update html lang
-  document.documentElement.lang = lang;
+  // Update active button
+  document.querySelectorAll('.nav-links span').forEach(s => s.classList.remove('active'));
+  const btn = document.getElementById('btn-' + lang);
+  if (btn) btn.classList.add('active');
 
-  // apply texts
-  const set = (id, html) => {
-    const el = document.getElementById(id);
-    if(el) el.innerHTML = html;
-  };
-
-  set('heroAppName', t.heroAppName);
-  set('heroTitle', t.heroTitle);
-  set('heroSubtitle', t.heroSubtitle);
-  set('ctaPrimary', t.ctaPrimary);
-  set('ctaLearn', t.ctaLearn);
-  set('ohaengLabel', t.sajuLabel);
-  set('ohaengTitle', t.sajuTitle);
-  set('ohaengIntro', t.sajuIntro);
-  set('p1label', t.p1label); set('p1name', t.p1name); set('p1desc', t.p1desc);
-  set('p2label', t.p2label); set('p2name', t.p2name); set('p2desc', t.p2desc);
-  set('p3label', t.p3label); set('p3name', t.p3name); set('p3desc', t.p3desc);
-  set('p4label', t.p4label); set('p4name', t.p4name); set('p4desc', t.p4desc);
-  set('ohaengLabel', t.ohaengLabel); set('ohaengDesc', t.ohaengDesc);
-  set('vsLabel', t.vsLabel); set('vsTitle', t.vsTitle);
-  set('saName', t.saName); set('westName', t.westName);
-  ['vs1lbl','vs2lbl','vs3lbl','vs4lbl'].forEach(id=>set(id, t[id]));
-  ['vs1lbl2','vs2lbl2','vs3lbl2','vs4lbl2'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.innerHTML=t[id.replace('2','')];
-  });
-  set('vs1ko',t.vs1ko); set('vs1en',t.vs1en);
-  set('vs2ko',t.vs2ko); set('vs2en',t.vs2en);
-  set('vs3ko',t.vs3ko); set('vs3en',t.vs3en);
-  set('vs4ko',t.vs4ko); set('vs4en',t.vs4en);
-  set('featuresLabel',t.featuresLabel); set('featuresTitle',t.featuresTitle);
-  set('f1t',t.f1t); set('f1d',t.f1d);
-  set('f2t',t.f2t); set('f2d',t.f2d);
-  set('f3t',t.f3t); set('f3d',t.f3d);
-  set('f4t',t.f4t); set('f4d',t.f4d);
-  set('f5t',t.f5t); set('f5d',t.f5d);
-  set('f6t',t.f6t); set('f6d',t.f6d);
-  set('testimonialText',t.testimonialText);
-  set('testimonialSrc',t.testimonialSrc);
-  set('dlLabel',t.dlLabel); set('dlTitle',t.dlTitle);
-  set('dlSubtitle',t.dlSubtitle);
-  set('iosSub',t.iosSub); set('androidSub',t.androidSub);
-  set('scrollHint',t.scrollHint);
-
-  // active button
-  document.querySelectorAll('.lang-btn').forEach(b=>{
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
-
-  // scroll hint text
-  const sh = document.getElementById('scrollHint');
-  if(sh) sh.firstChild && (sh.firstChild.textContent = t.scrollHint);
+  // RTL for Arabic
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 }
 
-document.querySelectorAll('.lang-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>applyLang(btn.dataset.lang));
-});
-
-// auto-detect browser language
-const browserLang = (navigator.language||'en').slice(0,2).toLowerCase();
-const supported = ['en','ko','zh','ja','ar','fr','de','es'];
-if(supported.includes(browserLang)) {
-  applyLang(browserLang);
-} else {
-  applyLang('en');
-}
+// Init
+applyLang('en');
 </script>
 </body>
 </html>

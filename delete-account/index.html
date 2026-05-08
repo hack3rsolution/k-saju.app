@@ -1,464 +1,263 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>계정 삭제 | K-Saju Global</title>
-  <meta name="description" content="K-Saju 앱에서 계정을 삭제하는 방법을 안내합니다." />
-  <link rel="icon" href="/favicon.ico" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete Account — Ohaeng</title>
+<meta name="description" content="Ohaeng: Five Elements Wellness — Account &amp; Data Deletion Instructions">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #2A2335; --bg-soft: #332B40; --bg-card: #2F2839;
+  --ink: #EFE7F2; --ink-soft: #B8AAC4; --ink-mute: #9B8AB8; --ink-faint: #7A6E88;
+  --lavender: #C9B8DC; --lavender-deep: #9B8AB8; --lavender-glow: rgba(155, 138, 184, 0.15);
+  --gold: #D4B97C; --gold-soft: #B89A5E;
+  --line: rgba(201, 184, 220, 0.10); --line-strong: rgba(201, 184, 220, 0.20);
+  --container: 720px; --gutter: 64px; --gutter-mobile: 24px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  position: relative;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(155, 138, 184, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 60%, rgba(212, 185, 124, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 138, 184, 0.06) 0%, transparent 60%);
+  z-index: 0;
+}
+main { position: relative; z-index: 1; counter-reset: step; }
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px var(--gutter); position: sticky; top: 0;
+  background: rgba(42, 35, 53, 0.7); backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); z-index: 100; border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px;
+  font-style: italic; letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
+}
+.wordmark::before {
+  content: ''; width: 5px; height: 5px; background: var(--gold);
+  border-radius: 50%; display: block; box-shadow: 0 0 12px var(--gold);
+}
+.nav-links { display: flex; gap: 4px; font-size: 12px; letter-spacing: 0.08em; align-items: center; }
+.nav-links a {
+  padding: 6px 14px; text-decoration: none; color: var(--ink-mute); transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--ink); }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', 'Noto Sans', sans-serif;
-      background: linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 50%, #16213E 100%);
-      min-height: 100vh;
-      color: #E5E7EB;
-      line-height: 1.6;
-    }
+.page { max-width: var(--container); margin: 0 auto; padding: 100px var(--gutter) 120px; }
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--lavender-deep); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px;
+}
+.eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); opacity: 0.6; }
 
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #7c3aed, #C9A84C);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-    .logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      background: linear-gradient(90deg, #C9A84C, #E8C96A);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    nav a {
-      color: #9CA3AF;
-      text-decoration: none;
-      font-size: 14px;
-    }
-    nav a:hover { color: #C9A84C; }
+h1.page-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(40px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--ink); margin-bottom: 20px;
+}
+h1.page-title em { font-style: italic; color: var(--lavender); }
 
-    /* ── Main ── */
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+.intro {
+  font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--ink-soft);
+  margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--line);
+}
 
-    .page-badge {
-      display: inline-block;
-      background: rgba(239, 68, 68, 0.15);
-      color: #F87171;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-    }
+.section-h {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: 28px; letter-spacing: -0.01em; color: var(--ink);
+  margin: 56px 0 28px;
+}
 
-    h1 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    h1 span {
-      background: linear-gradient(90deg, #C9A84C, #E8C96A);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .subtitle {
-      color: #9CA3AF;
-      font-size: 16px;
-      margin-bottom: 48px;
-    }
+p {
+  font-size: 15px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 16px;
+}
+p strong { font-weight: 500; color: var(--ink); }
 
-    /* ── Cards ── */
-    .card {
-      background: rgba(26, 10, 46, 0.7);
-      border: 1px solid rgba(124, 58, 237, 0.25);
-      border-radius: 16px;
-      padding: 28px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(8px);
-    }
-    .card-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-    .card-title .icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .icon-purple { background: rgba(124, 58, 237, 0.2); }
-    .icon-gold   { background: rgba(201, 168, 76, 0.15); }
-    .icon-red    { background: rgba(239, 68, 68, 0.15); }
-    .icon-green  { background: rgba(74, 222, 128, 0.15); }
+a {
+  color: var(--lavender); text-decoration: none;
+  border-bottom: 1px solid var(--line-strong); transition: all 0.3s;
+}
+a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
-    /* ── Steps ── */
-    .steps { list-style: none; }
-    .steps li {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 14px;
-      align-items: flex-start;
-    }
-    .step-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(124, 58, 237, 0.3);
-      border: 1px solid #7c3aed;
-      color: #C9A84C;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .step-text { color: #D1D5DB; font-size: 15px; }
-    .step-text strong { color: #fff; }
-    .step-text code {
-      background: rgba(124, 58, 237, 0.2);
-      color: #C9A84C;
-      padding: 2px 7px;
-      border-radius: 5px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 13px;
-    }
+/* Step list */
+.steps { list-style: none; padding: 0; margin: 32px 0; counter-reset: stepnum; }
+.steps li {
+  position: relative; padding: 20px 0 20px 60px;
+  border-top: 1px solid var(--line); counter-increment: stepnum;
+  font-size: 15px; line-height: 1.7; color: var(--ink-soft);
+}
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps li::before {
+  content: counter(stepnum, decimal-leading-zero);
+  position: absolute; left: 0; top: 22px;
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400;
+  letter-spacing: 0.18em; color: var(--gold);
+}
+.steps li strong { display: block; color: var(--ink); margin-bottom: 6px; font-weight: 500; }
 
-    /* ── Data table ── */
-    .data-list { list-style: none; }
-    .data-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 15px;
-      color: #D1D5DB;
-    }
-    .data-list li:last-child { border-bottom: none; }
-    .data-list .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .dot-red   { background: #EF4444; }
-    .dot-green { background: #4ADE80; }
+/* Email CTA card */
+.email-cta {
+  margin: 40px 0; padding: 32px;
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-left: 2px solid var(--gold);
+}
+.email-cta .label {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.email-cta a {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 22px; color: var(--ink); text-decoration: none;
+  display: block; margin-bottom: 16px;
+  border-bottom: 1px solid var(--line-strong); padding-bottom: 8px; transition: all 0.3s;
+}
+.email-cta a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.email-cta p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.65; }
+.email-cta p + p { margin-top: 10px; }
 
-    /* ── Alt contact ── */
-    .email-box {
-      background: rgba(201, 168, 76, 0.08);
-      border: 1px solid rgba(201, 168, 76, 0.25);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 12px;
-    }
-    .email-box p { font-size: 14px; color: #9CA3AF; margin-bottom: 6px; }
-    .email-link {
-      color: #C9A84C;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-    }
-    .email-link:hover { text-decoration: underline; }
-    .email-subject {
-      display: inline-block;
-      background: rgba(124, 58, 237, 0.2);
-      color: #a78bfa;
-      border-radius: 6px;
-      padding: 3px 10px;
-      font-size: 13px;
-      margin-top: 6px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-    }
+/* What gets deleted list */
+.deletion-list {
+  background: var(--bg-soft); padding: 28px 32px; margin: 32px 0;
+  border: 1px solid var(--line);
+}
+.deletion-list h3 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: 20px; color: var(--ink); margin-bottom: 16px;
+}
+.deletion-list ul { list-style: none; padding: 0; }
+.deletion-list ul li {
+  font-size: 14px; line-height: 1.75; color: var(--ink-soft);
+  padding-left: 24px; position: relative; margin-bottom: 8px;
+}
+.deletion-list ul li::before {
+  content: ''; position: absolute; left: 4px; top: 11px;
+  width: 6px; height: 1px; background: var(--gold); opacity: 0.6;
+}
 
-    /* ── Timeline ── */
-    .timeline-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 16px;
-      align-items: flex-start;
-    }
-    .timeline-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #7c3aed;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-    .timeline-text { font-size: 14px; color: #D1D5DB; }
-    .timeline-text strong { color: #fff; }
+.callout {
+  padding: 24px 28px; border-left: 2px solid var(--lavender-deep);
+  background: rgba(155, 138, 184, 0.06); margin: 32px 0;
+  font-size: 14px; line-height: 1.7; color: var(--ink-soft);
+}
+.callout strong { color: var(--lavender); font-weight: 500; }
 
-    /* ── Divider ── */
-    .lang-divider {
-      text-align: center;
-      color: rgba(201, 168, 76, 0.4);
-      font-size: 20px;
-      margin: 40px 0 32px;
-      letter-spacing: 8px;
-    }
+footer {
+  padding: 60px var(--gutter) 50px; border-top: 1px solid var(--line);
+  text-align: center; position: relative; z-index: 1;
+}
+footer .wordmark { justify-content: center; margin-bottom: 20px; font-size: 22px; }
+footer .footer-links { font-size: 12px; letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 20px; }
+footer .footer-links a {
+  color: var(--ink-mute); text-decoration: none; margin: 0 12px; border: none; transition: color 0.3s;
+}
+footer .footer-links a:hover { color: var(--ink); }
+footer .copyright {
+  font-size: 11px; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase;
+}
 
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      color: #6B7280;
-      font-size: 13px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    footer a { color: #7c3aed; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-  </style>
+@media (max-width: 700px) {
+  nav { padding: 18px var(--gutter-mobile); }
+  .page { padding: 60px var(--gutter-mobile) 80px; }
+  .section-h { font-size: 22px; }
+  footer { padding: 50px var(--gutter-mobile) 36px; }
+}
+</style>
 </head>
 <body>
 
-<header>
-  <a href="/" class="logo">
-    <div class="logo-icon">✦</div>
-    <span class="logo-text">K-Saju</span>
-  </a>
-  <nav><a href="/">← Home</a></nav>
-</header>
-
 <main>
 
-  <!-- Korean Section -->
-  <div class="page-badge">계정 관리</div>
-  <h1>계정 삭제 <span>안내</span></h1>
-  <p class="subtitle">K-Saju 계정 및 개인 데이터 삭제 방법을 안내합니다.</p>
-
-  <!-- In-app method -->
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-purple">📱</div>
-      앱에서 직접 삭제 (권장)
+  <nav>
+    <a href="/" class="wordmark">ohaeng</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
     </div>
+  </nav>
+
+  <article class="page">
+    <div class="eyebrow">Account</div>
+    <h1 class="page-title">Delete your <em>account</em>.</h1>
+    <p class="intro">You can request full deletion of your Ohaeng account and all associated personal data. Choose the method that's easiest for you below — both achieve the same result within 30 days.</p>
+
+    <h2 class="section-h">Method 1 — From inside the app</h2>
     <ol class="steps">
-      <li>
-        <div class="step-num">1</div>
-        <div class="step-text">K-Saju 앱을 열고 하단 탭에서 <strong>설정</strong>으로 이동합니다.</div>
-      </li>
-      <li>
-        <div class="step-num">2</div>
-        <div class="step-text">화면 하단까지 스크롤하여 <code>계정 삭제</code> 버튼을 탭합니다.</div>
-      </li>
-      <li>
-        <div class="step-num">3</div>
-        <div class="step-text">확인 메시지가 표시됩니다. <strong>삭제</strong>를 탭하면 즉시 처리됩니다.</div>
-      </li>
+      <li><strong>Open Ohaeng</strong>and go to the Settings tab.</li>
+      <li><strong>Tap "Edit Profile"</strong>and scroll to the bottom.</li>
+      <li><strong>Tap "Delete Account"</strong>and confirm. Your account and all associated data will be permanently removed within 30 days.</li>
     </ol>
-  </div>
 
-  <!-- Email method -->
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-gold">✉️</div>
-      이메일로 삭제 요청
-    </div>
-    <p style="color:#9CA3AF; font-size:14px; margin-bottom:12px;">
-      앱에 접근할 수 없거나 직접 요청을 원하시는 경우 이메일로 연락주세요.
-    </p>
-    <div class="email-box">
-      <p>이메일 주소</p>
-      <a href="mailto:support@k-saju.app?subject=Account%20Deletion%20Request" class="email-link">support@k-saju.app</a>
-      <br/>
-      <span class="email-subject">제목: Account Deletion Request</span>
-    </div>
-  </div>
+    <h2 class="section-h">Method 2 — By email</h2>
+    <p>If you no longer have access to the app, send us an email and we'll process the deletion manually.</p>
 
-  <!-- Data deleted -->
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-red">🗑️</div>
-      삭제되는 데이터
+    <div class="email-cta">
+      <div class="label">Send to</div>
+      <a href="mailto:support@ohaeng.app?subject=Account%20Deletion%20Request">support@ohaeng.app</a>
+      <p><strong>Subject:</strong> Account Deletion Request</p>
+      <p>Please include the email address associated with your account so we can locate it.</p>
     </div>
-    <ul class="data-list">
-      <li><div class="dot dot-red"></div>프로필 및 계정 정보</li>
-      <li><div class="dot dot-red"></div>사주팔자 분석 결과 및 운세 기록</li>
-      <li><div class="dot dot-red"></div>웰니스 다이어리 항목</li>
-      <li><div class="dot dot-red"></div>관계 및 궁합 분석 데이터</li>
-      <li><div class="dot dot-red"></div>앱 설정 및 환경설정</li>
-    </ul>
-  </div>
 
-  <!-- Data retained -->
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-green">📋</div>
-      보존되는 데이터
-    </div>
-    <ul class="data-list">
-      <li>
-        <div class="dot dot-green"></div>
-        <span>거래 기록 — <strong>5년 보존</strong> (전자상거래법 제6조에 따른 의무 보존)</span>
-      </li>
-    </ul>
-  </div>
+    <h2 class="section-h">What gets deleted</h2>
+    <p>When we process your request, the following data is permanently removed from our systems:</p>
 
-  <!-- Timeline -->
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-purple">⏱️</div>
-      처리 일정
+    <div class="deletion-list">
+      <h3>Removed within 30 days</h3>
+      <ul>
+        <li>Your account profile (email, birth date, birth hour, gender, name)</li>
+        <li>All wellness reading history and saved reports</li>
+        <li>Compatibility profiles you've added (partner, family, friends)</li>
+        <li>Subscription and entitlement records (subject to platform retention)</li>
+        <li>Push notification preferences and device tokens</li>
+        <li>Conversation history with the in-app AI</li>
+      </ul>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text"><strong>앱 내 삭제:</strong> 즉시 처리됩니다.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text"><strong>이메일 요청:</strong> 영업일 기준 <strong>30일 이내</strong> 처리됩니다.</div>
-    </div>
-    <div class="timeline-item" style="margin-bottom:0">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text">삭제 처리 후 복구는 불가능합니다.</div>
-    </div>
-  </div>
 
-  <!-- Divider -->
-  <div class="lang-divider">✦ ✦ ✦</div>
+    <div class="callout">
+      <strong>Face Reading photos</strong> are deleted within 24 hours of upload by default — they are never retained beyond the immediate analysis, regardless of whether you request account deletion.
+    </div>
 
-  <!-- English Section -->
-  <div class="page-badge" style="background:rgba(124,58,237,0.15);color:#a78bfa;border-color:rgba(124,58,237,0.3);">Account Management</div>
-  <h1 style="margin-top:12px;">Account Deletion <span>Guide</span></h1>
-  <p class="subtitle">Learn how to delete your K-Saju account and personal data.</p>
+    <h2 class="section-h">What we may retain</h2>
+    <p>For legal and security reasons, we may retain a minimal amount of data after account deletion:</p>
 
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-purple">📱</div>
-      Delete in the App (Recommended)
+    <div class="deletion-list">
+      <ul>
+        <li><strong>Aggregated, anonymized analytics</strong> — usage statistics that cannot identify you</li>
+        <li><strong>Transaction records</strong> — required for accounting, tax, and audit obligations (typically 5 years, governed by Korean tax law)</li>
+        <li><strong>Records required by law enforcement requests</strong> — only where legally compelled</li>
+      </ul>
     </div>
-    <ol class="steps">
-      <li>
-        <div class="step-num">1</div>
-        <div class="step-text">Open the K-Saju app and go to <strong>Settings</strong> from the bottom tab bar.</div>
-      </li>
-      <li>
-        <div class="step-num">2</div>
-        <div class="step-text">Scroll to the bottom of the screen and tap the <code>Delete Account</code> button.</div>
-      </li>
-      <li>
-        <div class="step-num">3</div>
-        <div class="step-text">A confirmation prompt will appear. Tap <strong>Delete Account</strong> to confirm.</div>
-      </li>
-    </ol>
-  </div>
 
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-gold">✉️</div>
-      Request via Email
-    </div>
-    <p style="color:#9CA3AF; font-size:14px; margin-bottom:12px;">
-      If you cannot access the app or prefer a manual request, contact us by email.
-    </p>
-    <div class="email-box">
-      <p>Email address</p>
-      <a href="mailto:support@k-saju.app?subject=Account%20Deletion%20Request" class="email-link">support@k-saju.app</a>
-      <br/>
-      <span class="email-subject">Subject: Account Deletion Request</span>
-    </div>
-  </div>
+    <p style="font-size:14px;color:var(--ink-mute);margin-top:32px">For more details about our data handling practices, see our <a href="/privacy.html">Privacy Policy</a>. If you have any questions about deletion, write to <a href="mailto:privacy@ohaeng.app">privacy@ohaeng.app</a>.</p>
 
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-red">🗑️</div>
-      Data That Will Be Deleted
-    </div>
-    <ul class="data-list">
-      <li><div class="dot dot-red"></div>Profile and account information</li>
-      <li><div class="dot dot-red"></div>Saju readings and fortune history</li>
-      <li><div class="dot dot-red"></div>Wellness diary entries</li>
-      <li><div class="dot dot-red"></div>Relationship and compatibility data</li>
-      <li><div class="dot dot-red"></div>App settings and preferences</li>
-    </ul>
-  </div>
+  </article>
 
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-green">📋</div>
-      Data That Will Be Retained
+  <footer>
+    <a href="/" class="wordmark">ohaeng</a>
+    <div class="footer-links">
+      <a href="/">Home</a>·
+      <a href="/privacy.html">Privacy</a>·
+      <a href="/terms.html">Terms</a>·
+      <a href="/support.html">Support</a>
     </div>
-    <ul class="data-list">
-      <li>
-        <div class="dot dot-green"></div>
-        <span>Transaction records — retained for <strong>5 years</strong> as required by Korean E-Commerce Act (Article 6)</span>
-      </li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <div class="card-title">
-      <div class="icon icon-purple">⏱️</div>
-      Timeline
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text"><strong>In-app deletion:</strong> Processed immediately.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text"><strong>Email request:</strong> Processed within <strong>30 days</strong>.</div>
-    </div>
-    <div class="timeline-item" style="margin-bottom:0">
-      <div class="timeline-dot"></div>
-      <div class="timeline-text">Account deletion is permanent and cannot be undone.</div>
-    </div>
-  </div>
+    <div class="copyright">© 2026 Pie Nest Inc.</div>
+  </footer>
 
 </main>
-
-<footer>
-  <p>© 2026 Pie Nest Inc. &nbsp;·&nbsp;
-    <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
-    <a href="mailto:support@k-saju.app">support@k-saju.app</a>
-  </p>
-</footer>
 
 </body>
 </html>

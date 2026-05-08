@@ -1,477 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ohaeng: Five Elements Wellness — Privacy Policy" />
-  <title>Privacy Policy — Ohaeng: Five Elements Wellness</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Ohaeng</title>
+<meta name="description" content="Ohaeng: Five Elements Wellness — Privacy Policy">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   OHAENG DESIGN SYSTEM — LEGAL/INFO PAGES
+   Identical token system as index.html
+   =========================================== */
+:root {
+  --bg: #2A2335;
+  --bg-soft: #332B40;
+  --bg-card: #2F2839;
+  --ink: #EFE7F2;
+  --ink-soft: #B8AAC4;
+  --ink-mute: #9B8AB8;
+  --ink-faint: #7A6E88;
+  --lavender: #C9B8DC;
+  --lavender-deep: #9B8AB8;
+  --lavender-glow: rgba(155, 138, 184, 0.15);
+  --gold: #D4B97C;
+  --gold-soft: #B89A5E;
+  --line: rgba(201, 184, 220, 0.10);
+  --line-strong: rgba(201, 184, 220, 0.20);
+  --container: 760px;
+  --gutter: 64px;
+  --gutter-mobile: 24px;
+}
 
-    :root {
-      --bg:       #0d0520;
-      --surface:  #1a0a2e;
-      --card:     #2d1854;
-      --border:   #3d2471;
-      --primary:  #7c3aed;
-      --gold:     #C9A84C;
-      --text:     #e2d9f3;
-      --muted:    #9d8fbe;
-      --link:     #a78bfa;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-      font-size: 15px;
-    }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
 
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(13, 5, 32, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.3px;
-    }
-    .nav-links { display: flex; gap: 20px; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(155, 138, 184, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 60%, rgba(212, 185, 124, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 138, 184, 0.06) 0%, transparent 60%);
+  z-index: 0;
+}
 
-    .page {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+main { position: relative; z-index: 1; }
 
-    .page-header { margin-bottom: 40px; }
-    .page-label {
-      display: inline-block;
-      background: rgba(124, 58, 237, 0.2);
-      color: var(--link);
-      border: 1px solid rgba(124, 58, 237, 0.35);
-      border-radius: 20px;
-      padding: 3px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
-      margin-bottom: 10px;
-    }
-    .page-meta { font-size: 13px; color: var(--muted); }
+/* ============== NAV (shared) ============== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px var(--gutter);
+  position: sticky;
+  top: 0;
+  background: rgba(42, 35, 53, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+}
 
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 36px 0;
-    }
+.wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 26px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .section { margin-bottom: 40px; }
-    h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--link);
-      margin: 18px 0 8px;
-    }
-    p { margin-bottom: 12px; }
-    ul, ol { padding-left: 22px; margin-bottom: 12px; }
-    li { margin-bottom: 6px; }
-    a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
-    a:hover { color: #c4b5fd; }
+.wordmark::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 0 12px var(--gold);
+}
 
-    /* ── Data table ── */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 13.5px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .data-table th {
-      background: var(--card);
-      color: var(--link);
-      font-weight: 600;
-      text-align: left;
-      padding: 10px 14px;
-      border-bottom: 2px solid var(--border);
-    }
-    .data-table td {
-      background: var(--surface);
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-    .data-table tr:last-child td { border-bottom: none; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  align-items: center;
+}
 
-    /* ── Highlight callout ── */
-    .callout {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--primary);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 16px 0;
-      font-size: 14px;
-    }
-    .callout.gold { border-left-color: var(--gold); }
+.nav-links a {
+  padding: 6px 14px;
+  text-decoration: none;
+  color: var(--ink-mute);
+  transition: color 0.3s;
+}
 
-    /* ── Rights list ── */
-    .rights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
-      margin: 16px 0;
-    }
-    .right-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13px;
-    }
-    .right-item strong { display: block; color: var(--gold); margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); }
 
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-    }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--link); }
+/* ============== PAGE ============== */
+.page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 100px var(--gutter) 120px;
+}
 
-    @media (max-width: 480px) {
-      .page { padding: 32px 16px 60px; }
-      .data-table th, .data-table td { padding: 8px 10px; }
-      .rights-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lavender-deep);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+h1.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(44px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.page-meta {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-bottom: 56px;
+  letter-spacing: 0.04em;
+}
+
+.page-meta strong {
+  font-weight: 400;
+  color: var(--lavender);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+}
+
+.intro {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ============== CONTENT TYPOGRAPHY ============== */
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 64px 0 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+h2::before {
+  content: counter(section, decimal-leading-zero);
+  counter-increment: section;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+main { counter-reset: section; }
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--lavender);
+  margin: 32px 0 14px;
+  letter-spacing: 0.02em;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+p strong, li strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 16px 0;
+}
+
+ul li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 6px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+a {
+  color: var(--lavender);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ============== TABLES ============== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 32px;
+  font-size: 14px;
+  border: 1px solid var(--line);
+}
+
+.data-table th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  text-align: left;
+  padding: 14px 16px;
+  background: rgba(155, 138, 184, 0.06);
+  border-bottom: 1px solid var(--line);
+}
+
+.data-table td {
+  padding: 14px 16px;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+
+.data-table td:first-child { color: var(--ink); font-weight: 400; }
+
+.data-table .required {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.data-table .optional {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ============== CALLOUT ============== */
+.callout {
+  padding: 24px 28px;
+  border-left: 2px solid var(--gold);
+  background: rgba(212, 185, 124, 0.04);
+  margin: 32px 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.callout strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* ============== RIGHTS GRID (Privacy §5) ============== */
+.rights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 24px 0;
+}
+
+.rights-grid .right-item {
+  padding: 24px 20px;
+  background: var(--bg);
+}
+
+.rights-grid .right-item strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--lavender);
+  margin-bottom: 6px;
+}
+
+.rights-grid .right-item span {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ============== CONTACT BLOCK ============== */
+.contact-block {
+  margin-top: 24px;
+  padding: 28px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+}
+
+.contact-block strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.contact-block a {
+  font-size: 14px;
+  color: var(--gold);
+  border-bottom-color: rgba(212, 185, 124, 0.3);
+}
+
+/* ============== FOOTER ============== */
+footer {
+  padding: 60px var(--gutter) 50px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+footer .wordmark {
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+footer .footer-links {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
+}
+
+footer .footer-links a {
+  color: var(--ink-mute);
+  text-decoration: none;
+  margin: 0 12px;
+  border: none;
+  transition: color 0.3s;
+}
+
+footer .footer-links a:hover { color: var(--ink); }
+
+footer .copyright {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  nav { padding: 18px var(--gutter-mobile); }
+  .page { padding: 60px var(--gutter-mobile) 80px; }
+  .rights-grid { grid-template-columns: 1fr; }
+  h2 { font-size: 24px; flex-direction: column; gap: 6px; align-items: flex-start; }
+  h2::before { font-size: 11px; }
+  .data-table { font-size: 13px; }
+  .data-table th, .data-table td { padding: 10px 12px; }
+  footer { padding: 50px var(--gutter-mobile) 36px; }
+}
+</style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="https://k-saju.app">☯ Ohaeng</a>
+<main>
+
+  <nav>
+    <a href="/" class="wordmark">ohaeng</a>
     <div class="nav-links">
-      <a href="https://k-saju.app">Home</a>
+      <a href="/">Home</a>
+      <a href="/privacy.html" class="active">Privacy</a>
       <a href="/terms.html">Terms</a>
       <a href="/support.html">Support</a>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="page">
-  <div class="page-header">
-    <div class="page-label">Legal</div>
-    <h1>Privacy Policy</h1>
-    <p class="page-meta">Ohaeng: Five Elements Wellness &nbsp;·&nbsp; Last updated: May 8, 2026</p>
-  </div>
+  <article class="page">
+    <div class="eyebrow">Legal</div>
+    <h1 class="page-title">Privacy Policy</h1>
+    <div class="page-meta"><strong>Ohaeng: Five Elements Wellness</strong> · Last updated May 8, 2026</div>
 
-  <p>
-    Pie Nest Inc. ("Pie Nest", "we", "us", or "our") operates Ohaeng: Five Elements Wellness.
-    This Privacy Policy explains what information we collect, how we use it, and your
-    rights. By using the App, you consent to the practices described here.
-  </p>
+    <p class="intro">Pie Nest Inc. ("Pie Nest", "we", "us", or "our") operates Ohaeng: Five Elements Wellness. This Privacy Policy explains what information we collect, how we use it, and your rights. By using the App, you consent to the practices described here.</p>
 
-  <hr class="divider" />
+    <h2>Information we collect</h2>
 
-  <!-- 1 -->
-  <div class="section">
-    <h2>1. Information We Collect</h2>
-
-    <h3>Information You Provide</h3>
+    <h3>Information you provide</h3>
     <table class="data-table">
       <thead>
-        <tr>
-          <th>Data</th>
-          <th>Purpose</th>
-          <th>Required</th>
-        </tr>
+        <tr><th>Data</th><th>Purpose</th><th style="width:90px">Required</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Email address</td>
-          <td>Account creation and authentication (magic link)</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>Birth date (year, month, day)</td>
-          <td>Five Elements (사주) calculation and wellness analysis</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>Birth hour</td>
-          <td>More precise Hour-based elemental balance</td>
-          <td>Optional</td>
-        </tr>
-        <tr>
-          <td>Gender</td>
-          <td>Personalized wellness cycle calibration</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Name-based elemental insights add-on feature</td>
-          <td>Optional</td>
-        </tr>
-        <tr>
-          <td>Face photo</td>
-          <td>Face Insight feature — AI analysis, auto-deleted within 24 hours</td>
-          <td>Optional</td>
-        </tr>
+        <tr><td>Email address</td><td>Account creation and authentication (magic link)</td><td><span class="required">Yes</span></td></tr>
+        <tr><td>Birth date<br><span style="color:var(--ink-faint);font-size:12px">year, month, day</span></td><td>Five Elements (오행) calculation and wellness analysis</td><td><span class="required">Yes</span></td></tr>
+        <tr><td>Birth hour</td><td>More precise hour-based elemental balance</td><td><span class="optional">Optional</span></td></tr>
+        <tr><td>Gender</td><td>Personalized wellness cycle calibration</td><td><span class="required">Yes</span></td></tr>
+        <tr><td>Name</td><td>Name-based elemental insights add-on feature</td><td><span class="optional">Optional</span></td></tr>
+        <tr><td>Face photo</td><td>Face Reading feature — AI analysis, auto-deleted within 24 hours</td><td><span class="optional">Optional</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Automatically Collected</h3>
+    <h3>Automatically collected</h3>
     <ul>
-      <li><strong>Device information</strong> — model, OS version, app version (for compatibility and crash reporting)</li>
-      <li><strong>Usage data</strong> — features accessed, session length (aggregated, not personally identifiable)</li>
-      <li><strong>Purchase data</strong> — subscription status and entitlements, managed by RevenueCat</li>
+      <li><strong>Device information</strong> — model, OS version, app version (for compatibility and crash reporting).</li>
+      <li><strong>Usage data</strong> — features accessed, session length (aggregated, not personally identifiable).</li>
+      <li><strong>Purchase data</strong> — subscription status and entitlements, managed by RevenueCat.</li>
     </ul>
 
-    <h3>Face Insight Feature</h3>
-    <div class="callout gold">
-      If you use Face Insight, your photo is transmitted securely to our servers and
-      analyzed by an AI model. <strong>The photo is automatically and permanently
-      deleted within 24 hours of submission.</strong> We never store, share, or use
-      face images beyond the immediate analysis you requested.
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="section">
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>Providing and personalizing Five Elements wellness recommendations and reports</li>
-      <li>Authenticating your account and maintaining session security</li>
-      <li>Processing in-app purchases and managing subscription entitlements</li>
-      <li>Sending optional push notifications (daily wellness, recommended time) — only with your explicit permission</li>
-      <li>Diagnosing technical issues and improving app performance</li>
-      <li>Complying with applicable legal obligations</li>
-    </ul>
+    <h3>Face Reading feature</h3>
     <div class="callout">
-      We do <strong>not</strong> use your personal data for targeted advertising,
-      and we do <strong>not</strong> sell your personal data to third parties.
+      If you use Face Reading, your photo is transmitted securely to our servers and analyzed by an AI model. <strong>The photo is automatically and permanently deleted within 24 hours of submission.</strong> We never store, share, or use face images beyond the immediate analysis you requested.
     </div>
-  </div>
 
-  <!-- 3 -->
-  <div class="section">
-    <h2>3. Third-Party Service Providers</h2>
-    <p>
-      We share data only with the following providers, solely to deliver the services
-      described above:
-    </p>
+    <h2>How we use your information</h2>
+    <ul>
+      <li>Providing and personalizing Five Elements wellness recommendations and reports.</li>
+      <li>Authenticating your account and maintaining session security.</li>
+      <li>Processing in-app purchases and managing subscription entitlements.</li>
+      <li>Sending optional push notifications (daily wellness, recommended timing) — only with your explicit permission.</li>
+      <li>Diagnosing technical issues and improving app performance.</li>
+      <li>Complying with applicable legal obligations.</li>
+    </ul>
+    <p>We do <strong>not</strong> use your personal data for targeted advertising, and we do <strong>not</strong> sell your personal data to third parties.</p>
+
+    <h2>Third-party service providers</h2>
+    <p>We share data only with the following providers, solely to deliver the services described above:</p>
     <table class="data-table">
       <thead>
-        <tr>
-          <th>Provider</th>
-          <th>Purpose</th>
-          <th>Data Shared</th>
-        </tr>
+        <tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Supabase</strong></td>
-          <td>Database, authentication, and storage infrastructure</td>
-          <td>Email, birth data, user-generated content</td>
-        </tr>
-        <tr>
-          <td><strong>Anthropic (Claude API)</strong></td>
-          <td>AI-powered fortune analysis and interpretation</td>
-          <td>Birth chart data — no direct personal identifiers</td>
-        </tr>
-        <tr>
-          <td><strong>RevenueCat</strong></td>
-          <td>In-app purchase management and subscription entitlements</td>
-          <td>Device ID, purchase receipts</td>
-        </tr>
-        <tr>
-          <td><strong>Apple App Store / Google Play</strong></td>
-          <td>Payment processing for subscriptions and add-ons</td>
-          <td>Transaction data (governed by platform policies)</td>
-        </tr>
+        <tr><td>Supabase</td><td>Database, authentication, storage</td><td>Email, birth data, user-generated content</td></tr>
+        <tr><td>Anthropic<br><span style="color:var(--ink-faint);font-size:12px">Claude API</span></td><td>AI-powered wellness analysis</td><td>Birth chart data — no direct personal identifiers</td></tr>
+        <tr><td>RevenueCat</td><td>In-app purchase management</td><td>Device ID, purchase receipts</td></tr>
+        <tr><td>Apple App Store<br>Google Play</td><td>Payment processing</td><td>Transaction data (governed by platform policies)</td></tr>
       </tbody>
     </table>
-    <p>
-      Anthropic's privacy policy: <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy</a> &nbsp;·&nbsp;
-      RevenueCat: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a> &nbsp;·&nbsp;
-      Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a>
-    </p>
-  </div>
+    <p style="font-size:13px;color:var(--ink-mute)">Anthropic's privacy policy: <a href="https://www.anthropic.com/privacy">anthropic.com/privacy</a> · RevenueCat: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a> · Supabase: <a href="https://supabase.com/privacy">supabase.com/privacy</a></p>
 
-  <!-- 4 -->
-  <div class="section">
-    <h2>4. Data Retention</h2>
+    <h2>Data retention</h2>
     <ul>
       <li><strong>Account data</strong> — retained while your account is active; permanently deleted within 30 days of account deletion.</li>
       <li><strong>Face photos</strong> — deleted within 24 hours of upload, regardless of account status.</li>
-      <li><strong>Wellness analysis history</strong> — retained while your account is active; deleted upon account deletion.</li>
+      <li><strong>Wellness reading history</strong> — retained while your account is active; deleted upon account deletion.</li>
       <li><strong>Aggregated analytics</strong> — may be retained in anonymized form indefinitely.</li>
     </ul>
-  </div>
 
-  <!-- 5 -->
-  <div class="section">
-    <h2>5. Your Rights (GDPR &amp; Similar Laws)</h2>
+    <h2>Your rights (GDPR & similar laws)</h2>
     <p>Depending on your location, you may have the following rights:</p>
     <div class="rights-grid">
-      <div class="right-item">
-        <strong>Access</strong>
-        Request a copy of your personal data
-      </div>
-      <div class="right-item">
-        <strong>Rectification</strong>
-        Correct inaccurate or incomplete data
-      </div>
-      <div class="right-item">
-        <strong>Erasure</strong>
-        Request deletion of your personal data
-      </div>
-      <div class="right-item">
-        <strong>Portability</strong>
-        Receive data in a machine-readable format
-      </div>
-      <div class="right-item">
-        <strong>Objection</strong>
-        Object to or restrict certain processing
-      </div>
-      <div class="right-item">
-        <strong>Withdraw Consent</strong>
-        Withdraw previously given consent
-      </div>
+      <div class="right-item"><strong>Access</strong><span>Request a copy of your personal data.</span></div>
+      <div class="right-item"><strong>Rectification</strong><span>Correct inaccurate or incomplete data.</span></div>
+      <div class="right-item"><strong>Erasure</strong><span>Request deletion of your personal data.</span></div>
+      <div class="right-item"><strong>Portability</strong><span>Receive data in a machine-readable format.</span></div>
+      <div class="right-item"><strong>Objection</strong><span>Object to or restrict certain processing.</span></div>
+      <div class="right-item"><strong>Withdraw consent</strong><span>Withdraw previously given consent.</span></div>
     </div>
-    <p>
-      To exercise any of these rights, contact us at
-      <a href="mailto:privacy@k-saju.app">privacy@k-saju.app</a>.
-      We will respond within 30 days.
-    </p>
-  </div>
+    <p>To exercise any of these rights, contact us at <a href="mailto:privacy@ohaeng.app">privacy@ohaeng.app</a>. We will respond within 30 days.</p>
 
-  <!-- 6 -->
-  <div class="section">
-    <h2>6. Children's Privacy</h2>
-    <p>
-      The App is not directed to children under the age of 13. We do not knowingly
-      collect personal information from children under 13. If you believe we have
-      inadvertently collected such information, please contact
-      <a href="mailto:privacy@k-saju.app">privacy@k-saju.app</a> and we will
-      delete it promptly.
-    </p>
-  </div>
+    <h2>Children's privacy</h2>
+    <p>The App is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact <a href="mailto:privacy@ohaeng.app">privacy@ohaeng.app</a> and we will delete it promptly.</p>
 
-  <!-- 7 -->
-  <div class="section">
-    <h2>7. Cookies &amp; Tracking</h2>
-    <p>
-      The App does not use cookies. We do not use cross-site tracking technologies.
-      Any analytics we collect are aggregated and do not personally identify you.
-    </p>
-  </div>
+    <h2>Cookies & tracking</h2>
+    <p>The App does not use cookies. We do not use cross-site tracking technologies. Any analytics we collect are aggregated and do not personally identify you.</p>
 
-  <!-- 8 -->
-  <div class="section">
-    <h2>8. Data Security</h2>
-    <p>
-      We implement industry-standard security measures including TLS encryption in
-      transit, Row-Level Security (RLS) policies in our database, and restricted
-      access controls. However, no transmission method or electronic storage system
-      is 100% secure — we cannot guarantee absolute security.
-    </p>
-  </div>
+    <h2>Data security</h2>
+    <p>We implement industry-standard security measures including TLS encryption in transit, Row-Level Security (RLS) policies in our database, and restricted access controls. However, no transmission method or electronic storage system is 100% secure — we cannot guarantee absolute security.</p>
 
-  <!-- 9 -->
-  <div class="section">
-    <h2>9. Push Notifications</h2>
-    <p>
-      Push notifications (e.g., daily wellness alerts, recommended time reminders) are sent
-      only after you grant explicit permission. You can withdraw this permission at
-      any time through your device's notification settings.
-    </p>
-  </div>
+    <h2>Push notifications</h2>
+    <p>Push notifications (e.g., daily wellness alerts, recommended timing reminders) are sent only after you grant explicit permission. You can withdraw this permission at any time through your device's notification settings.</p>
 
-  <!-- 10 -->
-  <div class="section">
-    <h2>10. International Data Transfers</h2>
-    <p>
-      Your data may be processed in countries outside your own, including the Republic
-      of Korea and the United States. Where applicable, transfers comply with relevant
-      data protection laws (e.g., GDPR Standard Contractual Clauses).
-    </p>
-  </div>
+    <h2>International data transfers</h2>
+    <p>Your data may be processed in countries outside your own, including the Republic of Korea and the United States. Where applicable, transfers comply with relevant data protection laws (e.g., GDPR Standard Contractual Clauses).</p>
 
-  <!-- 11 -->
-  <div class="section">
-    <h2>11. Changes to This Policy</h2>
-    <p>
-      We may update this Privacy Policy periodically. We will notify you of significant
-      changes by updating the "Last updated" date above and, where required by law,
-      by obtaining renewed consent. Your continued use of the App after the effective
-      date constitutes acceptance.
-    </p>
-  </div>
+    <h2>Changes to this policy</h2>
+    <p>We may update this Privacy Policy periodically. We will notify you of significant changes by updating the "Last updated" date above and, where required by law, by obtaining renewed consent. Your continued use of the App after the effective date constitutes acceptance.</p>
 
-  <!-- 12 -->
-  <div class="section">
-    <h2>12. Contact</h2>
-    <p>
-      For privacy-related questions, data requests, or concerns:
-    </p>
-    <p>
-      <strong>Pie Nest Inc. — Privacy Team</strong><br />
-      <a href="mailto:privacy@k-saju.app">privacy@k-saju.app</a>
-    </p>
-    <p>
-      General support: <a href="mailto:support@k-saju.app">support@k-saju.app</a>
-    </p>
-  </div>
-</div>
+    <h2>Contact</h2>
+    <p>For privacy-related questions, data requests, or concerns:</p>
+    <div class="contact-block">
+      <strong>Pie Nest Inc. — Privacy Team</strong>
+      <a href="mailto:privacy@ohaeng.app">privacy@ohaeng.app</a><br>
+      <span style="font-size:13px;color:var(--ink-mute)">General support: <a href="mailto:support@ohaeng.app">support@ohaeng.app</a></span>
+    </div>
 
-<footer>
-  <p>© 2026 Pie Nest Inc. · <a href="/terms.html">Terms of Service</a> · <a href="/support.html">Support</a> · <a href="https://k-saju.app">Ohaeng App</a></p>
-</footer>
+  </article>
+
+  <footer>
+    <a href="/" class="wordmark">ohaeng</a>
+    <div class="footer-links">
+      <a href="/">Home</a>·
+      <a href="/terms.html">Terms</a>·
+      <a href="/support.html">Support</a>·
+      <a href="mailto:support@ohaeng.app">Contact</a>
+    </div>
+    <div class="copyright">© 2026 Pie Nest Inc.</div>
+  </footer>
+
+</main>
 
 </body>
 </html>

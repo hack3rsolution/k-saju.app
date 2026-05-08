@@ -1,339 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ohaeng: Five Elements Wellness — Terms of Service" />
-  <title>Terms of Service — Ohaeng: Five Elements Wellness</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Service — Ohaeng</title>
+<meta name="description" content="Ohaeng: Five Elements Wellness — Terms of Service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #2A2335; --bg-soft: #332B40; --bg-card: #2F2839;
+  --ink: #EFE7F2; --ink-soft: #B8AAC4; --ink-mute: #9B8AB8; --ink-faint: #7A6E88;
+  --lavender: #C9B8DC; --lavender-deep: #9B8AB8; --lavender-glow: rgba(155, 138, 184, 0.15);
+  --gold: #D4B97C; --gold-soft: #B89A5E;
+  --line: rgba(201, 184, 220, 0.10); --line-strong: rgba(201, 184, 220, 0.20);
+  --container: 760px; --gutter: 64px; --gutter-mobile: 24px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  position: relative;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(155, 138, 184, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 60%, rgba(212, 185, 124, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 138, 184, 0.06) 0%, transparent 60%);
+  z-index: 0;
+}
+main { position: relative; z-index: 1; counter-reset: section; }
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px var(--gutter); position: sticky; top: 0;
+  background: rgba(42, 35, 53, 0.7); backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); z-index: 100; border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px;
+  font-style: italic; letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
+}
+.wordmark::before {
+  content: ''; width: 5px; height: 5px; background: var(--gold);
+  border-radius: 50%; display: block; box-shadow: 0 0 12px var(--gold);
+}
+.nav-links { display: flex; gap: 4px; font-size: 12px; letter-spacing: 0.08em; align-items: center; }
+.nav-links a {
+  padding: 6px 14px; text-decoration: none; color: var(--ink-mute); transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); }
 
-    :root {
-      --bg:       #0d0520;
-      --surface:  #1a0a2e;
-      --card:     #2d1854;
-      --border:   #3d2471;
-      --primary:  #7c3aed;
-      --gold:     #C9A84C;
-      --text:     #e2d9f3;
-      --muted:    #9d8fbe;
-      --link:     #a78bfa;
-    }
+.page { max-width: var(--container); margin: 0 auto; padding: 100px var(--gutter) 120px; }
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--lavender-deep); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px;
+}
+.eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); opacity: 0.6; }
 
-    html { scroll-behavior: smooth; }
+h1.page-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(44px, 5vw, 64px); line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--ink); margin-bottom: 20px;
+}
+.page-meta {
+  font-size: 13px; color: var(--ink-mute); margin-bottom: 56px; letter-spacing: 0.04em;
+}
+.page-meta strong {
+  font-weight: 400; color: var(--lavender); font-style: italic;
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+}
+.intro {
+  font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--ink-soft);
+  margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--line);
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-style: italic;
+  font-size: 28px; letter-spacing: -0.01em; color: var(--ink);
+  margin: 64px 0 20px;
+  display: flex; align-items: baseline; gap: 16px;
+}
+h2::before {
+  content: counter(section, decimal-leading-zero); counter-increment: section;
+  font-family: 'Inter', sans-serif; font-style: normal; font-size: 12px;
+  font-weight: 400; letter-spacing: 0.18em; color: var(--gold); flex-shrink: 0;
+}
+h3 {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 15px;
+  color: var(--lavender); margin: 32px 0 14px; letter-spacing: 0.02em;
+}
+p { font-size: 15px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 16px; }
+p strong, li strong { font-weight: 500; color: var(--ink); }
+ul { list-style: none; padding-left: 0; margin: 16px 0; }
+ul li {
+  font-size: 15px; line-height: 1.75; color: var(--ink-soft);
+  padding-left: 24px; position: relative; margin-bottom: 10px;
+}
+ul li::before {
+  content: ''; position: absolute; left: 4px; top: 12px;
+  width: 6px; height: 1px; background: var(--gold); opacity: 0.6;
+}
+a {
+  color: var(--lavender); text-decoration: none;
+  border-bottom: 1px solid var(--line-strong); transition: all 0.3s;
+}
+a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-      font-size: 15px;
-    }
+.callout {
+  padding: 24px 28px; border-left: 2px solid var(--gold);
+  background: rgba(212, 185, 124, 0.04); margin: 32px 0;
+  font-size: 15px; line-height: 1.7; color: var(--ink-soft);
+}
+.callout strong { color: var(--gold); font-weight: 500; }
 
-    /* ── Nav ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(13, 5, 32, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.3px;
-    }
-    .nav-links { display: flex; gap: 20px; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); }
+.contact-block {
+  margin-top: 24px; padding: 28px; background: var(--bg-soft); border: 1px solid var(--line);
+}
+.contact-block strong {
+  display: block; font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 400; font-size: 18px; color: var(--ink); margin-bottom: 8px;
+}
+.contact-block a {
+  font-size: 14px; color: var(--gold); border-bottom-color: rgba(212, 185, 124, 0.3);
+}
 
-    /* ── Page ── */
-    .page {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    .page-header { margin-bottom: 40px; }
-    .page-label {
-      display: inline-block;
-      background: rgba(124, 58, 237, 0.2);
-      color: var(--link);
-      border: 1px solid rgba(124, 58, 237, 0.35);
-      border-radius: 20px;
-      padding: 3px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
-      margin-bottom: 10px;
-    }
-    .page-meta { font-size: 13px; color: var(--muted); }
-
-    /* ── Divider ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 36px 0;
-    }
-
-    /* ── Sections ── */
-    .section { margin-bottom: 40px; }
-    h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--link);
-      margin: 18px 0 8px;
-    }
-    p { margin-bottom: 12px; color: var(--text); }
-    ul, ol { padding-left: 22px; margin-bottom: 12px; }
-    li { margin-bottom: 6px; color: var(--text); }
-    a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
-    a:hover { color: #c4b5fd; }
-
-    /* ── Callout ── */
-    .callout {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--primary);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 16px 0;
-      font-size: 14px;
-    }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-    }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--link); }
-
-    @media (max-width: 480px) {
-      .page { padding: 32px 16px 60px; }
-    }
-  </style>
+footer {
+  padding: 60px var(--gutter) 50px; border-top: 1px solid var(--line);
+  text-align: center; position: relative; z-index: 1;
+}
+footer .wordmark { justify-content: center; margin-bottom: 20px; font-size: 22px; }
+footer .footer-links { font-size: 12px; letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 20px; }
+footer .footer-links a {
+  color: var(--ink-mute); text-decoration: none; margin: 0 12px; border: none; transition: color 0.3s;
+}
+footer .footer-links a:hover { color: var(--ink); }
+footer .copyright {
+  font-size: 11px; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase;
+}
+@media (max-width: 700px) {
+  nav { padding: 18px var(--gutter-mobile); }
+  .page { padding: 60px var(--gutter-mobile) 80px; }
+  h2 { font-size: 24px; flex-direction: column; gap: 6px; align-items: flex-start; }
+  h2::before { font-size: 11px; }
+  footer { padding: 50px var(--gutter-mobile) 36px; }
+}
+</style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="https://k-saju.app">☯ Ohaeng</a>
+<main>
+
+  <nav>
+    <a href="/" class="wordmark">ohaeng</a>
     <div class="nav-links">
-      <a href="https://k-saju.app">Home</a>
+      <a href="/">Home</a>
       <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html" class="active">Terms</a>
       <a href="/support.html">Support</a>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="page">
-  <div class="page-header">
-    <div class="page-label">Legal</div>
-    <h1>Terms of Service</h1>
-    <p class="page-meta">Ohaeng: Five Elements Wellness &nbsp;·&nbsp; Last updated: May 8, 2026</p>
-  </div>
+  <article class="page">
+    <div class="eyebrow">Legal</div>
+    <h1 class="page-title">Terms of Service</h1>
+    <div class="page-meta"><strong>Ohaeng: Five Elements Wellness</strong> · Last updated May 8, 2026</div>
 
-  <p>
-    Welcome to Ohaeng: Five Elements Wellness ("Ohaeng", "we", "us", or "our"), operated by
-    Pie Nest Inc. By downloading, installing, or using the Ohaeng mobile application
-    ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not
-    agree, please do not use the App.
-  </p>
+    <p class="intro">Welcome to Ohaeng: Five Elements Wellness ("Ohaeng", "we", "us", or "our"), operated by Pie Nest Inc. By downloading, installing, or using the Ohaeng mobile application ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use the App.</p>
 
-  <hr class="divider" />
+    <h2>Service description</h2>
+    <p>Ohaeng is a daily wellness application grounded in the Five Elements philosophy (오행, 五行) of East Asian tradition. The App offers personalized wellness readings, balance reflections, timing guidance, and compatibility insights using AI-assisted interpretation across multiple cultural frameworks.</p>
+    <div class="callout">All content in Ohaeng is provided for <strong>wellness reflection, cultural exploration, and personal awareness</strong> only. It does not constitute medical, legal, financial, or professional advice of any kind.</div>
 
-  <!-- 1 -->
-  <div class="section">
-    <h2>1. Service Description</h2>
-    <p>
-      Ohaeng is a mobile entertainment application based on Korean Five Elements wellness practice
-      (사주팔자 / 四柱八字). The App generates personalized wellness analysis, compatibility
-      analyses, timing advice, and life-cycle forecasts using AI-assisted interpretation
-      across six cultural frameworks (Korean, Chinese, Japanese, English, Spanish, and
-      South Asian).
-    </p>
-    <div class="callout">
-      All content in Ohaeng is provided for <strong>entertainment, cultural exploration,
-      and personal reflection</strong> only. It does not constitute medical, legal,
-      financial, or professional advice of any kind.
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="section">
-    <h2>2. Subscription Terms</h2>
+    <h2>Subscription terms</h2>
     <p>Ohaeng offers a free tier and paid Premium subscriptions:</p>
     <ul>
       <li><strong>Premium Monthly</strong> — billed monthly to your App Store or Google Play account.</li>
       <li><strong>Premium Annual</strong> — billed once per year at a discounted rate.</li>
     </ul>
-    <h3>Auto-Renewal</h3>
-    <p>
-      Subscriptions automatically renew unless canceled at least <strong>24 hours before
-      the end of the current billing period</strong>. Your account will be charged for
-      renewal within 24 hours prior to the end of the current period at the confirmed
-      subscription price.
-    </p>
-    <h3>How to Cancel</h3>
+
+    <h3>Auto-renewal</h3>
+    <p>Subscriptions automatically renew unless canceled at least <strong>24 hours before the end of the current billing period</strong>. Your account will be charged for renewal within 24 hours prior to the end of the current period at the confirmed subscription price.</p>
+
+    <h3>How to cancel</h3>
     <ul>
       <li><strong>iOS:</strong> Settings &gt; [Your Name] &gt; Subscriptions &gt; Ohaeng</li>
       <li><strong>Android:</strong> Google Play &gt; Subscriptions &gt; Ohaeng</li>
     </ul>
-    <p>
-      Cancellation takes effect at the end of the current billing period. No partial
-      refunds are issued for unused subscription time after cancellation.
-    </p>
-    <h3>Price Changes</h3>
-    <p>
-      We reserve the right to change subscription pricing with reasonable advance notice.
-      Continued use after the effective date constitutes acceptance of the new price.
-    </p>
-  </div>
+    <p>Cancellation takes effect at the end of the current billing period. No partial refunds are issued for unused subscription time after cancellation.</p>
 
-  <!-- 3 -->
-  <div class="section">
-    <h2>3. In-App Purchases (Add-ons)</h2>
-    <p>
-      Ohaeng offers individual add-on reports (Timing Advisor, Compatibility Report,
-      Career &amp; Wealth Report, Name Analysis, etc.) as one-time in-app purchases.
-      These are non-consumable and tied to your account.
-    </p>
-    <p>
-      All purchases are processed through Apple App Store or Google Play. Refunds are
-      subject to the respective platform's refund policy:
-    </p>
+    <h3>Price changes</h3>
+    <p>We reserve the right to change subscription pricing with reasonable advance notice. Continued use after the effective date constitutes acceptance of the new price.</p>
+
+    <h2>In-app purchases (add-ons)</h2>
+    <p>Ohaeng offers individual add-on reports (Timing Advisor, Compatibility Report, Career &amp; Wealth Insights, Name Analysis, etc.) as one-time in-app purchases. These are non-consumable and tied to your account.</p>
+    <p>All purchases are processed through Apple App Store or Google Play. Refunds are subject to the respective platform's refund policy:</p>
     <ul>
-      <li>Apple: <a href="https://support.apple.com/en-us/HT204084" target="_blank" rel="noopener">apple.com/refund</a></li>
-      <li>Google Play: <a href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Google Play Refund Policy</a></li>
+      <li>Apple: <a href="https://support.apple.com/en-us/HT204084">apple.com/refund</a></li>
+      <li>Google Play: <a href="https://support.google.com/googleplay/answer/2479637">Google Play Refund Policy</a></li>
     </ul>
     <p>We do not process refunds directly. Please contact the platform's support team.</p>
-  </div>
 
-  <!-- 4 -->
-  <div class="section">
-    <h2>4. Disclaimer</h2>
-    <div class="callout">
-      Ohaeng is an <strong>entertainment and cultural education app</strong>. Fortune
-      readings are based on traditional East Asian wellness practice and AI interpretation.
-      They are <strong>not predictions of future events</strong> and should never be
-      used as a substitute for medical, psychological, legal, or financial advice.
-    </div>
-    <p>
-      We make no warranty, express or implied, regarding the accuracy or reliability
-      of any reading or analysis generated by the App. Use the App at your own
-      discretion.
-    </p>
-  </div>
+    <h2>Disclaimer</h2>
+    <p>Ohaeng is a <strong>wellness reflection and cultural education app</strong>. Wellness readings are based on traditional East Asian Five Elements philosophy and AI interpretation. They are <strong>not predictions of future events</strong> and should never be used as a substitute for medical, psychological, legal, or financial advice.</p>
+    <p>We make no warranty, express or implied, regarding the accuracy or reliability of any reading or analysis generated by the App. Use the App at your own discretion.</p>
 
-  <!-- 5 -->
-  <div class="section">
-    <h2>5. Intellectual Property</h2>
-    <p>
-      All content, software, trademarks, logos, and materials in the App are owned
-      by or licensed to Pie Nest Inc. and protected by applicable intellectual property
-      laws. You may not copy, reproduce, distribute, or create derivative works from
-      any App content without our express written permission.
-    </p>
-  </div>
+    <h2>Intellectual property</h2>
+    <p>All content, software, trademarks, logos, and materials in the App are owned by or licensed to Pie Nest Inc. and protected by applicable intellectual property laws. You may not copy, reproduce, distribute, or create derivative works from any App content without our express written permission.</p>
 
-  <!-- 6 -->
-  <div class="section">
-    <h2>6. Account Termination</h2>
-    <p>
-      You may delete your account at any time from the App's Settings screen.
-      Upon deletion, all personal data associated with your account will be permanently
-      removed from our systems within 30 days, subject to applicable legal requirements.
-    </p>
-    <p>
-      We reserve the right to suspend or terminate accounts that violate these Terms,
-      with or without prior notice.
-    </p>
-  </div>
+    <h2>Account termination</h2>
+    <p>You may delete your account at any time from the App's Settings screen. Upon deletion, all personal data associated with your account will be permanently removed from our systems within 30 days, subject to applicable legal requirements.</p>
+    <p>We reserve the right to suspend or terminate accounts that violate these Terms, with or without prior notice.</p>
 
-  <!-- 7 -->
-  <div class="section">
-    <h2>7. Limitation of Liability</h2>
-    <p>
-      To the maximum extent permitted by applicable law, Pie Nest Inc. shall not be
-      liable for any indirect, incidental, special, consequential, or punitive damages
-      arising from your use of or inability to use the App. Our total liability shall
-      not exceed the amount you paid us in the twelve months preceding the claim.
-    </p>
-  </div>
+    <h2>Limitation of liability</h2>
+    <p>To the maximum extent permitted by applicable law, Pie Nest Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the App. Our total liability shall not exceed the amount you paid us in the twelve months preceding the claim.</p>
 
-  <!-- 8 -->
-  <div class="section">
-    <h2>8. Changes to These Terms</h2>
-    <p>
-      We may update these Terms periodically. We will notify you of material changes
-      via an in-app notification or by updating the "Last updated" date above.
-      Your continued use of the App after the effective date constitutes acceptance
-      of the updated Terms.
-    </p>
-  </div>
+    <h2>Changes to these terms</h2>
+    <p>We may update these Terms periodically. We will notify you of material changes via an in-app notification or by updating the "Last updated" date above. Your continued use of the App after the effective date constitutes acceptance of the updated Terms.</p>
 
-  <!-- 9 -->
-  <div class="section">
-    <h2>9. Governing Law</h2>
-    <p>
-      These Terms are governed by the laws of the Republic of Korea. Any disputes
-      shall be subject to the exclusive jurisdiction of the courts in Seoul, Korea.
-    </p>
-  </div>
+    <h2>Governing law</h2>
+    <p>These Terms are governed by the laws of the Republic of Korea. Any disputes shall be subject to the exclusive jurisdiction of the courts in Seoul, Korea.</p>
 
-  <!-- 10 -->
-  <div class="section">
-    <h2>10. Contact</h2>
-    <p>
-      Questions about these Terms? Reach us at:<br />
-      <a href="mailto:support@k-saju.app">support@k-saju.app</a>
-    </p>
-    <p>
+    <h2>Contact</h2>
+    <p>Questions about these Terms? Reach us at:</p>
+    <div class="contact-block">
       <strong>Pie Nest Inc.</strong>
-    </p>
-  </div>
-</div>
+      <a href="mailto:support@ohaeng.app">support@ohaeng.app</a>
+    </div>
 
-<footer>
-  <p>© 2026 Pie Nest Inc. · <a href="/privacy.html">Privacy Policy</a> · <a href="/support.html">Support</a> · <a href="https://k-saju.app">Ohaeng App</a></p>
-</footer>
+  </article>
+
+  <footer>
+    <a href="/" class="wordmark">ohaeng</a>
+    <div class="footer-links">
+      <a href="/">Home</a>·
+      <a href="/privacy.html">Privacy</a>·
+      <a href="/support.html">Support</a>·
+      <a href="mailto:support@ohaeng.app">Contact</a>
+    </div>
+    <div class="copyright">© 2026 Pie Nest Inc.</div>
+  </footer>
+
+</main>
 
 </body>
 </html>
