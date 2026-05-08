@@ -342,37 +342,37 @@ footer .copyright { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-fa
     <div class="element-card wood">
       <span class="orbit-dot"></span>
       <span class="glyph">木</span>
-      <div class="name-en">Wood</div>
-      <div class="keyword">Growth · Vitality</div>
-      <div class="desc">The energy of springtime — flexible, upward, reaching. Strong Wood brings vision and momentum; tense Wood brings restlessness.</div>
+      <div class="name-en" id="woodName">Wood</div>
+      <div class="keyword" id="woodKeyword">Growth · Vitality</div>
+      <div class="desc" id="woodDesc">The energy of springtime — flexible, upward, reaching. Strong Wood brings vision and momentum; tense Wood brings restlessness.</div>
     </div>
     <div class="element-card fire">
       <span class="orbit-dot"></span>
       <span class="glyph">火</span>
-      <div class="name-en">Fire</div>
-      <div class="keyword">Warmth · Expression</div>
-      <div class="desc">The energy of summer — radiant, expressive, joyful. Strong Fire brings connection; depleted Fire brings burnout.</div>
+      <div class="name-en" id="fireName">Fire</div>
+      <div class="keyword" id="fireKeyword">Warmth · Expression</div>
+      <div class="desc" id="fireDesc">The energy of summer — radiant, expressive, joyful. Strong Fire brings connection; depleted Fire brings burnout.</div>
     </div>
     <div class="element-card earth">
       <span class="orbit-dot"></span>
       <span class="glyph">土</span>
-      <div class="name-en">Earth</div>
-      <div class="keyword">Grounding · Care</div>
-      <div class="desc">The energy of late summer — steady, nurturing, present. Strong Earth brings stability; heavy Earth brings stagnation.</div>
+      <div class="name-en" id="earthName">Earth</div>
+      <div class="keyword" id="earthKeyword">Grounding · Care</div>
+      <div class="desc" id="earthDesc">The energy of late summer — steady, nurturing, present. Strong Earth brings stability; heavy Earth brings stagnation.</div>
     </div>
     <div class="element-card metal">
       <span class="orbit-dot"></span>
       <span class="glyph">金</span>
-      <div class="name-en">Metal</div>
-      <div class="keyword">Clarity · Refinement</div>
-      <div class="desc">The energy of autumn — clear, precise, discerning. Strong Metal brings focus; brittle Metal brings rigidity.</div>
+      <div class="name-en" id="metalName">Metal</div>
+      <div class="keyword" id="metalKeyword">Clarity · Refinement</div>
+      <div class="desc" id="metalDesc">The energy of autumn — clear, precise, discerning. Strong Metal brings focus; brittle Metal brings rigidity.</div>
     </div>
     <div class="element-card water">
       <span class="orbit-dot"></span>
       <span class="glyph">水</span>
-      <div class="name-en">Water</div>
-      <div class="keyword">Depth · Stillness</div>
-      <div class="desc">The energy of winter — reflective, deep, adaptable. Strong Water brings wisdom; cold Water brings withdrawal.</div>
+      <div class="name-en" id="waterName">Water</div>
+      <div class="keyword" id="waterKeyword">Depth · Stillness</div>
+      <div class="desc" id="waterDesc">The energy of winter — reflective, deep, adaptable. Strong Water brings wisdom; cold Water brings withdrawal.</div>
     </div>
   </div>
 </section>
@@ -466,6 +466,16 @@ const T = {
     elementsTitle: 'Wood, Fire, Earth, Metal, Water —<br>the <em>quiet architecture</em> of how we feel.',
     elementsIntro1: 'Each of us carries a unique elemental signature, shaped by the moment we were born. Some elements run strong; others quiet. When they flow in harmony, we feel grounded.',
     elementsIntro2: 'When out of balance, we feel friction — the stress, the fatigue, the restlessness. Friction is information. Ohaeng helps you read it, gently.',
+    woodName: 'Wood', woodKeyword: 'Growth · Vitality',
+    woodDesc: 'The energy of springtime — flexible, upward, reaching. Strong Wood brings vision and momentum; tense Wood brings restlessness.',
+    fireName: 'Fire', fireKeyword: 'Warmth · Expression',
+    fireDesc: 'The energy of summer — radiant, expressive, joyful. Strong Fire brings connection; depleted Fire brings burnout.',
+    earthName: 'Earth', earthKeyword: 'Grounding · Care',
+    earthDesc: 'The energy of late summer — steady, nurturing, present. Strong Earth brings stability; heavy Earth brings stagnation.',
+    metalName: 'Metal', metalKeyword: 'Clarity · Refinement',
+    metalDesc: 'The energy of autumn — clear, precise, discerning. Strong Metal brings focus; brittle Metal brings rigidity.',
+    waterName: 'Water', waterKeyword: 'Depth · Stillness',
+    waterDesc: 'The energy of winter — reflective, deep, adaptable. Strong Water brings wisdom; cold Water brings withdrawal.',
     featuresEyebrow: 'Inside Ohaeng', featuresTitle: 'Everything your <em>daily balance</em> needs.',
     f1t: 'Daily reading', f1d: 'A short morning reading of today\'s elemental energy — what\'s flowing, what\'s blocked, where to lean in. Nuanced and personal, written for the day you\'re walking into.',
     f2t: 'Your element profile', f2d: 'A quiet look at your dominant element — your strengths, your blind spots, how you naturally move through the world. The most honest mirror you\'ll meet today.',
@@ -487,7 +497,17 @@ const T = {
     elementsEyebrow: '五行 · 다섯 가지 원소',
     elementsTitle: '목·화·토·금·수 —<br>우리가 느끼는 모든 것의 <em>조용한 구조</em>.',
     elementsIntro1: '우리 각자는 태어난 순간 고유한 원소 조합을 지닙니다. 어떤 원소는 강하게, 어떤 원소는 조용하게 흐릅니다. 조화롭게 흐를 때, 우리는 안정감을 느낍니다.',
-    elementsIntro2: '균형이 깨지면 마찰이 생깁니다 — 스트레스, 피로, 불안. 마찰은 정보입니다. Ohaeng이 그것을 부드럽게 읽어드립니다.',
+    elementsIntro2: '균형이 깨지면 마찰이 알려주는 것이 있습니다 — 스트레스, 피로, 불안. Ohaeng이 그 신호를 부드럽게 읽어드립니다.',
+    woodName: '목', woodKeyword: '성장 · 생명력',
+    woodDesc: '봄의 에너지 — 유연하고, 위로 향하며, 뻗어 나가는. 강한 목은 비전과 추진력을, 긴장된 목은 안절부절을 가져옵니다.',
+    fireName: '화', fireKeyword: '따스함 · 표현',
+    fireDesc: '여름의 에너지 — 빛나고, 표현하며, 기쁜. 강한 화는 연결을, 소진된 화는 번아웃을 가져옵니다.',
+    earthName: '토', earthKeyword: '안정 · 보살핌',
+    earthDesc: '늦여름의 에너지 — 한결같고, 보살피며, 지금에 머무는. 강한 토는 안정을, 무거운 토는 정체를 가져옵니다.',
+    metalName: '금', metalKeyword: '명료함 · 섬세함',
+    metalDesc: '가을의 에너지 — 맑고, 정확하며, 분별하는. 강한 금은 집중을, 부서지기 쉬운 금은 경직을 가져옵니다.',
+    waterName: '수', waterKeyword: '깊이 · 고요함',
+    waterDesc: '겨울의 에너지 — 성찰하고, 깊으며, 적응하는. 강한 수는 지혜를, 차가운 수는 위축을 가져옵니다.',
     featuresEyebrow: 'Ohaeng 기능', featuresTitle: '일상의 <em>균형</em>을 위한 모든 것.',
     f1t: '오늘의 에너지', f1d: '아침마다 오늘 원소 에너지를 짧게 읽어드립니다 — 무엇이 흐르고, 무엇이 막혔는지, 어디에 집중할지. 개인화된 깊이 있는 해석.',
     f2t: '나의 원소 프로파일', f2d: '나의 지배 원소를 조용히 살펴봅니다 — 강점, 사각지대, 세상과 내가 맺는 방식. 오늘 만날 가장 솔직한 거울.',
@@ -509,7 +529,17 @@ const T = {
     elementsEyebrow: '五行 · 五种元素',
     elementsTitle: '木·火·土·金·水 —<br>感受一切的<em>静谧结构</em>。',
     elementsIntro1: '我们每个人在出生那一刻，都携带着独特的元素印记。有些元素运行强劲，有些则悄然流淌。当它们和谐流动时，我们感到踏实。',
-    elementsIntro2: '失衡时，我们感受到摩擦 — 压力、疲惫、不安。摩擦是信息。Ohaeng 帮助你温柔地解读它。',
+    elementsIntro2: '失衡时，摩擦在诉说 — 压力、疲惫、不安。Ohaeng 帮助你温柔地聆听它。',
+    woodName: '木', woodKeyword: '生长 · 生机',
+    woodDesc: '春的能量 — 柔韧、向上、舒展。强木带来愿景与动力；紧绷之木带来不安。',
+    fireName: '火', fireKeyword: '温暖 · 表达',
+    fireDesc: '夏的能量 — 灿烂、表达、喜悦。强火带来连接；耗竭之火带来枯竭。',
+    earthName: '土', earthKeyword: '扎根 · 关怀',
+    earthDesc: '长夏的能量 — 沉稳、滋养、临在。强土带来安定；沉重之土带来停滞。',
+    metalName: '金', metalKeyword: '清晰 · 精炼',
+    metalDesc: '秋的能量 — 清晰、精准、辨识。强金带来专注；脆弱之金带来僵化。',
+    waterName: '水', waterKeyword: '深邃 · 静谧',
+    waterDesc: '冬的能量 — 内省、深邃、适应。强水带来智慧；冰冷之水带来退缩。',
     featuresEyebrow: 'Ohaeng 功能', featuresTitle: '日常<em>平衡</em>所需的一切。',
     f1t: '每日解读', f1d: '每天清晨，读取今日的元素能量 — 什么在流动，什么受阻，在哪里用力。个性化且深入。',
     f2t: '元素档案', f2d: '静静审视你的主导元素 — 你的优势、盲点，以及你与世界互动的方式。',
@@ -530,7 +560,17 @@ const T = {
     elementsEyebrow: '五行 · 五つの元素',
     elementsTitle: '木·火·土·金·水 —<br>私たちの感覚の<em>静かな構造</em>。',
     elementsIntro1: '私たちはそれぞれ、生まれた瞬間に固有の元素のシグネチャーを持っています。流れる時、私たちは安定を感じます。',
-    elementsIntro2: 'バランスが崩れると、摩擦が生まれます。ストレス、疲労、落ち着きのなさ。摩擦は情報です。Ohaengがそれを静かに読み解きます。',
+    elementsIntro2: 'バランスが崩れると、摩擦が語りかけます — ストレス、疲労、落ち着きのなさ。Ohaengがその声を静かに読み解きます。',
+    woodName: '木', woodKeyword: '成長 · 活力',
+    woodDesc: '春のエネルギー — しなやかで、上へ向かい、伸びゆく。強い木はビジョンと推進力を、張りつめた木は落ち着きのなさをもたらします。',
+    fireName: '火', fireKeyword: '温もり · 表現',
+    fireDesc: '夏のエネルギー — 輝き、表現し、喜びに満ちる。強い火はつながりを、枯れた火は燃え尽きをもたらします。',
+    earthName: '土', earthKeyword: '安定 · 育み',
+    earthDesc: '晩夏のエネルギー — 揺るがず、育み、いまここに在る。強い土は安定を、重い土は停滞をもたらします。',
+    metalName: '金', metalKeyword: '明晰 · 洗練',
+    metalDesc: '秋のエネルギー — 澄み、精緻で、見極める。強い金は集中を、脆い金は硬直をもたらします。',
+    waterName: '水', waterKeyword: '深さ · 静けさ',
+    waterDesc: '冬のエネルギー — 内省し、深く、しなやか。強い水は知恵を、冷たい水は引きこもりをもたらします。',
     featuresEyebrow: 'Ohaengの機能', featuresTitle: '毎日の<em>バランス</em>に必要なすべて。',
     f1t: 'デイリーリーディング', f1d: '今日の元素エネルギーを朝に短く読み解きます。個性的で深い解釈で、歩み入る一日のために。',
     f2t: '元素プロフィール', f2d: 'あなたの支配元素をそっと見つめます — 強み、盲点、世界との関わり方。',
@@ -551,7 +591,17 @@ const T = {
     elementsEyebrow: '五行 · Les Cinq Éléments',
     elementsTitle: 'Bois, Feu, Terre, Métal, Eau —<br>l\'<em>architecture silencieuse</em> de ce que nous ressentons.',
     elementsIntro1: 'Chacun de nous porte une signature élémentaire unique, façonnée par le moment de notre naissance. Quand ils coulent en harmonie, nous nous sentons ancrés.',
-    elementsIntro2: 'Quand le déséquilibre s\'installe, nous ressentons une friction — le stress, la fatigue. Ohaeng vous aide à la lire, en douceur.',
+    elementsIntro2: 'Quand le déséquilibre s\'installe, la friction nous parle — le stress, la fatigue. Ohaeng vous aide à l\'écouter, en douceur.',
+    woodName: 'Bois', woodKeyword: 'Croissance · Vitalité',
+    woodDesc: 'L\'énergie du printemps — souple, ascendante, qui s\'étire. Un Bois fort apporte vision et élan ; un Bois tendu apporte agitation.',
+    fireName: 'Feu', fireKeyword: 'Chaleur · Expression',
+    fireDesc: 'L\'énergie de l\'été — rayonnante, expressive, joyeuse. Un Feu fort apporte connexion ; un Feu épuisé mène à l\'épuisement.',
+    earthName: 'Terre', earthKeyword: 'Ancrage · Soin',
+    earthDesc: 'L\'énergie de l\'été tardif — stable, nourrissante, présente. Une Terre forte apporte stabilité ; une Terre lourde mène à la stagnation.',
+    metalName: 'Métal', metalKeyword: 'Clarté · Raffinement',
+    metalDesc: 'L\'énergie de l\'automne — claire, précise, discernante. Un Métal fort apporte concentration ; un Métal fragile apporte rigidité.',
+    waterName: 'Eau', waterKeyword: 'Profondeur · Quiétude',
+    waterDesc: 'L\'énergie de l\'hiver — réflexive, profonde, adaptable. Une Eau forte apporte sagesse ; une Eau froide mène au repli.',
     featuresEyebrow: 'Dans Ohaeng', featuresTitle: 'Tout ce que votre <em>équilibre quotidien</em> nécessite.',
     f1t: 'Lecture quotidienne', f1d: 'Une courte lecture matinale de l\'énergie élémentaire du jour. Nuancée et personnelle.',
     f2t: 'Votre profil élémentaire', f2d: 'Un regard sur votre élément dominant — vos forces, vos angles morts, comment vous traversez le monde.',
@@ -572,7 +622,17 @@ const T = {
     elementsEyebrow: '五行 · Die Fünf Elemente',
     elementsTitle: 'Holz, Feuer, Erde, Metall, Wasser —<br>die <em>stille Architektur</em> dessen, was wir fühlen.',
     elementsIntro1: 'Jeder von uns trägt eine einzigartige elementare Signatur, geformt durch den Moment unserer Geburt. Wenn sie harmonisch fließen, fühlen wir uns geerdet.',
-    elementsIntro2: 'Bei Ungleichgewicht spüren wir Reibung — Stress, Erschöpfung. Ohaeng hilft dir, sie sanft zu lesen.',
+    elementsIntro2: 'Bei Ungleichgewicht spricht die Reibung zu uns — Stress, Erschöpfung. Ohaeng hilft dir, ihr sanft zuzuhören.',
+    woodName: 'Holz', woodKeyword: 'Wachstum · Vitalität',
+    woodDesc: 'Die Energie des Frühlings — beweglich, aufsteigend, ausgreifend. Starkes Holz bringt Vision und Schwung; angespanntes Holz bringt Ruhelosigkeit.',
+    fireName: 'Feuer', fireKeyword: 'Wärme · Ausdruck',
+    fireDesc: 'Die Energie des Sommers — strahlend, ausdrucksstark, freudig. Starkes Feuer bringt Verbindung; erschöpftes Feuer bringt Burnout.',
+    earthName: 'Erde', earthKeyword: 'Verwurzelung · Fürsorge',
+    earthDesc: 'Die Energie des Spätsommers — beständig, nährend, präsent. Starke Erde bringt Stabilität; schwere Erde bringt Stagnation.',
+    metalName: 'Metall', metalKeyword: 'Klarheit · Verfeinerung',
+    metalDesc: 'Die Energie des Herbstes — klar, präzise, unterscheidend. Starkes Metall bringt Fokus; sprödes Metall bringt Starrheit.',
+    waterName: 'Wasser', waterKeyword: 'Tiefe · Stille',
+    waterDesc: 'Die Energie des Winters — reflektierend, tief, anpassungsfähig. Starkes Wasser bringt Weisheit; kaltes Wasser bringt Rückzug.',
     featuresEyebrow: 'In Ohaeng', featuresTitle: 'Alles, was dein <em>tägliches Gleichgewicht</em> braucht.',
     f1t: 'Tägliche Lesung', f1d: 'Eine kurze Morgenlesung der elementaren Energie des Tages. Nuanciert und persönlich.',
     f2t: 'Dein Elementprofil', f2d: 'Ein ruhiger Blick auf dein dominantes Element — deine Stärken, blinde Flecken, wie du dich in der Welt bewegst.',
@@ -585,7 +645,6 @@ const T = {
     ctaEyebrow: 'Beginne deine Praxis', ctaTitle: 'Dein <em>Gleichgewicht</em>, in deiner Tasche.',
     ctaLead: 'Kostenlos starten. In 15 Sprachen verfügbar.',
   },
-  // ES, PT, HI, VI, ID, TH, AR — English fallback with key override
   es: {
     heroEyebrow: 'Una práctica de bienestar diario',
     heroTitle: 'Encuentra tu <em>equilibrio</em>,<br>en <span class="gold-accent">cinco</span> elementos.',
@@ -594,29 +653,215 @@ const T = {
     elementsEyebrow: '五行 · Los Cinco Elementos',
     elementsTitle: 'Madera, Fuego, Tierra, Metal, Agua —<br>la <em>arquitectura silenciosa</em> de lo que sentimos.',
     elementsIntro1: 'Cada uno de nosotros lleva una firma elemental única, formada en el momento de nacer. Cuando fluyen en armonía, nos sentimos arraigados.',
-    elementsIntro2: 'Cuando hay desequilibrio, sentimos fricción — estrés, fatiga. Ohaeng te ayuda a leerla suavemente.',
+    elementsIntro2: 'Cuando hay desequilibrio, la fricción nos habla — estrés, fatiga. Ohaeng te ayuda a escucharla suavemente.',
+    woodName: 'Madera', woodKeyword: 'Crecimiento · Vitalidad',
+    woodDesc: 'La energía de la primavera — flexible, ascendente, expansiva. La Madera fuerte trae visión e impulso; la Madera tensa trae inquietud.',
+    fireName: 'Fuego', fireKeyword: 'Calidez · Expresión',
+    fireDesc: 'La energía del verano — radiante, expresiva, alegre. El Fuego fuerte trae conexión; el Fuego agotado trae agotamiento.',
+    earthName: 'Tierra', earthKeyword: 'Arraigo · Cuidado',
+    earthDesc: 'La energía del verano tardío — firme, nutricia, presente. La Tierra fuerte trae estabilidad; la Tierra pesada trae estancamiento.',
+    metalName: 'Metal', metalKeyword: 'Claridad · Refinamiento',
+    metalDesc: 'La energía del otoño — clara, precisa, discerniente. El Metal fuerte trae enfoque; el Metal frágil trae rigidez.',
+    waterName: 'Agua', waterKeyword: 'Profundidad · Quietud',
+    waterDesc: 'La energía del invierno — reflexiva, profunda, adaptable. El Agua fuerte trae sabiduría; el Agua fría trae retraimiento.',
     featuresEyebrow: 'Dentro de Ohaeng', featuresTitle: 'Todo lo que tu <em>equilibrio diario</em> necesita.',
     f1t: 'Lectura diaria', f1d: 'Una breve lectura matutina de la energía elemental del día. Matizada y personal.',
     f2t: 'Tu perfil elemental', f2d: 'Una mirada tranquila a tu elemento dominante — fortalezas, puntos ciegos, cómo te mueves por el mundo.',
     f3t: 'Calendario de bienestar', f3d: 'Planifica momentos importantes en torno a los ritmos de tus elementos.',
     f4t: 'Compatibilidad', f4d: 'Añade a las personas que te importan y ve dónde se armonizan o chocan sus elementos.',
     f5t: 'Lectura facial', f5d: 'Una práctica antigua de la tradición coreana. Foto analizada y eliminada en 24 horas.',
-    f6t: 'Pregunta a Ohaeng', f6d: 'IA conversacional basada en tu perfil elemental.',
+    f6t: 'Pregunta a Ohaeng', f6d: 'IA conversacional basada en tu perfil elemental. Pregunta sobre timing, energía y por qué esta semana se siente pesada.',
     quoteText: 'El equilibrio no es un estado que alcanzas.<br>Es un ritmo al que regresas.',
     quoteCite: '— Un recordatorio diario',
     ctaEyebrow: 'Comienza tu práctica', ctaTitle: 'Tu <em>equilibrio</em>, en tu bolsillo.',
     ctaLead: 'Gratis para empezar. Disponible en 15 idiomas.',
   },
-};
-
-// Languages with English fallback (partial override)
-const FALLBACK_LANGS = {
-  pt:  { heroEyebrow: 'Uma prática diária de bem-estar', ctaDownload: 'Baixar grátis', ctaTitle: 'Seu <em>equilíbrio</em>, no bolso.', ctaLead: 'Grátis para começar. Disponível em 15 idiomas.' },
-  hi:  { heroEyebrow: 'एक दैनिक वेलनेस अभ्यास', ctaDownload: 'मुफ़्त डाउनलोड करें', ctaTitle: 'आपका <em>संतुलन</em>, आपकी जेब में।', ctaLead: 'शुरू करने के लिए मुफ़्त। 15 भाषाओं में उपलब्ध।' },
-  vi:  { heroEyebrow: 'Thực hành sức khỏe hàng ngày', ctaDownload: 'Tải xuống miễn phí', ctaTitle: 'Sự <em>cân bằng</em> của bạn, trong tầm tay.', ctaLead: 'Miễn phí để bắt đầu. Có sẵn bằng 15 ngôn ngữ.' },
-  id:  { heroEyebrow: 'Praktik kesehatan harian', ctaDownload: 'Unduh gratis', ctaTitle: '<em>Keseimbangan</em> Anda, di genggaman Anda.', ctaLead: 'Gratis untuk memulai. Tersedia dalam 15 bahasa.' },
-  th:  { heroEyebrow: 'การปฏิบัติสุขภาพประจำวัน', ctaDownload: 'ดาวน์โหลดฟรี', ctaTitle: '<em>ความสมดุล</em>ของคุณ ในฝ่ามือ', ctaLead: 'เริ่มต้นฟรี มีให้ใน 15 ภาษา' },
-  ar:  { heroEyebrow: 'ممارسة يومية للعافية', ctaDownload: 'تحميل مجاني', ctaTitle: '<em>توازنك</em>، في جيبك.', ctaLead: 'مجاني للبدء. متاح بـ 15 لغة.' },
+  pt: {
+    heroEyebrow: 'Uma prática diária de bem-estar',
+    heroTitle: 'Encontre seu <em>equilíbrio</em>,<br>em <span class="gold-accent">cinco</span> elementos.',
+    heroSubtitle: 'Ohaeng é um companheiro de bem-estar enraizado em três mil anos de filosofia oriental. Leia seu dia em elementos — o que flui, o que está bloqueado, onde suavizar.',
+    ctaDownload: 'Baixar grátis', ctaHow: 'Como funciona ↓', svgCenter: 'equilíbrio',
+    elementsEyebrow: '五行 · Os Cinco Elementos',
+    elementsTitle: 'Madeira, Fogo, Terra, Metal, Água —<br>a <em>arquitetura silenciosa</em> do que sentimos.',
+    elementsIntro1: 'Cada um de nós carrega uma assinatura elemental única, moldada no momento em que nascemos. Quando fluem em harmonia, nos sentimos enraizados.',
+    elementsIntro2: 'Quando há desequilíbrio, o atrito nos fala — estresse, fadiga. Ohaeng te ajuda a ouvi-lo com gentileza.',
+    woodName: 'Madeira', woodKeyword: 'Crescimento · Vitalidade',
+    woodDesc: 'A energia da primavera — flexível, ascendente, expansiva. Madeira forte traz visão e impulso; Madeira tensa traz inquietação.',
+    fireName: 'Fogo', fireKeyword: 'Calor · Expressão',
+    fireDesc: 'A energia do verão — radiante, expressiva, alegre. Fogo forte traz conexão; Fogo esgotado traz esgotamento.',
+    earthName: 'Terra', earthKeyword: 'Enraizamento · Cuidado',
+    earthDesc: 'A energia do verão tardio — firme, nutritiva, presente. Terra forte traz estabilidade; Terra pesada traz estagnação.',
+    metalName: 'Metal', metalKeyword: 'Clareza · Refinamento',
+    metalDesc: 'A energia do outono — clara, precisa, discernente. Metal forte traz foco; Metal frágil traz rigidez.',
+    waterName: 'Água', waterKeyword: 'Profundidade · Quietude',
+    waterDesc: 'A energia do inverno — reflexiva, profunda, adaptável. Água forte traz sabedoria; Água fria traz recolhimento.',
+    featuresEyebrow: 'Dentro do Ohaeng', featuresTitle: 'Tudo que seu <em>equilíbrio diário</em> precisa.',
+    f1t: 'Leitura diária', f1d: 'Uma breve leitura matinal da energia elemental do dia. Sutil e pessoal.',
+    f2t: 'Seu perfil elemental', f2d: 'Um olhar calmo sobre seu elemento dominante — suas forças, pontos cegos, como você se move pelo mundo.',
+    f3t: 'Calendário de bem-estar', f3d: 'Planeje momentos importantes em torno dos ritmos dos seus elementos.',
+    f4t: 'Compatibilidade', f4d: 'Adicione as pessoas que você se importa e veja onde seus elementos se harmonizam ou colidem.',
+    f5t: 'Leitura facial', f5d: 'Uma prática antiga da tradição coreana. Foto analisada e excluída em 24 horas.',
+    f6t: 'Pergunte ao Ohaeng', f6d: 'IA conversacional baseada no seu perfil elemental. Pergunte sobre timing, energia e por que esta semana parece pesada.',
+    quoteText: 'O equilíbrio não é um estado que você alcança.<br>É um ritmo ao qual você retorna.',
+    quoteCite: '— Um lembrete diário',
+    ctaEyebrow: 'Comece sua prática', ctaTitle: 'Seu <em>equilíbrio</em>, no bolso.',
+    ctaLead: 'Grátis para começar. Disponível em 15 idiomas.',
+  },
+  hi: {
+    heroEyebrow: 'एक दैनिक वेलनेस अभ्यास',
+    heroTitle: '<span class="gold-accent">पंच तत्वों</span> में<br>अपना <em>संतुलन</em> खोजें।',
+    heroSubtitle: 'Ohaeng तीन हजार वर्षों की पूर्वी दर्शन परंपरा में निहित एक शांत वेलनेस साथी है। अपने दिन को तत्वों में पढ़ें — क्या प्रवाहित हो रहा है, क्या अवरुद्ध है, कहाँ नरमी लानी है।',
+    ctaDownload: 'मुफ़्त डाउनलोड करें', ctaHow: 'यह कैसे काम करता है ↓', svgCenter: 'संतुलन',
+    elementsEyebrow: '五行 · पाँच तत्व',
+    elementsTitle: 'लकड़ी, अग्नि, पृथ्वी, धातु, जल —<br>हम जो अनुभव करते हैं उसकी <em>मूक संरचना</em>।',
+    elementsIntro1: 'हम में से प्रत्येक जन्म के क्षण एक अनूठी तात्विक पहचान लेकर आता है। जब वे सामंजस्य में प्रवाहित होते हैं, हम स्थिर महसूस करते हैं।',
+    elementsIntro2: 'असंतुलन में, घर्षण कुछ बताता है — तनाव, थकान, बेचैनी। Ohaeng आपको उसे धीरे से सुनने में मदद करता है।',
+    woodName: 'लकड़ी', woodKeyword: 'विकास · जीवन शक्ति',
+    woodDesc: 'वसंत की ऊर्जा — लचीली, ऊर्ध्वमुखी, फैलती हुई। मजबूत लकड़ी दृष्टि और गति लाती है; तनावग्रस्त लकड़ी बेचैनी लाती है।',
+    fireName: 'अग्नि', fireKeyword: 'गर्मजोशी · अभिव्यक्ति',
+    fireDesc: 'ग्रीष्म की ऊर्जा — दीप्तिमान, अभिव्यंजक, आनंदमय। मजबूत अग्नि संबंध लाती है; थकी हुई अग्नि थकावट लाती है।',
+    earthName: 'पृथ्वी', earthKeyword: 'स्थिरता · देखभाल',
+    earthDesc: 'देर ग्रीष्म की ऊर्जा — स्थिर, पोषण करने वाली, वर्तमान में। मजबूत पृथ्वी स्थिरता लाती है; भारी पृथ्वी ठहराव लाती है।',
+    metalName: 'धातु', metalKeyword: 'स्पष्टता · परिष्कार',
+    metalDesc: 'शरद ऋतु की ऊर्जा — स्पष्ट, सटीक, विवेकशील। मजबूत धातु ध्यान केंद्रित करती है; भंगुर धातु कठोरता लाती है।',
+    waterName: 'जल', waterKeyword: 'गहराई · शांति',
+    waterDesc: 'शीत ऋतु की ऊर्जा — विचारशील, गहरी, अनुकूलनीय। मजबूत जल ज्ञान लाता है; ठंडा जल अलगाव लाता है।',
+    featuresEyebrow: 'Ohaeng के अंदर', featuresTitle: 'आपके <em>दैनिक संतुलन</em> के लिए सब कुछ।',
+    f1t: 'दैनिक पठन', f1d: 'आज की तात्विक ऊर्जा की एक संक्षिप्त सुबह की पठन — क्या प्रवाहित हो रहा है, क्या अवरुद्ध है। सूक्ष्म और व्यक्तिगत।',
+    f2t: 'आपका तत्व प्रोफ़ाइल', f2d: 'आपके प्रमुख तत्व पर एक शांत नज़र — शक्तियाँ, अंधे धब्बे, आप दुनिया में कैसे चलते हैं।',
+    f3t: 'वेलनेस कैलेंडर', f3d: 'अपने तत्वों की लय के अनुसार महत्वपूर्ण क्षणों की योजना बनाएं।',
+    f4t: 'अनुकूलता', f4d: 'अपने प्रियजनों को जोड़ें और देखें कि तत्व कहाँ सामंजस्य बनाते हैं और कहाँ टकराते हैं।',
+    f5t: 'चेहरा पठन', f5d: 'कोरियाई परंपरा की एक प्राचीन प्रथा। फोटो का विश्लेषण 24 घंटे में स्थायी रूप से हटा दिया जाता है।',
+    f6t: 'Ohaeng से पूछें', f6d: 'आपके तत्व प्रोफ़ाइल पर आधारित AI वार्तालाप। समय, ऊर्जा के बारे में पूछें।',
+    quoteText: 'संतुलन कोई ऐसी अवस्था नहीं जिसे आप पा लें।<br>यह एक लय है जिस पर आप लौटते हैं।',
+    quoteCite: '— एक दैनिक स्मरण',
+    ctaEyebrow: 'अपना अभ्यास शुरू करें', ctaTitle: 'आपका <em>संतुलन</em>, आपकी जेब में।',
+    ctaLead: 'शुरू करने के लिए मुफ़्त। 15 भाषाओं में उपलब्ध।',
+  },
+  vi: {
+    heroEyebrow: 'Thực hành sức khỏe hàng ngày',
+    heroTitle: 'Tìm thấy <em>cân bằng</em> của bạn,<br>trong <span class="gold-accent">năm</span> nguyên tố.',
+    heroSubtitle: 'Ohaeng là người bạn đồng hành sức khỏe lặng lẽ, bắt nguồn từ ba nghìn năm triết học phương Đông. Đọc ngày của bạn qua các nguyên tố — điều gì đang chảy, điều gì bị chặn, cần làm mềm ở đâu.',
+    ctaDownload: 'Tải xuống miễn phí', ctaHow: 'Cách hoạt động ↓', svgCenter: 'cân bằng',
+    elementsEyebrow: '五行 · Ngũ Hành',
+    elementsTitle: 'Mộc, Hỏa, Thổ, Kim, Thủy —<br><em>kiến trúc lặng lẽ</em> của những gì ta cảm nhận.',
+    elementsIntro1: 'Mỗi chúng ta mang một dấu ấn nguyên tố độc đáo, được định hình từ khoảnh khắc chào đời. Khi chúng hài hòa chảy, ta cảm thấy vững vàng.',
+    elementsIntro2: 'Khi mất cân bằng, sự cọ xát nói lên điều gì đó — căng thẳng, mệt mỏi. Ohaeng giúp bạn lắng nghe nó nhẹ nhàng.',
+    woodName: 'Mộc', woodKeyword: 'Sinh trưởng · Sức sống',
+    woodDesc: 'Năng lượng của mùa xuân — mềm mại, vươn lên, lan tỏa. Mộc mạnh mang đến tầm nhìn và sức bật; Mộc căng thẳng mang đến bồn chồn.',
+    fireName: 'Hỏa', fireKeyword: 'Ấm áp · Biểu đạt',
+    fireDesc: 'Năng lượng của mùa hè — rực rỡ, biểu đạt, vui tươi. Hỏa mạnh mang đến kết nối; Hỏa kiệt sức mang đến kiệt lực.',
+    earthName: 'Thổ', earthKeyword: 'Vững vàng · Chăm sóc',
+    earthDesc: 'Năng lượng cuối mùa hè — ổn định, nuôi dưỡng, hiện diện. Thổ mạnh mang đến sự vững chắc; Thổ nặng mang đến trì trệ.',
+    metalName: 'Kim', metalKeyword: 'Sáng rõ · Tinh tế',
+    metalDesc: 'Năng lượng của mùa thu — trong sáng, chính xác, sắc sảo. Kim mạnh mang đến sự tập trung; Kim giòn mang đến cứng nhắc.',
+    waterName: 'Thủy', waterKeyword: 'Sâu lắng · Tĩnh tại',
+    waterDesc: 'Năng lượng của mùa đông — suy ngẫm, sâu sắc, linh hoạt. Thủy mạnh mang đến trí tuệ; Thủy lạnh mang đến cô lập.',
+    featuresEyebrow: 'Trong Ohaeng', featuresTitle: 'Mọi thứ <em>cân bằng hàng ngày</em> của bạn cần.',
+    f1t: 'Đọc hàng ngày', f1d: 'Một buổi đọc ngắn buổi sáng về năng lượng nguyên tố hôm nay — điều gì đang chảy, điều gì bị chặn. Tinh tế và cá nhân.',
+    f2t: 'Hồ sơ nguyên tố', f2d: 'Nhìn lặng lẽ vào nguyên tố chủ đạo của bạn — điểm mạnh, điểm mù, cách bạn di chuyển trong thế giới.',
+    f3t: 'Lịch sức khỏe', f3d: 'Lên kế hoạch các khoảnh khắc quan trọng theo nhịp điệu các nguyên tố của bạn.',
+    f4t: 'Tương hợp', f4d: 'Thêm những người bạn quan tâm và xem các nguyên tố hài hòa hay va chạm ở đâu.',
+    f5t: 'Đọc gương mặt', f5d: 'Một thực hành cổ xưa từ truyền thống Hàn Quốc. Ảnh được xóa vĩnh viễn trong 24 giờ.',
+    f6t: 'Hỏi Ohaeng', f6d: 'AI hội thoại dựa trên hồ sơ nguyên tố của bạn. Hỏi về thời điểm, năng lượng và lý do tuần này có vẻ nặng nề.',
+    quoteText: 'Cân bằng không phải là trạng thái bạn đạt được.<br>Đó là nhịp điệu bạn trở về.',
+    quoteCite: '— Nhắc nhở hàng ngày',
+    ctaEyebrow: 'Bắt đầu thực hành', ctaTitle: 'Sự <em>cân bằng</em> của bạn, trong tầm tay.',
+    ctaLead: 'Miễn phí để bắt đầu. Có sẵn bằng 15 ngôn ngữ.',
+  },
+  id: {
+    heroEyebrow: 'Praktik kesehatan harian',
+    heroTitle: 'Temukan <em>keseimbangan</em> Anda,<br>dalam <span class="gold-accent">lima</span> elemen.',
+    heroSubtitle: 'Ohaeng adalah teman kesehatan yang tenang, berakar pada tiga ribu tahun filosofi Timur. Bacalah hari Anda dalam elemen — apa yang mengalir, apa yang tersumbat, di mana perlu dilunakkan.',
+    ctaDownload: 'Unduh gratis', ctaHow: 'Cara kerjanya ↓', svgCenter: 'seimbang',
+    elementsEyebrow: '五行 · Lima Elemen',
+    elementsTitle: 'Kayu, Api, Tanah, Logam, Air —<br><em>arsitektur sunyi</em> dari apa yang kita rasakan.',
+    elementsIntro1: 'Setiap dari kita membawa tanda tangan elemental yang unik, dibentuk pada saat kita lahir. Ketika mengalir harmonis, kita merasa berakar.',
+    elementsIntro2: 'Saat tidak seimbang, gesekan berbicara kepada kita — stres, kelelahan. Ohaeng membantu Anda mendengarkannya dengan lembut.',
+    woodName: 'Kayu', woodKeyword: 'Pertumbuhan · Vitalitas',
+    woodDesc: 'Energi musim semi — fleksibel, ke atas, merentang. Kayu yang kuat membawa visi dan momentum; Kayu yang tegang membawa kegelisahan.',
+    fireName: 'Api', fireKeyword: 'Kehangatan · Ekspresi',
+    fireDesc: 'Energi musim panas — bercahaya, ekspresif, penuh sukacita. Api yang kuat membawa keterhubungan; Api yang habis membawa kelelahan.',
+    earthName: 'Tanah', earthKeyword: 'Keteguhan · Perawatan',
+    earthDesc: 'Energi akhir musim panas — kokoh, memelihara, hadir. Tanah yang kuat membawa stabilitas; Tanah yang berat membawa kemandegan.',
+    metalName: 'Logam', metalKeyword: 'Kejernihan · Kehalusan',
+    metalDesc: 'Energi musim gugur — jernih, tepat, tajam. Logam yang kuat membawa fokus; Logam yang rapuh membawa kekakuan.',
+    waterName: 'Air', waterKeyword: 'Kedalaman · Ketenangan',
+    waterDesc: 'Energi musim dingin — reflektif, mendalam, mudah beradaptasi. Air yang kuat membawa kebijaksanaan; Air yang dingin membawa penarikan diri.',
+    featuresEyebrow: 'Di dalam Ohaeng', featuresTitle: 'Semua yang <em>keseimbangan harian</em> Anda butuhkan.',
+    f1t: 'Bacaan harian', f1d: 'Bacaan singkat pagi tentang energi elemental hari ini. Bernuansa dan personal.',
+    f2t: 'Profil elemen Anda', f2d: 'Pandangan tenang pada elemen dominan Anda — kekuatan, titik buta, cara Anda bergerak di dunia.',
+    f3t: 'Kalender kesehatan', f3d: 'Rencanakan momen penting di sekitar ritme elemen Anda.',
+    f4t: 'Kompatibilitas', f4d: 'Tambahkan orang yang Anda pedulikan dan lihat di mana elemen Anda harmonis atau bertabrakan.',
+    f5t: 'Membaca wajah', f5d: 'Praktik kuno dari tradisi Korea. Foto dianalisis dan dihapus dalam 24 jam.',
+    f6t: 'Tanya Ohaeng', f6d: 'AI percakapan berdasarkan profil elemen Anda. Tanya tentang waktu, energi, dan mengapa minggu ini terasa berat.',
+    quoteText: 'Keseimbangan bukan keadaan yang Anda capai.<br>Itu adalah ritme yang Anda kembali.',
+    quoteCite: '— Pengingat harian',
+    ctaEyebrow: 'Mulai praktik Anda', ctaTitle: '<em>Keseimbangan</em> Anda, di genggaman Anda.',
+    ctaLead: 'Gratis untuk memulai. Tersedia dalam 15 bahasa.',
+  },
+  th: {
+    heroEyebrow: 'การปฏิบัติสุขภาพประจำวัน',
+    heroTitle: 'ค้นพบ<em>สมดุล</em>ของคุณ<br>ใน<span class="gold-accent">ห้า</span>ธาตุ',
+    heroSubtitle: 'Ohaeng คือเพื่อนร่วมทางสุขภาพที่เงียบงาม หยั่งรากลึกในปรัชญาตะวันออกสามพันปี อ่านวันของคุณผ่านธาตุ — อะไรกำลังไหล อะไรถูกกั้น ควรผ่อนคลายตรงไหน',
+    ctaDownload: 'ดาวน์โหลดฟรี', ctaHow: 'วิธีการทำงาน ↓', svgCenter: 'สมดุล',
+    elementsEyebrow: '五行 · ห้าธาตุ',
+    elementsTitle: 'ไม้ ไฟ ดิน โลหะ น้ำ —<br><em>โครงสร้างเงียบงาม</em>ของสิ่งที่เรารู้สึก',
+    elementsIntro1: 'แต่ละคนในเราต่างมีลายเซ็นธาตุที่เป็นเอกลักษณ์ ถูกหล่อหลอมขึ้นในช่วงเวลาที่เราเกิด เมื่อไหลอย่างสอดประสาน เรารู้สึกมั่นคง',
+    elementsIntro2: 'เมื่อขาดสมดุล การเสียดสีบอกเล่าบางสิ่ง — ความเครียด ความเหนื่อย Ohaeng ช่วยให้คุณฟังมันอย่างอ่อนโยน',
+    woodName: 'ไม้', woodKeyword: 'การเติบโต · พลังชีวิต',
+    woodDesc: 'พลังงานของฤดูใบไม้ผลิ — ยืดหยุ่น พุ่งขึ้น แผ่กว้าง ไม้ที่แข็งแกร่งนำวิสัยทัศน์และพลัง ไม้ที่ตึงเครียดนำความกระสับกระส่าย',
+    fireName: 'ไฟ', fireKeyword: 'ความอบอุ่น · การแสดงออก',
+    fireDesc: 'พลังงานของฤดูร้อน — เปล่งประกาย แสดงออก เปี่ยมสุข ไฟที่แข็งแกร่งนำการเชื่อมต่อ ไฟที่หมดสิ้นนำความเหนื่อยล้า',
+    earthName: 'ดิน', earthKeyword: 'ความมั่นคง · การดูแล',
+    earthDesc: 'พลังงานของปลายฤดูร้อน — มั่นคง บำรุงเลี้ยง อยู่กับปัจจุบัน ดินที่แข็งแกร่งนำความมั่นคง ดินที่หนักนำความซบเซา',
+    metalName: 'โลหะ', metalKeyword: 'ความกระจ่าง · ความประณีต',
+    metalDesc: 'พลังงานของฤดูใบไม้ร่วง — ชัดเจน แม่นยำ หยั่งรู้ โลหะที่แข็งแกร่งนำสมาธิ โลหะที่เปราะบางนำความแข็งกร้าว',
+    waterName: 'น้ำ', waterKeyword: 'ความลึก · ความสงบ',
+    waterDesc: 'พลังงานของฤดูหนาว — ใคร่ครวญ ลึกซึ้ง ปรับตัวได้ น้ำที่แข็งแกร่งนำปัญญา น้ำที่เย็นชานำการถอนตัว',
+    featuresEyebrow: 'ภายใน Ohaeng', featuresTitle: 'ทุกสิ่งที่<em>สมดุลประจำวัน</em>ของคุณต้องการ',
+    f1t: 'การอ่านประจำวัน', f1d: 'การอ่านสั้นๆ ในตอนเช้าเกี่ยวกับพลังงานธาตุของวันนี้ ละเอียดอ่อนและเป็นส่วนตัว',
+    f2t: 'โปรไฟล์ธาตุของคุณ', f2d: 'มองอย่างสงบไปยังธาตุหลักของคุณ — จุดแข็ง จุดอ่อน วิธีที่คุณเคลื่อนไปในโลก',
+    f3t: 'ปฏิทินสุขภาพ', f3d: 'วางแผนช่วงเวลาสำคัญตามจังหวะธาตุของคุณ',
+    f4t: 'ความเข้ากัน', f4d: 'เพิ่มคนที่คุณห่วงใย และดูว่าธาตุของคุณสอดประสานหรือขัดแย้งกันที่ไหน',
+    f5t: 'การอ่านใบหน้า', f5d: 'การปฏิบัติโบราณจากประเพณีเกาหลี รูปถ่ายถูกวิเคราะห์และลบภายใน 24 ชั่วโมง',
+    f6t: 'ถาม Ohaeng', f6d: 'AI สนทนาที่หยั่งรากในโปรไฟล์ธาตุของคุณ ถามเกี่ยวกับเวลา พลังงาน',
+    quoteText: 'สมดุลไม่ใช่สภาวะที่คุณบรรลุ<br>มันคือจังหวะที่คุณกลับคืนสู่',
+    quoteCite: '— การเตือนใจประจำวัน',
+    ctaEyebrow: 'เริ่มการปฏิบัติของคุณ', ctaTitle: '<em>สมดุล</em>ของคุณ อยู่ในมือคุณ',
+    ctaLead: 'เริ่มต้นฟรี มีให้ใน 15 ภาษา',
+  },
+  ar: {
+    heroEyebrow: 'ممارسة يومية للعافية',
+    heroTitle: 'اعثر على <em>توازنك</em>،<br>في <span class="gold-accent">خمسة</span> عناصر.',
+    heroSubtitle: 'Ohaeng رفيق عافية هادئ متجذّر في ثلاثة آلاف عام من الفلسفة الشرقية. اقرأ يومك في العناصر — ما يتدفق، ما يُعيق، أين تُليّن.',
+    ctaDownload: 'تحميل مجاني', ctaHow: 'كيف يعمل ↓', svgCenter: 'توازن',
+    elementsEyebrow: '五行 · العناصر الخمسة',
+    elementsTitle: 'الخشب، النار، الأرض، المعدن، الماء —<br><em>البنية الصامتة</em> لما نشعر به.',
+    elementsIntro1: 'كل واحد منا يحمل بصمة عنصرية فريدة، تشكّلت في لحظة ولادتنا. حين تتدفق بانسجام، نشعر بالثبات.',
+    elementsIntro2: 'حين يختل التوازن، يُخبرنا الاحتكاك — التوتر، الإرهاق. Ohaeng يساعدك على الإصغاء إليه برفق.',
+    woodName: 'خشب', woodKeyword: 'نمو · حيوية',
+    woodDesc: 'طاقة الربيع — مرنة، صاعدة، ممتدة. الخشب القوي يجلب الرؤية والزخم؛ الخشب المتوتر يجلب القلق.',
+    fireName: 'نار', fireKeyword: 'دفء · تعبير',
+    fireDesc: 'طاقة الصيف — مشعة، معبّرة، مبهجة. النار القوية تجلب التواصل؛ النار المنهكة تجلب الإرهاق.',
+    earthName: 'أرض', earthKeyword: 'تجذّر · رعاية',
+    earthDesc: 'طاقة آخر الصيف — ثابتة، مغذية، حاضرة. الأرض القوية تجلب الاستقرار؛ الأرض الثقيلة تجلب الركود.',
+    metalName: 'معدن', metalKeyword: 'وضوح · صقل',
+    metalDesc: 'طاقة الخريف — صافية، دقيقة، مميّزة. المعدن القوي يجلب التركيز؛ المعدن الهش يجلب الجمود.',
+    waterName: 'ماء', waterKeyword: 'عمق · سكينة',
+    waterDesc: 'طاقة الشتاء — تأملية، عميقة، قابلة للتكيّف. الماء القوي يجلب الحكمة؛ الماء البارد يجلب الانسحاب.',
+    featuresEyebrow: 'داخل Ohaeng', featuresTitle: 'كل ما يحتاجه <em>توازنك اليومي</em>.',
+    f1t: 'قراءة يومية', f1d: 'قراءة صباحية قصيرة لطاقة اليوم العنصرية. دقيقة وشخصية.',
+    f2t: 'ملفك العنصري', f2d: 'نظرة هادئة على عنصرك المسيطر — قواك، نقاط عماك، كيف تتحرك في العالم.',
+    f3t: 'تقويم العافية', f3d: 'خطّط للحظات المهمة وفق إيقاعات عناصرك.',
+    f4t: 'التوافق', f4d: 'أضف من تهتم بهم وانظر أين تتناغم العناصر وأين تتصادم.',
+    f5t: 'قراءة الوجه', f5d: 'ممارسة قديمة من التراث الكوري. الصورة تُحلَّل وتُحذف خلال 24 ساعة.',
+    f6t: 'اسأل Ohaeng', f6d: 'ذكاء اصطناعي حواري متجذّر في ملفك العنصري. اسأل عن التوقيت، الطاقة، ولماذا تبدو هذه الأسبوع ثقيلة.',
+    quoteText: 'التوازن ليس حالةً تبلغها،<br>بل إيقاعٌ تعود إليه.',
+    quoteCite: '— تذكير يومي',
+    ctaEyebrow: 'ابدأ ممارستك', ctaTitle: '<em>توازنك</em>، في جيبك.',
+    ctaLead: 'مجاني للبدء. متاح بـ 15 لغة.',
+  },
 };
 
 function set(id, html) {
@@ -625,21 +870,14 @@ function set(id, html) {
 }
 
 function applyLang(lang) {
-  const base = T[lang] || { ...T.en, ...(FALLBACK_LANGS[lang] || {}) };
-  const t = T[lang] ? T[lang] : { ...T.en, ...(FALLBACK_LANGS[lang] || {}) };
-
+  const t = T[lang] || T.en;
   for (const [key, val] of Object.entries(t)) set(key, val);
-
-  // Update active button
   document.querySelectorAll('.nav-links span').forEach(s => s.classList.remove('active'));
   const btn = document.getElementById('btn-' + lang);
   if (btn) btn.classList.add('active');
-
-  // RTL for Arabic
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 }
 
-// Init
 applyLang('en');
 </script>
 </body>
