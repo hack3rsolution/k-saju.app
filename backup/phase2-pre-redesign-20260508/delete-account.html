@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>계정 삭제 | K-Saju Global</title>
+  <meta name="description" content="K-Saju 앱에서 계정을 삭제하는 방법을 안내합니다." />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', 'Noto Sans', sans-serif;
+      background: linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 50%, #16213E 100%);
+      min-height: 100vh;
+      color: #E5E7EB;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #7c3aed, #C9A84C);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #C9A84C, #E8C96A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    nav a {
+      color: #9CA3AF;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    nav a:hover { color: #C9A84C; }
+
+    /* ── Main ── */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .page-badge {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.15);
+      color: #F87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #C9A84C, #E8C96A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      color: #9CA3AF;
+      font-size: 16px;
+      margin-bottom: 48px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: rgba(26, 10, 46, 0.7);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .card-title .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-purple { background: rgba(124, 58, 237, 0.2); }
+    .icon-gold   { background: rgba(201, 168, 76, 0.15); }
+    .icon-red    { background: rgba(239, 68, 68, 0.15); }
+    .icon-green  { background: rgba(74, 222, 128, 0.15); }
+
+    /* ── Steps ── */
+    .steps { list-style: none; }
+    .steps li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.3);
+      border: 1px solid #7c3aed;
+      color: #C9A84C;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text { color: #D1D5DB; font-size: 15px; }
+    .step-text strong { color: #fff; }
+    .step-text code {
+      background: rgba(124, 58, 237, 0.2);
+      color: #C9A84C;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+    }
+
+    /* ── Data table ── */
+    .data-list { list-style: none; }
+    .data-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 15px;
+      color: #D1D5DB;
+    }
+    .data-list li:last-child { border-bottom: none; }
+    .data-list .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-red   { background: #EF4444; }
+    .dot-green { background: #4ADE80; }
+
+    /* ── Alt contact ── */
+    .email-box {
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 12px;
+    }
+    .email-box p { font-size: 14px; color: #9CA3AF; margin-bottom: 6px; }
+    .email-link {
+      color: #C9A84C;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .email-link:hover { text-decoration: underline; }
+    .email-subject {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.2);
+      color: #a78bfa;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 13px;
+      margin-top: 6px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Timeline ── */
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #7c3aed;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .timeline-text { font-size: 14px; color: #D1D5DB; }
+    .timeline-text strong { color: #fff; }
+
+    /* ── Divider ── */
+    .lang-divider {
+      text-align: center;
+      color: rgba(201, 168, 76, 0.4);
+      font-size: 20px;
+      margin: 40px 0 32px;
+      letter-spacing: 8px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: #6B7280;
+      font-size: 13px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    footer a { color: #7c3aed; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <div class="logo-icon">✦</div>
+    <span class="logo-text">K-Saju</span>
+  </a>
+  <nav><a href="/">← Home</a></nav>
+</header>
+
+<main>
+
+  <!-- Korean Section -->
+  <div class="page-badge">계정 관리</div>
+  <h1>계정 삭제 <span>안내</span></h1>
+  <p class="subtitle">K-Saju 계정 및 개인 데이터 삭제 방법을 안내합니다.</p>
+
+  <!-- In-app method -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-purple">📱</div>
+      앱에서 직접 삭제 (권장)
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-text">K-Saju 앱을 열고 하단 탭에서 <strong>설정</strong>으로 이동합니다.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text">화면 하단까지 스크롤하여 <code>계정 삭제</code> 버튼을 탭합니다.</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text">확인 메시지가 표시됩니다. <strong>삭제</strong>를 탭하면 즉시 처리됩니다.</div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Email method -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-gold">✉️</div>
+      이메일로 삭제 요청
+    </div>
+    <p style="color:#9CA3AF; font-size:14px; margin-bottom:12px;">
+      앱에 접근할 수 없거나 직접 요청을 원하시는 경우 이메일로 연락주세요.
+    </p>
+    <div class="email-box">
+      <p>이메일 주소</p>
+      <a href="mailto:support@k-saju.app?subject=Account%20Deletion%20Request" class="email-link">support@k-saju.app</a>
+      <br/>
+      <span class="email-subject">제목: Account Deletion Request</span>
+    </div>
+  </div>
+
+  <!-- Data deleted -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-red">🗑️</div>
+      삭제되는 데이터
+    </div>
+    <ul class="data-list">
+      <li><div class="dot dot-red"></div>프로필 및 계정 정보</li>
+      <li><div class="dot dot-red"></div>사주팔자 분석 결과 및 운세 기록</li>
+      <li><div class="dot dot-red"></div>웰니스 다이어리 항목</li>
+      <li><div class="dot dot-red"></div>관계 및 궁합 분석 데이터</li>
+      <li><div class="dot dot-red"></div>앱 설정 및 환경설정</li>
+    </ul>
+  </div>
+
+  <!-- Data retained -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-green">📋</div>
+      보존되는 데이터
+    </div>
+    <ul class="data-list">
+      <li>
+        <div class="dot dot-green"></div>
+        <span>거래 기록 — <strong>5년 보존</strong> (전자상거래법 제6조에 따른 의무 보존)</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-purple">⏱️</div>
+      처리 일정
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text"><strong>앱 내 삭제:</strong> 즉시 처리됩니다.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text"><strong>이메일 요청:</strong> 영업일 기준 <strong>30일 이내</strong> 처리됩니다.</div>
+    </div>
+    <div class="timeline-item" style="margin-bottom:0">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text">삭제 처리 후 복구는 불가능합니다.</div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="lang-divider">✦ ✦ ✦</div>
+
+  <!-- English Section -->
+  <div class="page-badge" style="background:rgba(124,58,237,0.15);color:#a78bfa;border-color:rgba(124,58,237,0.3);">Account Management</div>
+  <h1 style="margin-top:12px;">Account Deletion <span>Guide</span></h1>
+  <p class="subtitle">Learn how to delete your K-Saju account and personal data.</p>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-purple">📱</div>
+      Delete in the App (Recommended)
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-text">Open the K-Saju app and go to <strong>Settings</strong> from the bottom tab bar.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text">Scroll to the bottom of the screen and tap the <code>Delete Account</code> button.</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text">A confirmation prompt will appear. Tap <strong>Delete Account</strong> to confirm.</div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-gold">✉️</div>
+      Request via Email
+    </div>
+    <p style="color:#9CA3AF; font-size:14px; margin-bottom:12px;">
+      If you cannot access the app or prefer a manual request, contact us by email.
+    </p>
+    <div class="email-box">
+      <p>Email address</p>
+      <a href="mailto:support@k-saju.app?subject=Account%20Deletion%20Request" class="email-link">support@k-saju.app</a>
+      <br/>
+      <span class="email-subject">Subject: Account Deletion Request</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-red">🗑️</div>
+      Data That Will Be Deleted
+    </div>
+    <ul class="data-list">
+      <li><div class="dot dot-red"></div>Profile and account information</li>
+      <li><div class="dot dot-red"></div>Saju readings and fortune history</li>
+      <li><div class="dot dot-red"></div>Wellness diary entries</li>
+      <li><div class="dot dot-red"></div>Relationship and compatibility data</li>
+      <li><div class="dot dot-red"></div>App settings and preferences</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-green">📋</div>
+      Data That Will Be Retained
+    </div>
+    <ul class="data-list">
+      <li>
+        <div class="dot dot-green"></div>
+        <span>Transaction records — retained for <strong>5 years</strong> as required by Korean E-Commerce Act (Article 6)</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon icon-purple">⏱️</div>
+      Timeline
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text"><strong>In-app deletion:</strong> Processed immediately.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text"><strong>Email request:</strong> Processed within <strong>30 days</strong>.</div>
+    </div>
+    <div class="timeline-item" style="margin-bottom:0">
+      <div class="timeline-dot"></div>
+      <div class="timeline-text">Account deletion is permanent and cannot be undone.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 Pie Nest Inc. &nbsp;·&nbsp;
+    <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+    <a href="mailto:support@k-saju.app">support@k-saju.app</a>
+  </p>
+</footer>
+
+</body>
+</html>
